@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Westbridge Finance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<script src="assets/consent.js"></script>
+<style>
+/* Variant B: light editorial. Large grotesque type, serif italics as accent, product-like deal cards */
+:root {
+  --ink: #14181B;
+  --graphite: #1E2327;
+  --paper: #F6F4EF;
+  --white: #FFFFFF;
+  --stone: #ECE8E0;
+  --gold: #A99273;
+  --gold-d: #8C7658;
+  --signal: #E94431;
+  --mute: #5E636A;
+  --mute-2: #8A8F95;
+  --line: #DEDAD2;
+  --ok: #2F7D5B;
+  --no: #B5452F;
+  --sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --serif: "Instrument Serif", Georgia, serif;
+  --wrap: 1440px;
+  --g: max(20px, env(safe-area-inset-left, 0px));
+  --gr: max(20px, env(safe-area-inset-right, 0px));
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--g); padding-right: var(--gr); }
+section { position: relative; scroll-margin-top: 60px; }
+.pad { padding-block: clamp(80px, 11vw, 150px); }
+
+h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -.035em; text-wrap: balance; }
+h1 { font-size: clamp(46px, 8.4vw, 124px); line-height: .95; }
+h2 { font-size: clamp(34px, 5vw, 68px); line-height: 1.02; }
+h3 { font-size: 22px; line-height: 1.2; letter-spacing: -.02em; }
+em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -.01em; color: var(--gold-d); }
+.kicker { font-size: 13px; font-weight: 500; color: var(--mute); display: flex; align-items: center; gap: 10px; margin: 0 0 22px; }
+.kicker b { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.kicker::after { content: ""; flex: 0 0 48px; height: 1px; background: var(--line); }
+.lede { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.55; color: var(--mute); max-width: 54ch; margin: 0; }
+
+.btn { display: inline-flex; align-items: center; gap: 12px; padding: 16px 24px; border-radius: 999px; font: 500 15px/1 var(--sans); text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: background .25s, color .25s, border-color .25s, transform .25s; }
+.btn-dark { background: var(--ink); color: var(--white); }
+.btn-dark:hover { background: #2B3238; }
+.btn-line { border-color: var(--ink); color: var(--ink); background: transparent; }
+.btn-line:hover { background: var(--ink); color: var(--white); }
+.btn .arr { width: 22px; height: 22px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; transition: transform .25s; }
+.btn .arr svg { width: 11px; height: 11px; }
+.btn:hover .arr { transform: translateX(3px); }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* NAV */
+.nav { position: sticky; top: 0; z-index: 50; background: rgba(246,244,239,.86); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+.nav.scrolled { border-bottom-color: var(--line); }
+.nav .wrap { display: flex; align-items: center; height: 76px; gap: 20px; }
+.nav ul { margin-left: clamp(24px, 3.5vw, 56px) !important; }
+.nav-r { margin-left: auto; }
+.logo img { width: 124px; height: auto; }
+.nav ul { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.nav ul a { text-decoration: none; color: var(--mute); transition: color .2s; }
+.nav ul a:hover { color: var(--ink); }
+.nav-r { display: flex; align-items: center; gap: 10px; }
+.nav .btn { padding: 11px 18px; font-size: 14px; }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.lang button { background: none; border: 0; color: var(--mute); font: 600 12px/1 var(--sans); letter-spacing: .08em; padding: 8px 10px; border-radius: 999px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+@media (max-width: 980px) { .nav ul { display: none; } }
+@media (max-width: 440px) { .nav .btn .lbl { display: none; } .nav .btn { padding: 10px; } .logo img { width: 104px; } }
+
+/* HERO */
+.hero { padding-top: clamp(48px, 7vw, 96px); }
+.hero h1 { max-width: 12ch; font-size: clamp(46px, 6.6vw, 100px); }
+.hero-row { display: grid; grid-template-columns: 1.35fr .65fr; gap: 48px; align-items: end; }
+.hero-row .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.deal { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 26px; box-shadow: 0 30px 60px -30px rgba(20,24,27,.22); max-width: 460px; justify-self: end; width: 100%; }
+.deal-top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--mute); }
+.pill { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 500; padding: 6px 11px; border-radius: 999px; background: #EAF3EE; color: var(--ok); }
+.pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.deal-amt { font-size: clamp(40px, 4.4vw, 56px); font-weight: 500; letter-spacing: -.04em; margin: 18px 0 2px; font-variant-numeric: tabular-nums; }
+.deal-sub { font-size: 14px; color: var(--mute); }
+.deal dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 22px 0 18px; border-top: 1px solid var(--line); }
+.deal dl div { padding: 14px 0 0; }
+.deal dt { font-size: 11px; color: var(--mute-2); text-transform: uppercase; letter-spacing: .12em; }
+.deal dd { margin: 4px 0 0; font-weight: 500; font-variant-numeric: tabular-nums; }
+.track { height: 6px; background: var(--stone); border-radius: 99px; position: relative; overflow: hidden; }
+.track i { position: absolute; inset: 0 auto 0 0; width: 0; background: linear-gradient(90deg, var(--gold), var(--ink)); border-radius: 99px; animation: fill 2.4s 0.4s cubic-bezier(.2,.7,.2,1) forwards; }
+@keyframes fill { to { width: 93%; } }
+.track-l { display: flex; justify-content: space-between; font-size: 12px; color: var(--mute); margin-top: 8px; font-variant-numeric: tabular-nums; }
+.hero-img { margin-top: clamp(48px, 7vw, 88px); height: clamp(260px, 38vw, 520px); background: url("assets/warsaw.jpg") center 28% / cover; border-radius: 24px; position: relative; overflow: hidden; }
+.hero-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,24,27,0) 40%, rgba(20,24,27,.55)); }
+.hero-img .cap { position: absolute; left: 28px; bottom: 24px; right: 28px; z-index: 1; color: var(--white); display: flex; justify-content: space-between; gap: 20px; font-size: 13px; flex-wrap: wrap; }
+@media (max-width: 860px) { .hero-row { grid-template-columns: 1fr; } .deal { justify-self: stretch; max-width: none; } }
+
+/* FIGURES */
+.figs { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); margin-top: clamp(56px, 7vw, 88px); }
+.fig { padding: 22px 20px 0 0; }
+.fig + .fig { padding-left: 20px; border-left: 1px solid var(--line); }
+.fig b { display: block; font-size: clamp(30px, 3.6vw, 52px); font-weight: 500; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.fig span { display: block; margin-top: 10px; font-size: 14px; color: var(--mute); }
+@media (max-width: 760px) { .figs { grid-template-columns: 1fr 1fr; } .fig:nth-child(3) { border-left: 0; padding-left: 0; } .fig { padding-bottom: 22px; } }
+
+/* COMPARE */
+.split-h { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: clamp(40px, 6vw, 72px); }
+@media (max-width: 860px) { .split-h { grid-template-columns: 1fr; gap: 20px; } }
+.cmp { width: 100%; border-collapse: collapse; font-size: 16px; }
+.cmp th, .cmp td { text-align: left; padding: 20px 16px 20px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.cmp thead th { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--mute); font-weight: 500; padding-top: 0; border-bottom-color: var(--ink); }
+.cmp tbody th { font-weight: 500; width: 28%; }
+.cmp td.bank { color: var(--mute); width: 34%; }
+.cmp td.wb { font-weight: 500; }
+.cmp td.wb::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); margin-right: 10px; vertical-align: 2px; }
+.cmp thead th.wb-h { color: var(--ink); }
+.note { font-size: 13px; color: var(--mute-2); margin: 16px 0 0; }
+@media (max-width: 640px) {
+  .cmp thead { display: none; }
+  .cmp tr { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .cmp th, .cmp td { border: 0; padding: 0; width: auto !important; }
+  .cmp tbody th { grid-column: 1 / -1; margin-bottom: 6px; }
+  .cmp td::after { content: attr(data-l); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--mute-2); font-weight: 400; margin-top: 4px; }
+}
+
+/* DARK BAND */
+.dark { background: var(--graphite); color: var(--white); }
+.dark .kicker { color: #9AA0A7; } .dark .kicker b { color: var(--white); } .dark .kicker::after { background: rgba(255,255,255,.18); }
+.dark .lede { color: #AEB3B8; }
+.dark em.s { color: #C9B89E; }
+
+/* MANDATE */
+.tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,.07); margin-bottom: 36px; flex-wrap: wrap; }
+.tabs button { background: none; border: 0; color: #AEB3B8; font: 500 14px/1 var(--sans); padding: 12px 18px; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s; }
+.tabs button[aria-selected="true"] { background: var(--white); color: var(--ink); }
+.mgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.mcard { border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 24px 22px 26px; min-height: 180px; display: grid; align-content: space-between; gap: 30px; transition: opacity .35s, border-color .35s, background .35s; }
+.mcard small { font-size: 12px; color: #9AA0A7; font-variant-numeric: tabular-nums; }
+.mcard b { font-size: 21px; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; display: block; }
+.mcard em { font-style: normal; font-size: 13px; color: #9AA0A7; display: block; margin-top: 8px; }
+.mcard.dim { opacity: .22; }
+.mcard.on { border-color: var(--gold); background: rgba(169,146,115,.08); }
+@media (max-width: 960px) { .mgrid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .mgrid { grid-template-columns: 1fr; } .mcard { min-height: 0; } }
+
+/* CASES */
+.cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.case { background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; transition: transform .35s, box-shadow .35s; }
+.case:hover { transform: translateY(-4px); box-shadow: 0 30px 50px -30px rgba(20,24,27,.3); }
+.case .ph { aspect-ratio: 16 / 10; background-size: cover; background-position: center; position: relative; }
+.case .ph span.ex { left: auto; right: 16px; background: rgba(20,24,27,.78); color: #fff; }
+.case .ph span { position: absolute; left: 16px; top: 16px; background: rgba(255,255,255,.92); font-size: 12px; font-weight: 500; padding: 6px 11px; border-radius: 999px; }
+.case .bd { padding: 22px 22px 24px; display: grid; gap: 16px; align-content: start; }
+.case .amt { font-size: 34px; font-weight: 500; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.case .t { color: var(--mute); font-size: 15px; }
+.case dl { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding-top: 14px; border-top: 1px solid var(--line); }
+.case dt { font-size: 11px; color: var(--mute-2); text-transform: uppercase; letter-spacing: .1em; }
+.case dd { margin: 2px 0 0; font-weight: 500; font-size: 15px; font-variant-numeric: tabular-nums; }
+@media (max-width: 960px) { .cases { grid-template-columns: 1fr; max-width: 560px; } }
+
+/* FIT CHECK */
+.fit { display: grid; grid-template-columns: 1.05fr .95fr; gap: 18px; }
+.fit-in, .fit-out { border-radius: 24px; padding: clamp(24px, 3.4vw, 40px); }
+.fit-in { background: var(--white); border: 1px solid var(--line); display: grid; gap: 30px; }
+.fit-out { background: var(--ink); color: var(--white); display: grid; gap: 22px; align-content: start; }
+.field { display: grid; gap: 12px; }
+.field .row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.field label { font-size: 14px; color: var(--mute); }
+.field output { font-size: 26px; font-weight: 500; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 99px; background: linear-gradient(90deg, var(--ink) var(--p, 50%), var(--stone) var(--p, 50%)); outline: none; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--white); border: 2px solid var(--ink); cursor: grab; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--white); border: 2px solid var(--ink); cursor: grab; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips button { font: 500 14px/1 var(--sans); padding: 11px 15px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; transition: all .2s; }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.verdict { font-size: clamp(28px, 3vw, 38px); font-weight: 500; letter-spacing: -.03em; line-height: 1.1; }
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.checks li { display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.12); font-size: 15px; }
+.checks li span:last-child { color: #9AA0A7; font-variant-numeric: tabular-nums; font-size: 14px; }
+.dot { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+.dot.y { background: #3C8E69; color: #fff; } .dot.n { background: #C4513A; color: #fff; }
+.fit-out .btn { background: var(--gold); color: var(--ink); justify-self: start; }
+.fit-out .btn:hover { background: #C9B89E; }
+.fit-out .fine { font-size: 12px; color: #8A8F95; margin: 0; }
+@media (max-width: 900px) { .fit { grid-template-columns: 1fr; } }
+
+/* PROCESS */
+.tl { position: relative; display: grid; grid-template-columns: 6% 10% 66% 8% 10%; margin: 8px 0 40px; height: 54px; }
+.tl div { border-left: 2px solid var(--paper); position: relative; }
+.tl div:nth-child(1) { background: var(--gold); border-radius: 12px 0 0 12px; border-left: 0; }
+.tl div:nth-child(2) { background: #BFAE94; }
+.tl div:nth-child(3) { background: var(--stone); }
+.tl div:nth-child(4) { background: #C9C2B5; }
+.tl div:nth-child(5) { background: var(--ink); border-radius: 0 12px 12px 0; }
+.tl-l { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+.tl-l div { display: grid; gap: 8px; align-content: start; }
+.tl-l small { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 8px; }
+.tl-l small i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.tl-l b { font-size: 19px; font-weight: 500; letter-spacing: -.02em; }
+.tl-l p { margin: 0; font-size: 14px; color: var(--mute); }
+@media (max-width: 900px) { .tl { display: none; } .tl-l { grid-template-columns: 1fr; gap: 0; border-left: 2px solid var(--line); } .tl-l div { padding: 0 0 26px 22px; position: relative; } .tl-l small i { position: absolute; left: -6px; top: 4px; } }
+
+/* SECURITY */
+.sec { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.slist { list-style: none; margin: 0; padding: 0; counter-reset: s; border-top: 1px solid var(--ink); }
+.slist li { counter-increment: s; display: grid; grid-template-columns: 56px 1fr; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: clamp(18px, 1.8vw, 22px); letter-spacing: -.02em; transition: padding .3s; }
+.slist li:hover { padding-left: 8px; }
+.slist li::before { content: counter(s, decimal-leading-zero); font-size: 13px; color: var(--mute-2); padding-top: 6px; font-variant-numeric: tabular-nums; }
+@media (max-width: 860px) { .sec { grid-template-columns: 1fr; } }
+
+/* PARTNER QUOTE */
+.quote { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+.quote img { border-radius: 24px; aspect-ratio: 1; object-fit: cover; width: 100%; }
+.quote blockquote { margin: 0; font-family: var(--serif); font-size: clamp(30px, 3.6vw, 52px); line-height: 1.1; letter-spacing: -.01em; }
+.quote cite { display: block; font-style: normal; margin-top: 28px; font-size: 15px; color: #AEB3B8; }
+.quote cite b { color: var(--white); font-weight: 500; display: block; }
+.crit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
+.crit div { border-top: 1px solid rgba(255,255,255,.2); padding-top: 16px; }
+.crit b { font-weight: 500; display: block; }
+.crit span { color: #9AA0A7; font-size: 14px; }
+@media (max-width: 860px) { .quote { grid-template-columns: 1fr; } .quote img { max-width: 360px; aspect-ratio: 1; } }
+@media (max-width: 560px) { .crit { grid-template-columns: 1fr; } }
+
+/* CONTACT */
+.contact { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.person { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); display: grid; gap: 6px; }
+.person b { font-size: 22px; font-weight: 500; letter-spacing: -.02em; }
+.person .line { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 16px; }
+.copybtn { background: none; border: 1px solid var(--line); color: var(--mute); font: 500 11px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; padding: 6px 9px; border-radius: 999px; cursor: pointer; }
+.copybtn:hover { border-color: var(--ink); color: var(--ink); }
+form { background: var(--white); border: 1px solid var(--line); border-radius: 24px; padding: clamp(24px, 3.4vw, 40px); display: grid; gap: 16px; }
+.f2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 520px) { .f2 { grid-template-columns: 1fr; } }
+form label { display: grid; gap: 6px; font-size: 13px; color: var(--mute); }
+input:not([type=range]), select, textarea { font: 400 16px/1.4 var(--sans); color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; width: 100%; }
+textarea { min-height: 110px; resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--ink); background: var(--white); }
+form .btn { justify-self: start; }
+.form-ok { margin: 0; font-size: 14px; background: #F1ECE4; border-left: 3px solid var(--gold); padding: 12px 14px; border-radius: 4px; }
+.fine { font-size: 12px; color: var(--mute-2); margin: 0; }
+@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+
+/* grid children may shrink below their content width */
+.sec > *, .split-h > *, .fit > *, .fit-in > *, .contact > *, .quote > *, .hero-row > * { min-width: 0; }
+/* INSIGHTS */
+.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.post { background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; text-decoration: none; display: grid; grid-template-rows: auto 1fr; transition: transform .35s, box-shadow .35s; }
+.post:hover { transform: translateY(-4px); box-shadow: 0 30px 50px -30px rgba(20,24,27,.3); }
+.post .cv { aspect-ratio: 16 / 10; background: var(--ink); color: var(--white); padding: 22px; display: grid; align-content: space-between; position: relative; overflow: hidden; }
+.post .cv::after { content: ""; position: absolute; width: 120%; aspect-ratio: 1; right: -60%; top: -50%; border-radius: 50%; background: rgba(255,255,255,.05); }
+.post .cv > * { position: relative; z-index: 1; }
+.post .cv small { font-size: 12px; font-weight: 500; color: #C9B89E; }
+.post .cv strong { font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1.1; max-width: 16ch; }
+.post .md { padding: 20px 22px 24px; display: grid; gap: 6px; align-content: start; }
+.post .md b { font-weight: 500; }
+.post .md span { font-size: 14px; color: var(--mute); }
+@media (max-width: 960px) { .posts { grid-template-columns: 1fr; max-width: 560px; } }
+footer { border-top: 1px solid var(--line); padding-block: 36px; font-size: 13px; color: var(--mute); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 20px 32px; justify-content: space-between; align-items: center; }
+footer nav { display: flex; gap: 22px; flex-wrap: wrap; }
+footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
+footer .logo img { width: 110px; }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Westbridge Finance home"><img src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="124" height="39"></a>
+    <ul>
+      <li><a href="#why">Why us</a></li>
+      <li><a href="#mandate">Mandate</a></li>
+      <li><a href="#deals">Transactions</a></li>
+      <li><a href="#fit">Check your deal</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#insights">Insights</a></li>
+    </ul>
+    <div class="nav-r">
+      <div class="lang" role="group" aria-label="Language / Język"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="pl" aria-pressed="false">PL</button></div>
+      <a class="btn btn-dark" href="#contact"><span class="lbl">Discuss a transaction</span><span class="arr"><svg viewBox="0 0 12 12" fill="none" stroke="#14181B" stroke-width="1.6"><path d="M2 6h8M7 3l3 3-3 3"/></svg></span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-row">
+        <div class="reveal">
+          <p class="kicker">Private credit for real estate in Poland</p>
+          <h1>Capital that moves <em class="s">at the speed</em> of your deal.</h1>
+          <p class="lede" style="margin-top:32px">Senior secured financing of PLN 20–120M for experienced sponsors. Indicative terms in 1–3 business days, funding in about 30 days, and the people who decide are on every call.</p>
+          <div class="cta">
+            <a class="btn btn-dark" href="#contact">Discuss a transaction <span class="arr"><svg viewBox="0 0 12 12" fill="none" stroke="#14181B" stroke-width="1.6"><path d="M2 6h8M7 3l3 3-3 3"/></svg></span></a>
+            <a class="btn btn-line" href="#fit">Check if your deal fits</a>
+          </div>
+        </div>
+        <div class="deal reveal" aria-label="Example facility">
+          <div class="deal-top"><span>Bridge facility · Residential</span><span class="pill">Example</span></div>
+          <div class="deal-amt">PLN 48.0M</div>
+          <div class="deal-sub">Senior secured, first-ranking mortgage</div>
+          <dl>
+            <div><dt>LTV</dt><dd>61%</dd></div>
+            <div><dt>Tenor</dt><dd>24 mo</dd></div>
+            <div><dt>Term sheet</dt><dd>Day 2</dd></div>
+          </dl>
+          <div class="track"><i></i></div>
+          <div class="track-l"><span>First call</span><span>Funded on day 28</span></div>
+        </div>
+      </div>
+      <div class="hero-img reveal" role="img" aria-label="Aerial view of Warsaw city centre">
+        <div class="cap"><span>Land · Residential · PRS · Commercial · Mixed-use</span><span>Across Poland</span></div>
+      </div>
+      <div class="figs">
+        <div class="fig reveal"><b>PLN 150M+</b><span>Capital deployed</span></div>
+        <div class="fig reveal"><b>20–120M</b><span>Ticket size, PLN</span></div>
+        <div class="fig reveal"><b>≤65%</b><span>Senior LTV</span></div>
+        <div class="fig reveal"><b>~30 days</b><span>From approach to funding</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY: COMPARISON -->
+  <section class="pad" id="why">
+    <div class="wrap">
+      <div class="split-h">
+        <div>
+          <p class="kicker"><b>01</b> Why Westbridge</p>
+          <h2 class="reveal">Where bank lending stops, <em class="s">we start.</em></h2>
+        </div>
+        <p class="lede reveal">Banks remain structurally constrained on land, early-stage and transitional assets. We built a lender for exactly those moments, with institutional underwriting and a short decision path.</p>
+      </div>
+      <table class="cmp reveal">
+        <thead><tr><th></th><th>Typical bank</th><th class="wb-h">Westbridge Finance</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Land acquisition</th><td class="bank" data-l="Typical bank">Rarely financed</td><td class="wb" data-l="Westbridge Finance">Core mandate</td></tr>
+          <tr><th scope="row">First answer</th><td class="bank" data-l="Typical bank">Several weeks</td><td class="wb" data-l="Westbridge Finance">1–3 business days</td></tr>
+          <tr><th scope="row">Time to funding</th><td class="bank" data-l="Typical bank">3–6 months</td><td class="wb" data-l="Westbridge Finance">About 30 days</td></tr>
+          <tr><th scope="row">Who decides</th><td class="bank" data-l="Typical bank">Central credit committee</td><td class="wb" data-l="Westbridge Finance">Decision-makers on every call</td></tr>
+          <tr><th scope="row">Structure</th><td class="bank" data-l="Typical bank">Standard products</td><td class="wb" data-l="Westbridge Finance">Built around the business plan</td></tr>
+          <tr><th scope="row">VAT financing</th><td class="bank" data-l="Typical bank">Limited</td><td class="wb" data-l="Westbridge Finance">Up to 85% LTV</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Bank timelines are typical market ranges and vary by institution.</p>
+    </div>
+  </section>
+
+  <!-- MANDATE -->
+  <section class="dark pad" id="mandate">
+    <div class="wrap">
+      <div class="split-h">
+        <div>
+          <p class="kicker"><b>02</b> Investment mandate</p>
+          <h2 class="reveal">Flexible across assets, <em class="s">stages</em> and structures.</h2>
+        </div>
+        <p class="lede reveal">Pick a lens to see what we finance. Every facility is senior secured and shaped around its own transaction.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Mandate filter">
+        <button role="tab" aria-selected="true" data-f="all">All</button>
+        <button role="tab" aria-selected="false" data-f="p">Purpose</button>
+        <button role="tab" aria-selected="false" data-f="a">Asset</button>
+        <button role="tab" aria-selected="false" data-f="s">Strategy</button>
+      </div>
+      <div class="mgrid" id="mgrid">
+        <div class="mcard" data-k="p"><small>Purpose</small><b>Land acquisition</b></div>
+        <div class="mcard" data-k="p"><small>Purpose</small><b>Acquisition financing</b></div>
+        <div class="mcard" data-k="p"><small>Purpose</small><b>Bridge financing</b></div>
+        <div class="mcard" data-k="p"><small>Purpose</small><b>Refinancing</b></div>
+        <div class="mcard" data-k="a"><small>Asset</small><b>Residential developments</b></div>
+        <div class="mcard" data-k="a"><small>Asset</small><b>PRS (private rented sector)</b></div>
+        <div class="mcard" data-k="a"><small>Asset</small><b>Income-producing and commercial assets</b></div>
+        <div class="mcard" data-k="a"><small>Asset</small><b>Mixed-use developments</b></div>
+        <div class="mcard" data-k="s"><small>Strategy</small><b>Refurbishment / value-add</b></div>
+        <div class="mcard" data-k="s"><small>Strategy</small><b>Redevelopment projects</b></div>
+        <div class="mcard" data-k="s"><small>Strategy</small><b>Late-stage construction</b><em>Where construction risk has already been materially reduced.</em></div>
+        <div class="mcard" data-k="s"><small>Strategy</small><b>VAT facilities</b><em>Up to 85% LTV.</em></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSACTIONS -->
+  <section class="pad" id="deals">
+    <div class="wrap">
+      <div class="split-h">
+        <div>
+          <p class="kicker"><b>03</b> Selected transactions</p>
+          <h2 class="reveal">Structured to the deal, <em class="s">funded on time.</em></h2>
+        </div>
+        <p class="lede reveal">A look at how facilities come together across asset types and stages.</p>
+      </div>
+      <div class="cases">
+        <article class="case reveal">
+          <div class="ph" style="background-image:url('assets/city.jpg')"><span>Land acquisition</span><span class="ex">Example</span></div>
+          <div class="bd">
+            <div class="amt">PLN 34M</div>
+            <div class="t">Residential land plot with zoning in place, Warsaw. Senior facility to secure the site ahead of the building permit.</div>
+            <dl><div><dt>LTV</dt><dd>55%</dd></div><div><dt>Tenor</dt><dd>18 mo</dd></div><div><dt>Funded</dt><dd>Day 26</dd></div></dl>
+          </div>
+        </article>
+        <article class="case reveal">
+          <div class="ph" style="background-image:url('assets/skyline.jpg')"><span>Bridge</span><span class="ex">Example</span></div>
+          <div class="bd">
+            <div class="amt">PLN 62M</div>
+            <div class="t">Mixed-use scheme in Kraków, bridging the sponsor to long-term bank refinancing after letting.</div>
+            <dl><div><dt>LTV</dt><dd>60%</dd></div><div><dt>Tenor</dt><dd>24 mo</dd></div><div><dt>Funded</dt><dd>Day 31</dd></div></dl>
+          </div>
+        </article>
+        <article class="case reveal">
+          <div class="ph" style="background-image:url('assets/skyline.jpg');background-position:20% 100%;background-size:220%;filter:grayscale(.6)"><span>Refinancing</span><span class="ex">Example</span></div>
+          <div class="bd">
+            <div class="amt">PLN 95M</div>
+            <div class="t">Stabilising PRS portfolio in Wrocław, refinancing a maturing facility and releasing equity for the next phase.</div>
+            <dl><div><dt>LTV</dt><dd>63%</dd></div><div><dt>Tenor</dt><dd>36 mo</dd></div><div><dt>Funded</dt><dd>Day 29</dd></div></dl>
+          </div>
+        </article>
+      </div>
+      <p class="note">Illustrative transactions for the mockup. To be replaced with approved case studies before launch.</p>
+    </div>
+  </section>
+
+  <!-- FIT CHECK -->
+  <section class="pad" id="fit" style="padding-top:0">
+    <div class="wrap">
+      <div class="split-h">
+        <div>
+          <p class="kicker"><b>04</b> Check your deal</p>
+          <h2 class="reveal">Does your project <em class="s">fit</em> our mandate?</h2>
+        </div>
+        <p class="lede reveal">Three inputs, an instant read against our parameters. It is not an offer, but it tells you whether the first call is worth booking.</p>
+      </div>
+      <div class="fit reveal">
+        <div class="fit-in">
+          <div class="field">
+            <div class="row"><label for="r-amt">Facility you need</label><output id="o-amt">PLN 45M</output></div>
+            <input type="range" id="r-amt" min="5" max="200" step="1" value="45">
+          </div>
+          <div class="field">
+            <div class="row"><label for="r-val">Value of the property</label><output id="o-val">PLN 80M</output></div>
+            <input type="range" id="r-val" min="10" max="400" step="1" value="80">
+          </div>
+          <div class="field">
+            <span style="font-size:14px;color:var(--mute)">Purpose</span>
+            <div class="chips" id="purpose">
+              <button type="button" aria-pressed="true" data-p="land">Land acquisition</button>
+              <button type="button" aria-pressed="false" data-p="bridge">Bridge</button>
+              <button type="button" aria-pressed="false" data-p="refi">Refinancing</button>
+              <button type="button" aria-pressed="false" data-p="vat">VAT facility</button>
+              <button type="button" aria-pressed="false" data-p="early">Early-stage construction</button>
+            </div>
+          </div>
+        </div>
+        <div class="fit-out" aria-live="polite">
+          <div class="verdict" id="verdict">Looks like a fit.</div>
+          <ul class="checks" id="checks"></ul>
+          <a class="btn" href="#contact" id="fit-cta">Send these details <span class="arr" style="background:var(--ink)"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="1.6"><path d="M2 6h8M7 3l3 3-3 3"/></svg></span></a>
+          <p class="fine">Indicative only. Final terms depend on the sponsor, the asset and due diligence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="pad" id="process" style="background:var(--white)">
+    <div class="wrap">
+      <div class="split-h">
+        <div>
+          <p class="kicker"><b>05</b> Execution</p>
+          <h2 class="reveal">Thirty days, <em class="s">mapped out.</em></h2>
+        </div>
+        <p class="lede reveal">The same timeline whether the ticket is PLN 20M or PLN 120M, with one team carrying the deal from first call to drawdown.</p>
+      </div>
+      <div class="tl reveal" aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div>
+      <div class="tl-l">
+        <div class="reveal"><small><i style="background:var(--gold)"></i>Day 0</small><b>First call</b><p>You share the basics. A decision-maker joins the conversation.</p></div>
+        <div class="reveal"><small><i style="background:#BFAE94"></i>Days 1–3</small><b>Term sheet</b><p>Go / no-go and an indicative term sheet.</p></div>
+        <div class="reveal"><small><i style="background:var(--stone);border:1px solid #CFC8BB"></i>Days 4–25</small><b>Due diligence</b><p>Legal, financial, tax and technical review, run in parallel.</p></div>
+        <div class="reveal"><small><i style="background:#C9C2B5"></i>Days 25–28</small><b>Committee</b><p>Final approval ahead of signing.</p></div>
+        <div class="reveal"><small><i style="background:var(--ink)"></i>Day ~30</small><b>Funding</b><p>First drawdown of funds.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="pad">
+    <div class="wrap sec">
+      <div>
+        <p class="kicker"><b>06</b> Security package</p>
+        <h2 class="reveal">Layered protection, <em class="s">tailored</em> to each facility.</h2>
+        <p class="lede reveal" style="margin-top:24px">Instruments are combined to match the asset, the sponsor and the structure, with further protections added where appropriate.</p>
+      </div>
+      <ol class="slist reveal">
+        <li>First-ranking mortgage</li><li>Share pledge</li><li>Assignment of receivables</li><li>Assignment of bank accounts</li><li>Assignment of insurance proceeds</li><li>Corporate &amp; personal guarantees</li><li>Art. 777 submission to enforcement</li><li>Cash sweep mechanism</li><li>Step-in rights</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="dark pad">
+    <div class="wrap quote">
+      <img class="reveal" src="assets/partner.jpg" alt="Senior partner in conversation over coffee" width="660" height="630">
+      <div>
+        <p class="kicker"><b>07</b> Who we partner with</p>
+        <blockquote class="reveal">We weigh the quality of the sponsor as much as the strength of the opportunity.</blockquote>
+        <cite>Westbridge Finance</cite>
+        <div class="crit">
+          <div><b>Track record</b><span>Delivery demonstrated across cycles.</span></div>
+          <div><b>Clear exit</b><span>A defined refinancing or sale path.</span></div>
+          <div><b>Alignment</b><span>Shared interests between sponsor and lender.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section class="pad" id="insights">
+    <div class="wrap">
+      <div class="split-h">
+        <div>
+          <p class="kicker"><b>08</b> Insights</p>
+          <h2 class="reveal">Market notes, transactions <em class="s">and financing explained.</em></h2>
+        </div>
+        <p class="lede reveal">What we publish on LinkedIn twice a week, collected in one place.</p>
+      </div>
+      <div class="posts">
+        <a class="post reveal" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+          <div class="cv"><small>Market intelligence</small><strong>Where bank lending stops in Polish real estate</strong></div>
+          <div class="md"><b>Market commentary</b><span>Carousel · Why land and early-stage assets sit outside bank appetite in 2026.</span></div>
+        </a>
+        <a class="post reveal" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+          <div class="cv"><small>Transaction stories</small><strong>From term sheet to drawdown in 30 days</strong></div>
+          <div class="md"><b>Transaction example</b><span>Document post · How a residential bridge facility was structured and funded.</span></div>
+        </a>
+        <a class="post reveal" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+          <div class="cv"><small>Education</small><strong>What a VAT facility at 85% LTV actually covers</strong></div>
+          <div class="md"><b>Financing education</b><span>Expert post · A plain explanation for developers planning a purchase.</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="pad" id="contact" style="padding-top:0;padding-bottom:clamp(56px, 6vw, 88px)">
+    <div class="wrap contact">
+      <div>
+        <p class="kicker"><b>09</b> Contact</p>
+        <h2 class="reveal">Let's talk about your <em class="s">next</em> transaction.</h2>
+        <p class="lede reveal" style="margin-top:24px">Send the basics. A decision-maker comes back within 1–3 business days with a go / no-go and, where it fits, an indicative term sheet.</p>
+        <div class="person">
+          <b>Shlomi Weber</b>
+          <span style="color:var(--mute);font-size:14px;margin-bottom:8px">Westbridge Finance</span>
+          <div class="line"><span id="ph">+48 571 270 389</span><button class="copybtn" type="button" data-copy="ph">Copy</button></div>
+          <div class="line"><span id="em">shlomi.weber@wb-finance.pl</span><button class="copybtn" type="button" data-copy="em">Copy</button></div>
+        </div>
+      </div>
+      <form id="dealform" novalidate>
+        <div class="f2">
+          <label for="f-name">Name<input id="f-name" name="name" autocomplete="name" required></label>
+          <label for="f-company">Company<input id="f-company" name="company" autocomplete="organization"></label>
+        </div>
+        <div class="f2">
+          <label for="f-email">Email<input id="f-email" name="email" type="email" autocomplete="email" required></label>
+          <label for="f-phone">Phone<input id="f-phone" name="phone" type="tel" autocomplete="tel"></label>
+        </div>
+        <label for="f-msg">About the project<textarea id="f-msg" name="message" placeholder="Asset, location, stage, amount, timeline"></textarea></label>
+        <button class="btn btn-dark" type="submit">Send enquiry <span class="arr"><svg viewBox="0 0 12 12" fill="none" stroke="#14181B" stroke-width="1.6"><path d="M2 6h8M7 3l3 3-3 3"/></svg></span></button>
+        <p class="form-ok" id="form-ok" hidden></p>
+        <p class="fine">We use your details only to reply to this enquiry. See our <a href="polityka-prywatnosci.html" style="text-decoration:underline">privacy policy</a>.</p>
+        <p class="fine">Prototype form. In the live site it routes to the Westbridge deal inbox.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Westbridge Finance home"><img src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"></a>
+    <nav><a href="#why">Why us</a><a href="#mandate">Mandate</a><a href="#process">Process</a><a href="polityka-prywatnosci.html">Privacy policy</a><a href="#" data-cc="show-preferencesModal">Privacy settings</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></nav>
+    <span>© 2026 Westbridge Finance</span>
+  </div>
+</footer>
+
+<script src="assets/wb.js"></script>
+<script>
+(function () {
+  var PL = {
+    "Westbridge Finance home": "Westbridge Finance – strona główna", "Privacy policy": "Polityka prywatności", "privacy policy": "polityce prywatności", "Privacy settings": "Ustawienia prywatności", "We use your details only to reply to this enquiry. See our": "Twoje dane wykorzystamy wyłącznie do odpowiedzi na to zapytanie. Szczegóły w",
+    "Insights": "Analizy", "Market notes, transactions": "Komentarze rynkowe, transakcje", "and financing explained.": "i finansowanie w przystępnej formie.", "What we publish on LinkedIn twice a week, collected in one place.": "To, co publikujemy na LinkedIn dwa razy w tygodniu, zebrane w jednym miejscu.", "Market intelligence": "Analizy rynku", "Where bank lending stops in Polish real estate": "Gdzie kończy się kredyt bankowy w polskich nieruchomościach", "Market commentary": "Komentarz rynkowy", "Carousel · Why land and early-stage assets sit outside bank appetite in 2026.": "Karuzela · Dlaczego grunty i projekty na wczesnym etapie są w 2026 roku poza apetytem banków.", "Transaction stories": "Historie transakcji", "From term sheet to drawdown in 30 days": "Od term sheetu do wypłaty w 30 dni", "Transaction example": "Przykład transakcji", "Document post · How a residential bridge facility was structured and funded.": "Dokument · Jak ustrukturyzowaliśmy i wypłaciliśmy pomostowe finansowanie mieszkaniowe.", "Education": "Edukacja", "What a VAT facility at 85% LTV actually covers": "Co faktycznie obejmuje finansowanie VAT przy LTV 85%", "Financing education": "Edukacja finansowa", "Expert post · A plain explanation for developers planning a purchase.": "Post ekspercki · Proste wyjaśnienie dla deweloperów planujących zakup.",
+    "Why us": "Dlaczego my", "Mandate": "Mandat", "Transactions": "Transakcje", "Check your deal": "Sprawdź projekt", "Process": "Proces",
+    "Discuss a transaction": "Omów transakcję",
+    "Private credit for real estate in Poland": "Private credit dla nieruchomości w Polsce",
+    "Capital that moves": "Kapitał, który działa", "at the speed": "w tempie", "of your deal.": "Twojej transakcji.",
+    "Senior secured financing of PLN 20–120M for experienced sponsors. Indicative terms in 1–3 business days, funding in about 30 days, and the people who decide are on every call.": "Seniorskie, zabezpieczone finansowanie od 20 do 120 mln zł dla doświadczonych inwestorów. Wstępne warunki w 1–3 dni robocze, wypłata w około 30 dni, a osoby decyzyjne uczestniczą w każdej rozmowie.",
+    "Check if your deal fits": "Sprawdź, czy projekt pasuje",
+    "Example facility": "Przykładowe finansowanie",
+    "Bridge facility · Residential": "Finansowanie pomostowe · Mieszkaniowe", "Funded": "Wypłacone",
+    "PLN 48.0M": "48,0 mln zł", "Senior secured, first-ranking mortgage": "Seniorskie, hipoteka pierwszego rzędu",
+    "Tenor": "Okres", "24 mo": "24 mies.", "Term sheet": "Term sheet", "Day 2": "Dzień 2",
+    "First call": "Pierwsza rozmowa", "Funded on day 28": "Wypłata w 28. dniu",
+    "Aerial view of a dense city skyline": "Widok z lotu ptaka na gęstą zabudowę miasta",
+    "Land · Residential · PRS · Commercial · Mixed-use": "Grunty · Mieszkania · PRS · Komercja · Wielofunkcyjne", "Poland": "Polska", "Across Poland": "Cała Polska", "Aerial view of Warsaw city centre": "Widok z lotu ptaka na centrum Warszawy",
+    "PLN 150M+": "150+ mln zł", "Capital deployed": "Zaangażowany kapitał", "Ticket size, PLN": "Wielkość finansowania, mln zł",
+    "Senior LTV": "LTV seniorskie", "~30 days": "~30 dni", "From approach to funding": "Od kontaktu do wypłaty",
+    "Why Westbridge": "Dlaczego Westbridge",
+    "Where bank lending stops,": "Tam, gdzie kończy się bank,", "we start.": "zaczynamy my.",
+    "Banks remain structurally constrained on land, early-stage and transitional assets. We built a lender for exactly those moments, with institutional underwriting and a short decision path.": "Banki są strukturalnie ograniczone przy gruntach, projektach na wczesnym etapie i aktywach przejściowych. Zbudowaliśmy instytucję finansującą właśnie na takie momenty, z instytucjonalną analizą ryzyka i krótką ścieżką decyzyjną.",
+    "Typical bank": "Typowy bank", "Westbridge Finance": "Westbridge Finance",
+    "Land acquisition": "Zakup gruntu", "Rarely financed": "Rzadko finansowany", "Core mandate": "Podstawa mandatu",
+    "First answer": "Pierwsza odpowiedź", "Several weeks": "Kilka tygodni", "1–3 business days": "1–3 dni robocze",
+    "Time to funding": "Czas do wypłaty", "3–6 months": "3–6 miesięcy", "About 30 days": "Około 30 dni",
+    "Who decides": "Kto decyduje", "Central credit committee": "Centralny komitet kredytowy", "Decision-makers on every call": "Decydenci w każdej rozmowie",
+    "Structure": "Struktura", "Standard products": "Standardowe produkty", "Built around the business plan": "Dopasowana do biznesplanu",
+    "VAT financing": "Finansowanie VAT", "Limited": "Ograniczone", "Up to 85% LTV": "Do 85% LTV",
+    "Bank timelines are typical market ranges and vary by institution.": "Terminy bankowe to typowe przedziały rynkowe i różnią się między instytucjami.",
+    "Investment mandate": "Mandat inwestycyjny",
+    "Flexible across assets,": "Elastycznie w różnych aktywach,", "stages": "etapach", "and structures.": "i strukturach.",
+    "Pick a lens to see what we finance. Every facility is senior secured and shaped around its own transaction.": "Wybierz perspektywę i zobacz, co finansujemy. Każde finansowanie jest seniorskie, zabezpieczone i dopasowane do swojej transakcji.",
+    "Mandate filter": "Filtr mandatu", "All": "Wszystko", "Purpose": "Cel", "Asset": "Aktywo", "Strategy": "Strategia",
+    "Acquisition financing": "Finansowanie akwizycji", "Bridge financing": "Finansowanie pomostowe", "Refinancing": "Refinansowanie",
+    "Residential developments": "Inwestycje mieszkaniowe", "PRS (private rented sector)": "PRS (najem instytucjonalny)",
+    "Income-producing and commercial assets": "Aktywa dochodowe i komercyjne", "Mixed-use developments": "Projekty wielofunkcyjne",
+    "Refurbishment / value-add": "Modernizacja / value-add", "Redevelopment projects": "Projekty przebudowy",
+    "Late-stage construction": "Budowa na zaawansowanym etapie", "Where construction risk has already been materially reduced.": "Gdy ryzyko budowlane zostało już istotnie ograniczone.",
+    "VAT facilities": "Finansowanie VAT", "Up to 85% LTV.": "Do 85% LTV.",
+    "Selected transactions": "Wybrane transakcje",
+    "Structured to the deal,": "Dopasowane do transakcji,", "funded on time.": "wypłacone na czas.",
+    "A look at how facilities come together across asset types and stages.": "Jak powstaje finansowanie dla różnych aktywów i etapów projektu.",
+    "PLN 34M": "34 mln zł", "PLN 62M": "62 mln zł", "PLN 95M": "95 mln zł",
+    "Residential land plot with zoning in place, Warsaw. Senior facility to secure the site ahead of the building permit.": "Działka pod zabudowę mieszkaniową z planem miejscowym, Warszawa. Finansowanie seniorskie na zabezpieczenie gruntu przed uzyskaniem pozwolenia na budowę.",
+    "Mixed-use scheme in Kraków, bridging the sponsor to long-term bank refinancing after letting.": "Projekt wielofunkcyjny w Krakowie. Finansowanie pomostowe do czasu długoterminowego refinansowania bankowego po komercjalizacji.",
+    "Stabilising PRS portfolio in Wrocław, refinancing a maturing facility and releasing equity for the next phase.": "Stabilizujący się portfel PRS we Wrocławiu. Refinansowanie zapadającego kredytu i uwolnienie kapitału na kolejny etap.",
+    "Bridge": "Pomostowe", "18 mo": "18 mies.", "36 mo": "36 mies.", "Day 26": "Dzień 26", "Day 31": "Dzień 31", "Day 29": "Dzień 29",
+    "Illustrative transactions for the mockup. To be replaced with approved case studies before launch.": "Transakcje poglądowe na potrzeby makiety. Przed publikacją zostaną zastąpione zatwierdzonymi przykładami.",
+    "Does your project": "Czy Twój projekt", "fit": "pasuje", "our mandate?": "do naszego mandatu?",
+    "Three inputs, an instant read against our parameters. It is not an offer, but it tells you whether the first call is worth booking.": "Trzy parametry i natychmiastowe porównanie z naszymi kryteriami. To nie jest oferta, ale pokazuje, czy warto umówić pierwszą rozmowę.",
+    "Facility you need": "Potrzebne finansowanie", "Value of the property": "Wartość nieruchomości",
+    "VAT facility": "Finansowanie VAT", "Early-stage construction": "Budowa na wczesnym etapie",
+    "Send these details": "Wyślij te dane",
+    "Indicative only. Final terms depend on the sponsor, the asset and due diligence.": "Wyłącznie orientacyjnie. Ostateczne warunki zależą od inwestora, aktywa i due diligence.",
+    "Execution": "Realizacja", "Thirty days,": "Trzydzieści dni,", "mapped out.": "krok po kroku.",
+    "The same timeline whether the ticket is PLN 20M or PLN 120M, with one team carrying the deal from first call to drawdown.": "Ten sam harmonogram przy 20 i przy 120 mln zł. Jeden zespół prowadzi transakcję od pierwszej rozmowy do wypłaty.",
+    "Day 0": "Dzień 0", "You share the basics. A decision-maker joins the conversation.": "Przekazujesz podstawowe informacje. W rozmowie od razu uczestniczy osoba decyzyjna.",
+    "Days 1–3": "Dni 1–3", "Go / no-go and an indicative term sheet.": "Decyzja tak/nie i wstępny term sheet.",
+    "Days 4–25": "Dni 4–25", "Due diligence": "Due diligence", "Legal, financial, tax and technical review, run in parallel.": "Analiza prawna, finansowa, podatkowa i techniczna prowadzona równolegle.",
+    "Days 25–28": "Dni 25–28", "Committee": "Komitet", "Final approval ahead of signing.": "Ostateczna zgoda przed podpisaniem umowy.",
+    "Day ~30": "Dzień ~30", "Funding": "Wypłata", "First drawdown of funds.": "Pierwsza wypłata środków.",
+    "Security package": "Pakiet zabezpieczeń", "Layered protection,": "Wielowarstwowe zabezpieczenie,", "tailored": "dopasowane", "to each facility.": "do każdego finansowania.",
+    "Instruments are combined to match the asset, the sponsor and the structure, with further protections added where appropriate.": "Instrumenty dobieramy do aktywa, inwestora i struktury, a w razie potrzeby dodajemy kolejne zabezpieczenia.",
+    "First-ranking mortgage": "Hipoteka pierwszego rzędu", "Share pledge": "Zastaw na udziałach", "Assignment of receivables": "Cesja wierzytelności",
+    "Assignment of bank accounts": "Cesja praw z rachunków bankowych", "Assignment of insurance proceeds": "Cesja praw z polis ubezpieczeniowych",
+    "Corporate & personal guarantees": "Poręczenia korporacyjne i osobiste", "Art. 777 submission to enforcement": "Oświadczenie o poddaniu się egzekucji (art. 777)",
+    "Cash sweep mechanism": "Mechanizm cash sweep", "Step-in rights": "Prawo wejścia w projekt (step-in)",
+    "Senior partner in conversation over coffee": "Starszy partner podczas rozmowy przy kawie",
+    "Who we partner with": "Z kim współpracujemy",
+    "We weigh the quality of the sponsor as much as the strength of the opportunity.": "Jakość inwestora waży dla nas tyle samo, co siła samego projektu.", "Example": "Przykład",
+    "Track record": "Doświadczenie", "Delivery demonstrated across cycles.": "Realizacje potwierdzone w różnych cyklach rynkowych.",
+    "Clear exit": "Jasna strategia wyjścia", "A defined refinancing or sale path.": "Określona ścieżka refinansowania lub sprzedaży.",
+    "Alignment": "Zbieżność interesów", "Shared interests between sponsor and lender.": "Wspólne interesy inwestora i finansującego.",
+    "Contact": "Kontakt", "Let's talk about your": "Porozmawiajmy o Twojej", "next": "kolejnej", "transaction.": "transakcji.",
+    "Send the basics. A decision-maker comes back within 1–3 business days with a go / no-go and, where it fits, an indicative term sheet.": "Prześlij podstawowe informacje. W ciągu 1–3 dni roboczych odezwie się osoba decyzyjna z decyzją tak/nie, a jeśli projekt pasuje, ze wstępnym term sheetem.",
+    "Copy": "Kopiuj", "Copied": "Skopiowano",
+    "Name": "Imię i nazwisko", "Company": "Firma", "Email": "E-mail", "Phone": "Telefon", "About the project": "O projekcie",
+    "Asset, location, stage, amount, timeline": "Aktywo, lokalizacja, etap, kwota, harmonogram", "Send enquiry": "Wyślij zapytanie",
+    "Prototype form. In the live site it routes to the Westbridge deal inbox.": "Formularz poglądowy. Na docelowej stronie trafi do skrzynki zespołu transakcyjnego Westbridge.",
+    "© 2026 Westbridge Finance": "© 2026 Westbridge Finance",
+    // dynamic strings
+    "Looks like a fit.": "Wygląda na to, że pasuje.", "Close, worth a call.": "Blisko, warto porozmawiać.", "Outside our mandate.": "Poza naszym mandatem.",
+    "Ticket size": "Wielkość finansowania", "Loan to value": "Wskaźnik LTV", "Purpose in mandate": "Cel w mandacie",
+    "Within PLN 20–120M": "W przedziale 20–120 mln zł", "Max": "Maks."
+  };
+
+  // Sticky nav border
+  var nav = document.getElementById("nav");
+  addEventListener("scroll", function () { nav.classList.toggle("scrolled", scrollY > 8); }, { passive: true });
+
+  // Mandate filter
+  var cards = document.querySelectorAll("#mgrid .mcard");
+  document.querySelectorAll(".tabs button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll(".tabs button").forEach(function (x) { x.setAttribute("aria-selected", String(x === b)); });
+      var f = b.dataset.f;
+      cards.forEach(function (c) { c.classList.toggle("dim", f !== "all" && c.dataset.k !== f); c.classList.toggle("on", f !== "all" && c.dataset.k === f); });
+    });
+  });
+
+  // Fit check
+  var rA = document.getElementById("r-amt"), rV = document.getElementById("r-val");
+  var oA = document.getElementById("o-amt"), oV = document.getElementById("o-val");
+  var verdict = document.getElementById("verdict"), checks = document.getElementById("checks");
+  var purpose = "land";
+  function pln(n) { return WB.lang() === "pl" ? WB.fmt(n) + " mln zł" : "PLN " + WB.fmt(n) + "M"; }
+  function paint(r) { r.style.setProperty("--p", ((r.value - r.min) / (r.max - r.min) * 100) + "%"); }
+  function run() {
+    var t = WB.t, a = +rA.value, v = +rV.value, ltv = a / v * 100;
+    var maxLtv = purpose === "vat" ? 85 : 65;
+    paint(rA); paint(rV);
+    oA.textContent = pln(a); oV.textContent = pln(v);
+    var c1 = a >= 20 && a <= 120, c2 = ltv <= maxLtv, c3 = purpose !== "early";
+    var score = [c1, c2, c3].filter(Boolean).length;
+    verdict.textContent = t(score === 3 ? "Looks like a fit." : (score === 2 && c3 ? "Close, worth a call." : "Outside our mandate."));
+    function li(ok, label, val) { return '<li><span class="dot ' + (ok ? "y" : "n") + '">' + (ok ? "✓" : "✕") + '</span><span>' + t(label) + '</span><span>' + val + '</span></li>'; }
+    var pBtn = document.querySelector('#purpose [data-p="' + purpose + '"]');
+    checks.innerHTML =
+      li(c1, "Ticket size", c1 ? t("Within PLN 20–120M") : pln(a)) +
+      li(c2, "Loan to value", WB.fmt(ltv) + "% · " + t("Max") + " " + maxLtv + "%") +
+      li(c3, "Purpose in mandate", pBtn.textContent);
+  }
+  [rA, rV].forEach(function (r) { r.addEventListener("input", run); });
+  document.querySelectorAll("#purpose button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      purpose = b.dataset.p;
+      document.querySelectorAll("#purpose button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      run();
+    });
+  });
+  document.getElementById("fit-cta").addEventListener("click", function () {
+    var pBtn = document.querySelector('#purpose [data-p="' + purpose + '"]');
+    document.getElementById("f-msg").value = (WB.lang() === "pl" ? "Finansowanie: " : "Facility: ") + oA.textContent + " · " + (WB.lang() === "pl" ? "Wartość: " : "Value: ") + oV.textContent + " · " + pBtn.textContent;
+  });
+  WB.onLang(run);
+
+  // Form
+  var form = document.getElementById("dealform"), ok = document.getElementById("form-ok");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var pl = WB.lang() === "pl", name = form.elements.name.value.trim(), email = form.elements.email.value.trim();
+    if (!name || !/^\S+@\S+\.\S+$/.test(email)) { ok.textContent = pl ? "Podaj imię i poprawny adres e-mail, żebyśmy mogli odpowiedzieć." : "Add your name and a valid email address so we can reply."; ok.hidden = false; return; }
+    ok.textContent = pl ? "Dziękujemy, " + name.split(" ")[0] + ". Zapytanie jest gotowe. Na docelowej stronie trafi prosto do naszego zespołu transakcyjnego." : "Thank you, " + name.split(" ")[0] + ". Your enquiry is ready. In the live site it goes straight to our deal team.";
+    ok.hidden = false;
+  });
+
+  WB.init(PL);
+})();
+</script>
+</body>
+</html>
