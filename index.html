@@ -352,6 +352,8 @@ html[data-theme="dark"] .theme .sun { display: block; }
 html[data-theme="dark"] .theme .moon { display: none; }
 html[data-theme="dark"] .logo .lg-d { display: none; }
 html[data-theme="dark"] .logo .lg-w { display: block; }
+/* in the light theme insights and contact share a background, so their gap is not doubled */
+html:not([data-theme="dark"]) #contact { padding-top: 0; }
 html[data-theme="dark"] .deal { box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
 footer { border-top: 1px solid var(--line); padding-block: 36px; font-size: 13px; color: var(--mute); }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 20px 32px; justify-content: space-between; align-items: center; }
@@ -716,7 +718,7 @@ footer .logo img { width: 110px; }
   </section>
 
   <!-- CONTACT -->
-  <section class="pad" id="contact" style="padding-top:0;padding-bottom:clamp(56px, 6vw, 88px)">
+  <section class="pad" id="contact" style="padding-bottom:clamp(56px, 6vw, 88px)">
     <div class="wrap contact">
       <div>
         <p class="kicker"><b>12</b> Contact</p>
