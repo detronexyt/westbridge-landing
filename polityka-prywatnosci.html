@@ -9,10 +9,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("wbf-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
 <script src="assets/consent.js"></script>
 <style>
 /* Variant B: light editorial. Large grotesque type, serif italics as accent, product-like deal cards */
 :root {
+  color-scheme: light;
   --ink: #14181B;
   --graphite: #1E2327;
   --paper: #F6F4EF;
@@ -24,6 +26,9 @@
   --mute: #5E636A;
   --mute-2: #8A8F95;
   --line: #DEDAD2;
+  --on-ink: #FFFFFF;
+  --nav-bg: rgba(246,244,239,.86);
+  --arc: #EFEBE3;
   --ok: #2F7D5B;
   --no: #B5452F;
   --sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
@@ -54,10 +59,10 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .lede { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.55; color: var(--mute); max-width: 54ch; margin: 0; }
 
 .btn { display: inline-flex; align-items: center; gap: 12px; padding: 16px 24px; border-radius: 999px; font: 500 15px/1 var(--sans); text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: background .25s, color .25s, border-color .25s, transform .25s; }
-.btn-dark { background: var(--ink); color: var(--white); }
-.btn-dark:hover { background: #2B3238; }
+.btn-dark { background: var(--ink); color: var(--on-ink); }
+.btn-dark:hover { background: var(--ink); opacity: .88; }
 .btn-line { border-color: var(--ink); color: var(--ink); background: transparent; }
-.btn-line:hover { background: var(--ink); color: var(--white); }
+.btn-line:hover { background: var(--ink); color: var(--on-ink); }
 .btn .arr { width: 22px; height: 22px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; transition: transform .25s; }
 .btn .arr svg { width: 11px; height: 11px; }
 .btn:hover .arr { transform: translateX(3px); }
@@ -66,7 +71,7 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .reveal.in { opacity: 1; transform: none; }
 
 /* NAV */
-.nav { position: sticky; top: 0; z-index: 50; background: rgba(246,244,239,.86); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+.nav { position: sticky; top: 0; z-index: 50; background: var(--nav-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: border-color .3s; }
 .nav.scrolled { border-bottom-color: var(--line); }
 .nav .wrap { display: flex; align-items: center; height: 76px; gap: 20px; }
 .nav ul { margin-left: clamp(24px, 3.5vw, 56px) !important; }
@@ -79,13 +84,16 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .nav .btn { padding: 11px 18px; font-size: 14px; }
 .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
 .lang button { background: none; border: 0; color: var(--mute); font: 600 12px/1 var(--sans); letter-spacing: .08em; padding: 8px 10px; border-radius: 999px; cursor: pointer; }
-.lang button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
 .nav ul a, .nav .btn { white-space: nowrap; }
 @media (max-width: 1180px) { .nav ul { display: none; } }
 @media (max-width: 440px) { .nav .btn .lbl { display: none; } .nav .btn { padding: 10px; } .logo img { width: 104px; } }
 
 /* HERO */
-.hero { padding-top: clamp(48px, 7vw, 96px); }
+.hero { padding-top: clamp(48px, 7vw, 96px); overflow: hidden; }
+.hero > .wrap { position: relative; z-index: 1; }
+/* large circles taken from the LinkedIn graphics */
+.hero::before { content: ""; position: absolute; width: min(1100px, 120vw); aspect-ratio: 1; border-radius: 50%; right: -18%; top: -340px; background: var(--arc); pointer-events: none; }
 .hero h1 { max-width: 12ch; font-size: clamp(46px, 6.6vw, 100px); }
 .hero-row { display: grid; grid-template-columns: 1.35fr .65fr; gap: 48px; align-items: end; }
 .hero-row .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
@@ -105,7 +113,7 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .track-l { display: flex; justify-content: space-between; font-size: 12px; color: var(--mute); margin-top: 8px; font-variant-numeric: tabular-nums; }
 .hero-img { margin-top: clamp(48px, 7vw, 88px); height: clamp(260px, 38vw, 520px); background: url("assets/warsaw.jpg") center 28% / cover; border-radius: 24px; position: relative; overflow: hidden; }
 .hero-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,24,27,0) 40%, rgba(20,24,27,.55)); }
-.hero-img .cap { position: absolute; left: 28px; bottom: 24px; right: 28px; z-index: 1; color: var(--white); display: flex; justify-content: space-between; gap: 20px; font-size: 13px; flex-wrap: wrap; }
+.hero-img .cap { position: absolute; left: 28px; bottom: 24px; right: 28px; z-index: 1; color: #fff; display: flex; justify-content: space-between; gap: 20px; font-size: 13px; flex-wrap: wrap; }
 @media (max-width: 860px) { .hero-row { grid-template-columns: 1fr; } .deal { justify-self: stretch; max-width: none; } }
 
 /* FIGURES */
@@ -137,15 +145,15 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 }
 
 /* DARK BAND */
-.dark { background: var(--graphite); color: var(--white); }
-.dark .kicker { color: #9AA0A7; } .dark .kicker b { color: var(--white); } .dark .kicker::after { background: rgba(255,255,255,.18); }
+.dark { background: var(--graphite); color: #fff; }
+.dark .kicker { color: #9AA0A7; } .dark .kicker b { color: #fff; } .dark .kicker::after { background: rgba(255,255,255,.18); }
 .dark .lede { color: #AEB3B8; }
 .dark em.s { color: #C9B89E; }
 
 /* MANDATE */
 .tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,.07); margin-bottom: 36px; flex-wrap: wrap; }
 .tabs button { background: none; border: 0; color: #AEB3B8; font: 500 14px/1 var(--sans); padding: 12px 18px; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s; }
-.tabs button[aria-selected="true"] { background: var(--white); color: var(--ink); }
+.tabs button[aria-selected="true"] { background: #fff; color: #14181B; }
 .mgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .mcard { border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 24px 22px 26px; min-height: 180px; display: grid; align-content: space-between; gap: 30px; transition: opacity .35s, border-color .35s, background .35s; }
 .mcard small { font-size: 12px; color: #9AA0A7; font-variant-numeric: tabular-nums; }
@@ -154,7 +162,15 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .mcard.dim { opacity: .22; }
 .mcard.on { border-color: var(--gold); background: rgba(169,146,115,.08); }
 @media (max-width: 960px) { .mgrid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 480px) { .mgrid { grid-template-columns: 1fr; } .mcard { min-height: 0; } }
+@media (max-width: 640px) {
+  .tabs { position: sticky; top: 84px; z-index: 5; display: flex; flex-wrap: nowrap; background: rgba(42,48,53,.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); margin-bottom: 20px; }
+  .tabs button { flex: 1; padding: 12px 6px; }
+  .mgrid { grid-template-columns: 1fr; gap: 8px; }
+  .mcard { min-height: 0; padding: 16px 18px; gap: 4px; border-radius: 14px; }
+  .mcard b { font-size: 18px; }
+  .mcard em { margin-top: 4px; }
+  .mcard.dim { display: none; }
+}
 
 /* CASES */
 .cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -162,7 +178,7 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .case:hover { transform: translateY(-4px); box-shadow: 0 30px 50px -30px rgba(20,24,27,.3); }
 .case .ph { aspect-ratio: 16 / 10; background-size: cover; background-position: center; position: relative; }
 .case .ph span.ex { left: auto; right: 16px; background: rgba(20,24,27,.78); color: #fff; }
-.case .ph span { position: absolute; left: 16px; top: 16px; background: rgba(255,255,255,.92); font-size: 12px; font-weight: 500; padding: 6px 11px; border-radius: 999px; }
+.case .ph span { position: absolute; left: 16px; top: 16px; background: rgba(255,255,255,.92); color: #14181B; font-size: 12px; font-weight: 500; padding: 6px 11px; border-radius: 999px; }
 .case .bd { padding: 22px 22px 24px; display: grid; gap: 16px; align-content: start; }
 .case .amt { font-size: 34px; font-weight: 500; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
 .case .t { color: var(--mute); font-size: 15px; }
@@ -175,7 +191,7 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .fit { display: grid; grid-template-columns: 1.05fr .95fr; gap: 18px; }
 .fit-in, .fit-out { border-radius: 24px; padding: clamp(24px, 3.4vw, 40px); }
 .fit-in { background: var(--white); border: 1px solid var(--line); display: grid; gap: 30px; }
-.fit-out { background: var(--ink); color: var(--white); display: grid; gap: 22px; align-content: start; }
+.fit-out { background: #14181B; color: #fff; display: grid; gap: 22px; align-content: start; }
 .field { display: grid; gap: 12px; }
 .field .row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
 .field label { font-size: 14px; color: var(--mute); }
@@ -185,7 +201,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px;
 input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--white); border: 2px solid var(--ink); cursor: grab; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chips button { font: 500 14px/1 var(--sans); padding: 11px 15px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; transition: all .2s; }
-.chips button[aria-pressed="true"] { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
 .verdict { font-size: clamp(28px, 3vw, 38px); font-weight: 500; letter-spacing: -.03em; line-height: 1.1; }
 .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
 .checks li { display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.12); font-size: 15px; }
@@ -223,15 +239,15 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 
 /* PARTNER QUOTE */
 .quote { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
-.quote img { border-radius: 24px; aspect-ratio: 1; object-fit: cover; width: 100%; }
+.quote img { border-radius: 24px; aspect-ratio: 4 / 3; height: auto; object-fit: cover; object-position: center 30%; width: 100%; }
 .quote blockquote { margin: 0; font-family: var(--serif); font-size: clamp(30px, 3.6vw, 52px); line-height: 1.1; letter-spacing: -.01em; }
 .quote cite { display: block; font-style: normal; margin-top: 28px; font-size: 15px; color: #AEB3B8; }
-.quote cite b { color: var(--white); font-weight: 500; display: block; }
+.quote cite b { color: #fff; font-weight: 500; display: block; }
 .crit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
 .crit div { border-top: 1px solid rgba(255,255,255,.2); padding-top: 16px; }
 .crit b { font-weight: 500; display: block; }
 .crit span { color: #9AA0A7; font-size: 14px; }
-@media (max-width: 860px) { .quote { grid-template-columns: 1fr; } .quote img { max-width: 360px; aspect-ratio: 1; } }
+@media (max-width: 860px) { .quote { grid-template-columns: 1fr; } .quote img { max-width: none; aspect-ratio: 4 / 3; } }
 @media (max-width: 560px) { .crit { grid-template-columns: 1fr; } }
 
 /* CONTACT */
@@ -249,7 +265,7 @@ input:not([type=range]), select, textarea { font: 400 16px/1.4 var(--sans); colo
 textarea { min-height: 110px; resize: vertical; }
 input:focus, select:focus, textarea:focus { outline: none; border-color: var(--ink); background: var(--white); }
 form .btn { justify-self: start; }
-.form-ok { margin: 0; font-size: 14px; background: #F1ECE4; border-left: 3px solid var(--gold); padding: 12px 14px; border-radius: 4px; }
+.form-ok { margin: 0; font-size: 14px; background: var(--stone); border-left: 3px solid var(--gold); padding: 12px 14px; border-radius: 4px; }
 .fine { font-size: 12px; color: var(--mute-2); margin: 0; }
 @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
 
@@ -259,7 +275,7 @@ form .btn { justify-self: start; }
 .posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .post { background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; text-decoration: none; display: grid; grid-template-rows: auto 1fr; transition: transform .35s, box-shadow .35s; }
 .post:hover { transform: translateY(-4px); box-shadow: 0 30px 50px -30px rgba(20,24,27,.3); }
-.post .cv { aspect-ratio: 16 / 10; background: var(--ink); color: var(--white); padding: 22px; display: grid; align-content: space-between; position: relative; overflow: hidden; }
+.post .cv { aspect-ratio: 16 / 10; background: #1E2327; color: #fff; padding: 22px; display: grid; align-content: space-between; position: relative; overflow: hidden; }
 .post .cv::after { content: ""; position: absolute; width: 120%; aspect-ratio: 1; right: -60%; top: -50%; border-radius: 50%; background: rgba(255,255,255,.05); }
 .post .cv > * { position: relative; z-index: 1; }
 .post .cv small { font-size: 12px; font-weight: 500; color: #C9B89E; }
@@ -268,6 +284,76 @@ form .btn { justify-self: start; }
 .post .md b { font-weight: 500; }
 .post .md span { font-size: 14px; color: var(--mute); }
 @media (max-width: 960px) { .posts { grid-template-columns: 1fr; max-width: 560px; } }
+/* FINANCING AT A GLANCE (blocks from variant A) */
+.terms { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+.glance { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.glance div { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 8px; }
+.glance b { font-size: clamp(26px, 2.6vw, 36px); font-weight: 500; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.glance span { font-size: 14px; color: var(--mute); }
+.tbl { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 8px 24px 20px; }
+.tbl table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.tbl th, .tbl td { text-align: left; padding: 15px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tbl tr:last-child th, .tbl tr:last-child td { border-bottom: 0; }
+.tbl th { font-weight: 400; color: var(--mute); width: 42%; }
+.tbl td { font-weight: 500; }
+@media (max-width: 860px) { .terms { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .glance div { padding: 16px; } .glance b { font-size: 22px; white-space: nowrap; } }
+.terms-sec { background: var(--white); }
+html[data-theme="dark"] .terms-sec { background: #FFFFFF; }
+
+/* WHO WE ARE */
+.about-copy { display: grid; gap: 18px; color: var(--mute); }
+.about-copy p { margin: 0; }
+.about-copy p:first-child { color: var(--ink); font-size: 20px; line-height: 1.5; letter-spacing: -.01em; }
+.about-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: clamp(40px, 6vw, 72px); }
+.acard { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 26px; display: grid; gap: 12px; align-content: start; }
+.acard small { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--gold-d); font-weight: 600; }
+.acard > b { font-size: 22px; font-weight: 500; letter-spacing: -.02em; line-height: 1.25; }
+.acard > b.big { font-size: clamp(40px, 4.4vw, 60px); letter-spacing: -.045em; line-height: 1; }
+.acard p { margin: 0; color: var(--mute); font-size: 15px; }
+@media (max-width: 900px) { .about-cards { grid-template-columns: 1fr; } }
+
+/* placeholders for content Westbridge still has to send */
+.todo-t { color: var(--mute) !important; font-style: italic; font-weight: 400 !important; }
+.todo { justify-self: start; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; color: var(--gold-d); border: 1px dashed var(--gold); border-radius: 999px; padding: 5px 11px; }
+.todo::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+/* TEAM */
+.team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.tm { background: var(--white); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.tm .ph { aspect-ratio: 5 / 4; background: var(--stone); display: grid; place-items: end center; color: var(--mute-2); overflow: hidden; }
+.tm .ph svg { width: 62%; height: auto; opacity: .55; }
+.tm .bd { padding: 22px 22px 26px; display: grid; gap: 8px; align-content: start; }
+.tm .bd > b { font-size: 22px; font-weight: 500; letter-spacing: -.02em; }
+.tm .role { font-size: 14px; color: var(--gold-d); }
+.tm p { margin: 4px 0 6px; font-size: 15px; color: var(--mute); }
+@media (max-width: 900px) { .team { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .team { grid-template-columns: 1fr; } .tm .ph { aspect-ratio: 16 / 10; } .tm .ph svg { width: 40%; } }
+
+/* THEME: dark direction in the LinkedIn palette, mixed with light sections */
+.theme { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: none; color: var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0; }
+.theme svg { width: 17px; height: 17px; }
+.theme .sun { display: none; }
+.logo .lg-w { display: none; }
+html[data-theme="dark"] { color-scheme: dark; }
+html[data-theme="dark"] body, html[data-theme="dark"] .dark, html[data-theme="dark"] .dk {
+  --ink: #F4F2EE; --paper: #1E2327; --white: #282F37; --stone: #313943;
+  --gold-d: #C9B89E; --mute: #A3A9AF; --mute-2: #7F868D; --line: rgba(255,255,255,.12);
+  --on-ink: #14181B; --nav-bg: rgba(30,35,39,.86); --arc: #282F37;
+}
+html[data-theme="dark"] .dark { background: #282F37; }
+html[data-theme="dark"] .dk { background: var(--paper); color: var(--ink); }
+html[data-theme="dark"] .lt {
+  color-scheme: light;
+  --ink: #14181B; --paper: #F6F4EF; --white: #FFFFFF; --stone: #ECE8E0; --gold-d: #8C7658;
+  --mute: #5E636A; --mute-2: #8A8F95; --line: #DEDAD2; --on-ink: #FFFFFF;
+  background: var(--paper); color: var(--ink);
+}
+html[data-theme="dark"] .theme .sun { display: block; }
+html[data-theme="dark"] .theme .moon { display: none; }
+html[data-theme="dark"] .logo .lg-d { display: none; }
+html[data-theme="dark"] .logo .lg-w { display: block; }
+html[data-theme="dark"] .deal { box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
 footer { border-top: 1px solid var(--line); padding-block: 36px; font-size: 13px; color: var(--mute); }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 20px 32px; justify-content: space-between; align-items: center; }
 footer nav { display: flex; gap: 22px; flex-wrap: wrap; }
@@ -286,23 +372,24 @@ footer .logo img { width: 110px; }
 .legal li + li { margin-top: 6px; }
 .legal a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .legal code { font-size: 14px; background: var(--stone); padding: 1px 6px; border-radius: 6px; }
-mark.todo { background: #F7E27A; color: var(--ink); padding: 0 4px; border-radius: 4px; }
+mark.todo { background: #F7E27A; color: #14181B; padding: 0 4px; border-radius: 4px; }
 </style>
 </head>
 <body>
 
 <header class="nav" id="nav">
   <div class="wrap">
-    <a class="logo" href="./" aria-label="Westbridge Finance home"><img src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="124" height="39"></a>
+    <a class="logo" href="./" aria-label="Westbridge Finance home"><img class="lg-d" src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="124" height="39"><img class="lg-w" src="logo/wbf-logo-white-transparent.png" alt="WBF West Bridge Finance" width="124" height="39"></a>
     <ul>
-      <li><a href="./#why">Why us</a></li>
+      <li><a href="./#about">Who we are</a></li>
+      <li><a href="./#terms">Financing</a></li>
       <li><a href="./#mandate">Mandate</a></li>
       <li><a href="./#deals">Transactions</a></li>
-      <li><a href="./#fit">Check your deal</a></li>
-      <li><a href="./#process">Process</a></li>
+      <li><a href="./#team">Team</a></li>
       <li><a href="./#insights">Insights</a></li>
     </ul>
     <div class="nav-r">
+      <button class="theme" type="button" id="theme" aria-label="Switch to light theme"><svg class="sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.5v2.2M10 16.3v2.2M1.5 10h2.2M16.3 10h2.2M4 4l1.6 1.6M14.4 14.4 16 16M4 16l1.6-1.6M14.4 5.6 16 4"/></svg><svg class="moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16.5 12.2A7 7 0 0 1 7.8 3.5a7 7 0 1 0 8.7 8.7z"/></svg></button>
       <div class="lang" role="group" aria-label="Language / Język"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="pl" aria-pressed="false">PL</button></div>
       <a class="btn btn-dark" href="./#contact"><span class="lbl">Discuss a transaction</span><span class="arr"><svg viewBox="0 0 12 12" fill="none" stroke="#14181B" stroke-width="1.6"><path d="M2 6h8M7 3l3 3-3 3"/></svg></span></a>
     </div>
@@ -366,7 +453,7 @@ mark.todo { background: #F7E27A; color: var(--ink); padding: 0 4px; border-radiu
 
 <footer>
   <div class="wrap">
-    <a class="logo" href="./" aria-label="Westbridge Finance home"><img src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"></a>
+    <a class="logo" href="./" aria-label="Westbridge Finance home"><img class="lg-d" src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"><img class="lg-w" src="logo/wbf-logo-white-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"></a>
     <nav><a href="polityka-prywatnosci.html">Privacy policy</a><a href="#" data-cc="show-preferencesModal">Privacy settings</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></nav>
     <span>© 2026 Westbridge Finance</span>
   </div>
@@ -377,7 +464,7 @@ mark.todo { background: #F7E27A; color: var(--ink); padding: 0 4px; border-radiu
 (function () {
   var PL = {
     "Westbridge Finance home": "Westbridge Finance – strona główna",
-    "Why us": "Dlaczego my", "Mandate": "Mandat", "Transactions": "Transakcje", "Check your deal": "Sprawdź projekt", "Process": "Proces", "Insights": "Analizy",
+    "Who we are": "Kim jesteśmy", "Financing": "Finansowanie", "Team": "Zespół", "Mandate": "Mandat", "Transactions": "Transakcje", "Insights": "Analizy",
     "Discuss a transaction": "Omów transakcję",
     "Last updated: 2 November 2026": "Ostatnia aktualizacja: 2 listopada 2026 r.",
     "Privacy": "Polityka", "policy.": "prywatności.",
@@ -413,6 +500,20 @@ mark.todo { background: #F7E27A; color: var(--ink); padding: 0 4px; border-radiu
     "We will announce material changes on this page.": "O istotnych zmianach poinformujemy na tej stronie.",
     "© 2026 Westbridge Finance": "© 2026 Westbridge Finance"
   };
+  // Light / dark theme switch (dark is the default, closer to the LinkedIn materials)
+  var tb = document.getElementById("theme");
+  function themeLabel() {
+    var dark = document.documentElement.dataset.theme === "dark", pl = WB.lang() === "pl";
+    tb.setAttribute("aria-label", dark ? (pl ? "Przełącz na jasny motyw" : "Switch to light theme") : (pl ? "Przełącz na ciemny motyw" : "Switch to dark theme"));
+  }
+  tb.addEventListener("click", function () {
+    var t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = t;
+    try { localStorage.setItem("wbf-theme", t); } catch (e) {}
+    themeLabel();
+  });
+  WB.onLang(themeLabel);
+
   var nav = document.getElementById("nav");
   addEventListener("scroll", function () { nav.classList.toggle("scrolled", scrollY > 8); }, { passive: true });
   WB.onLang(function (l) { document.title = l === "pl" ? "Polityka prywatności · Westbridge Finance" : "Privacy policy · Westbridge Finance"; });

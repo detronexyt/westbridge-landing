@@ -8,10 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("wbf-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
 <script src="assets/consent.js"></script>
 <style>
 /* Variant B: light editorial. Large grotesque type, serif italics as accent, product-like deal cards */
 :root {
+  color-scheme: light;
   --ink: #14181B;
   --graphite: #1E2327;
   --paper: #F6F4EF;
@@ -23,6 +25,9 @@
   --mute: #5E636A;
   --mute-2: #8A8F95;
   --line: #DEDAD2;
+  --on-ink: #FFFFFF;
+  --nav-bg: rgba(246,244,239,.86);
+  --arc: #EFEBE3;
   --ok: #2F7D5B;
   --no: #B5452F;
   --sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
@@ -53,10 +58,10 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .lede { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.55; color: var(--mute); max-width: 54ch; margin: 0; }
 
 .btn { display: inline-flex; align-items: center; gap: 12px; padding: 16px 24px; border-radius: 999px; font: 500 15px/1 var(--sans); text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: background .25s, color .25s, border-color .25s, transform .25s; }
-.btn-dark { background: var(--ink); color: var(--white); }
-.btn-dark:hover { background: #2B3238; }
+.btn-dark { background: var(--ink); color: var(--on-ink); }
+.btn-dark:hover { background: var(--ink); opacity: .88; }
 .btn-line { border-color: var(--ink); color: var(--ink); background: transparent; }
-.btn-line:hover { background: var(--ink); color: var(--white); }
+.btn-line:hover { background: var(--ink); color: var(--on-ink); }
 .btn .arr { width: 22px; height: 22px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; transition: transform .25s; }
 .btn .arr svg { width: 11px; height: 11px; }
 .btn:hover .arr { transform: translateX(3px); }
@@ -65,7 +70,7 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .reveal.in { opacity: 1; transform: none; }
 
 /* NAV */
-.nav { position: sticky; top: 0; z-index: 50; background: rgba(246,244,239,.86); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+.nav { position: sticky; top: 0; z-index: 50; background: var(--nav-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: border-color .3s; }
 .nav.scrolled { border-bottom-color: var(--line); }
 .nav .wrap { display: flex; align-items: center; height: 76px; gap: 20px; }
 .nav ul { margin-left: clamp(24px, 3.5vw, 56px) !important; }
@@ -78,13 +83,16 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .nav .btn { padding: 11px 18px; font-size: 14px; }
 .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
 .lang button { background: none; border: 0; color: var(--mute); font: 600 12px/1 var(--sans); letter-spacing: .08em; padding: 8px 10px; border-radius: 999px; cursor: pointer; }
-.lang button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
 .nav ul a, .nav .btn { white-space: nowrap; }
 @media (max-width: 1180px) { .nav ul { display: none; } }
 @media (max-width: 440px) { .nav .btn .lbl { display: none; } .nav .btn { padding: 10px; } .logo img { width: 104px; } }
 
 /* HERO */
-.hero { padding-top: clamp(48px, 7vw, 96px); }
+.hero { padding-top: clamp(48px, 7vw, 96px); overflow: hidden; }
+.hero > .wrap { position: relative; z-index: 1; }
+/* large circles taken from the LinkedIn graphics */
+.hero::before { content: ""; position: absolute; width: min(1100px, 120vw); aspect-ratio: 1; border-radius: 50%; right: -18%; top: -340px; background: var(--arc); pointer-events: none; }
 .hero h1 { max-width: 12ch; font-size: clamp(46px, 6.6vw, 100px); }
 .hero-row { display: grid; grid-template-columns: 1.35fr .65fr; gap: 48px; align-items: end; }
 .hero-row .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
@@ -104,7 +112,7 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .track-l { display: flex; justify-content: space-between; font-size: 12px; color: var(--mute); margin-top: 8px; font-variant-numeric: tabular-nums; }
 .hero-img { margin-top: clamp(48px, 7vw, 88px); height: clamp(260px, 38vw, 520px); background: url("assets/warsaw.jpg") center 28% / cover; border-radius: 24px; position: relative; overflow: hidden; }
 .hero-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,24,27,0) 40%, rgba(20,24,27,.55)); }
-.hero-img .cap { position: absolute; left: 28px; bottom: 24px; right: 28px; z-index: 1; color: var(--white); display: flex; justify-content: space-between; gap: 20px; font-size: 13px; flex-wrap: wrap; }
+.hero-img .cap { position: absolute; left: 28px; bottom: 24px; right: 28px; z-index: 1; color: #fff; display: flex; justify-content: space-between; gap: 20px; font-size: 13px; flex-wrap: wrap; }
 @media (max-width: 860px) { .hero-row { grid-template-columns: 1fr; } .deal { justify-self: stretch; max-width: none; } }
 
 /* FIGURES */
@@ -136,15 +144,15 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 }
 
 /* DARK BAND */
-.dark { background: var(--graphite); color: var(--white); }
-.dark .kicker { color: #9AA0A7; } .dark .kicker b { color: var(--white); } .dark .kicker::after { background: rgba(255,255,255,.18); }
+.dark { background: var(--graphite); color: #fff; }
+.dark .kicker { color: #9AA0A7; } .dark .kicker b { color: #fff; } .dark .kicker::after { background: rgba(255,255,255,.18); }
 .dark .lede { color: #AEB3B8; }
 .dark em.s { color: #C9B89E; }
 
 /* MANDATE */
 .tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,.07); margin-bottom: 36px; flex-wrap: wrap; }
 .tabs button { background: none; border: 0; color: #AEB3B8; font: 500 14px/1 var(--sans); padding: 12px 18px; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s; }
-.tabs button[aria-selected="true"] { background: var(--white); color: var(--ink); }
+.tabs button[aria-selected="true"] { background: #fff; color: #14181B; }
 .mgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .mcard { border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 24px 22px 26px; min-height: 180px; display: grid; align-content: space-between; gap: 30px; transition: opacity .35s, border-color .35s, background .35s; }
 .mcard small { font-size: 12px; color: #9AA0A7; font-variant-numeric: tabular-nums; }
@@ -169,7 +177,7 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .case:hover { transform: translateY(-4px); box-shadow: 0 30px 50px -30px rgba(20,24,27,.3); }
 .case .ph { aspect-ratio: 16 / 10; background-size: cover; background-position: center; position: relative; }
 .case .ph span.ex { left: auto; right: 16px; background: rgba(20,24,27,.78); color: #fff; }
-.case .ph span { position: absolute; left: 16px; top: 16px; background: rgba(255,255,255,.92); font-size: 12px; font-weight: 500; padding: 6px 11px; border-radius: 999px; }
+.case .ph span { position: absolute; left: 16px; top: 16px; background: rgba(255,255,255,.92); color: #14181B; font-size: 12px; font-weight: 500; padding: 6px 11px; border-radius: 999px; }
 .case .bd { padding: 22px 22px 24px; display: grid; gap: 16px; align-content: start; }
 .case .amt { font-size: 34px; font-weight: 500; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
 .case .t { color: var(--mute); font-size: 15px; }
@@ -182,7 +190,7 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .fit { display: grid; grid-template-columns: 1.05fr .95fr; gap: 18px; }
 .fit-in, .fit-out { border-radius: 24px; padding: clamp(24px, 3.4vw, 40px); }
 .fit-in { background: var(--white); border: 1px solid var(--line); display: grid; gap: 30px; }
-.fit-out { background: var(--ink); color: var(--white); display: grid; gap: 22px; align-content: start; }
+.fit-out { background: #14181B; color: #fff; display: grid; gap: 22px; align-content: start; }
 .field { display: grid; gap: 12px; }
 .field .row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
 .field label { font-size: 14px; color: var(--mute); }
@@ -192,7 +200,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px;
 input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--white); border: 2px solid var(--ink); cursor: grab; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chips button { font: 500 14px/1 var(--sans); padding: 11px 15px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; transition: all .2s; }
-.chips button[aria-pressed="true"] { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
 .verdict { font-size: clamp(28px, 3vw, 38px); font-weight: 500; letter-spacing: -.03em; line-height: 1.1; }
 .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
 .checks li { display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.12); font-size: 15px; }
@@ -233,7 +241,7 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .quote img { border-radius: 24px; aspect-ratio: 4 / 3; height: auto; object-fit: cover; object-position: center 30%; width: 100%; }
 .quote blockquote { margin: 0; font-family: var(--serif); font-size: clamp(30px, 3.6vw, 52px); line-height: 1.1; letter-spacing: -.01em; }
 .quote cite { display: block; font-style: normal; margin-top: 28px; font-size: 15px; color: #AEB3B8; }
-.quote cite b { color: var(--white); font-weight: 500; display: block; }
+.quote cite b { color: #fff; font-weight: 500; display: block; }
 .crit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
 .crit div { border-top: 1px solid rgba(255,255,255,.2); padding-top: 16px; }
 .crit b { font-weight: 500; display: block; }
@@ -256,7 +264,7 @@ input:not([type=range]), select, textarea { font: 400 16px/1.4 var(--sans); colo
 textarea { min-height: 110px; resize: vertical; }
 input:focus, select:focus, textarea:focus { outline: none; border-color: var(--ink); background: var(--white); }
 form .btn { justify-self: start; }
-.form-ok { margin: 0; font-size: 14px; background: #F1ECE4; border-left: 3px solid var(--gold); padding: 12px 14px; border-radius: 4px; }
+.form-ok { margin: 0; font-size: 14px; background: var(--stone); border-left: 3px solid var(--gold); padding: 12px 14px; border-radius: 4px; }
 .fine { font-size: 12px; color: var(--mute-2); margin: 0; }
 @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
 
@@ -266,7 +274,7 @@ form .btn { justify-self: start; }
 .posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .post { background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; text-decoration: none; display: grid; grid-template-rows: auto 1fr; transition: transform .35s, box-shadow .35s; }
 .post:hover { transform: translateY(-4px); box-shadow: 0 30px 50px -30px rgba(20,24,27,.3); }
-.post .cv { aspect-ratio: 16 / 10; background: var(--ink); color: var(--white); padding: 22px; display: grid; align-content: space-between; position: relative; overflow: hidden; }
+.post .cv { aspect-ratio: 16 / 10; background: #1E2327; color: #fff; padding: 22px; display: grid; align-content: space-between; position: relative; overflow: hidden; }
 .post .cv::after { content: ""; position: absolute; width: 120%; aspect-ratio: 1; right: -60%; top: -50%; border-radius: 50%; background: rgba(255,255,255,.05); }
 .post .cv > * { position: relative; z-index: 1; }
 .post .cv small { font-size: 12px; font-weight: 500; color: #C9B89E; }
@@ -275,6 +283,76 @@ form .btn { justify-self: start; }
 .post .md b { font-weight: 500; }
 .post .md span { font-size: 14px; color: var(--mute); }
 @media (max-width: 960px) { .posts { grid-template-columns: 1fr; max-width: 560px; } }
+/* FINANCING AT A GLANCE (blocks from variant A) */
+.terms { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+.glance { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.glance div { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 8px; }
+.glance b { font-size: clamp(26px, 2.6vw, 36px); font-weight: 500; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.glance span { font-size: 14px; color: var(--mute); }
+.tbl { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 8px 24px 20px; }
+.tbl table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.tbl th, .tbl td { text-align: left; padding: 15px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tbl tr:last-child th, .tbl tr:last-child td { border-bottom: 0; }
+.tbl th { font-weight: 400; color: var(--mute); width: 42%; }
+.tbl td { font-weight: 500; }
+@media (max-width: 860px) { .terms { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .glance div { padding: 16px; } .glance b { font-size: 22px; white-space: nowrap; } }
+.terms-sec { background: var(--white); }
+html[data-theme="dark"] .terms-sec { background: #FFFFFF; }
+
+/* WHO WE ARE */
+.about-copy { display: grid; gap: 18px; color: var(--mute); }
+.about-copy p { margin: 0; }
+.about-copy p:first-child { color: var(--ink); font-size: 20px; line-height: 1.5; letter-spacing: -.01em; }
+.about-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: clamp(40px, 6vw, 72px); }
+.acard { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 26px; display: grid; gap: 12px; align-content: start; }
+.acard small { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--gold-d); font-weight: 600; }
+.acard > b { font-size: 22px; font-weight: 500; letter-spacing: -.02em; line-height: 1.25; }
+.acard > b.big { font-size: clamp(40px, 4.4vw, 60px); letter-spacing: -.045em; line-height: 1; }
+.acard p { margin: 0; color: var(--mute); font-size: 15px; }
+@media (max-width: 900px) { .about-cards { grid-template-columns: 1fr; } }
+
+/* placeholders for content Westbridge still has to send */
+.todo-t { color: var(--mute) !important; font-style: italic; font-weight: 400 !important; }
+.todo { justify-self: start; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; color: var(--gold-d); border: 1px dashed var(--gold); border-radius: 999px; padding: 5px 11px; }
+.todo::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+/* TEAM */
+.team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.tm { background: var(--white); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.tm .ph { aspect-ratio: 5 / 4; background: var(--stone); display: grid; place-items: end center; color: var(--mute-2); overflow: hidden; }
+.tm .ph svg { width: 62%; height: auto; opacity: .55; }
+.tm .bd { padding: 22px 22px 26px; display: grid; gap: 8px; align-content: start; }
+.tm .bd > b { font-size: 22px; font-weight: 500; letter-spacing: -.02em; }
+.tm .role { font-size: 14px; color: var(--gold-d); }
+.tm p { margin: 4px 0 6px; font-size: 15px; color: var(--mute); }
+@media (max-width: 900px) { .team { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .team { grid-template-columns: 1fr; } .tm .ph { aspect-ratio: 16 / 10; } .tm .ph svg { width: 40%; } }
+
+/* THEME: dark direction in the LinkedIn palette, mixed with light sections */
+.theme { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: none; color: var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0; }
+.theme svg { width: 17px; height: 17px; }
+.theme .sun { display: none; }
+.logo .lg-w { display: none; }
+html[data-theme="dark"] { color-scheme: dark; }
+html[data-theme="dark"] body, html[data-theme="dark"] .dark, html[data-theme="dark"] .dk {
+  --ink: #F4F2EE; --paper: #1E2327; --white: #282F37; --stone: #313943;
+  --gold-d: #C9B89E; --mute: #A3A9AF; --mute-2: #7F868D; --line: rgba(255,255,255,.12);
+  --on-ink: #14181B; --nav-bg: rgba(30,35,39,.86); --arc: #282F37;
+}
+html[data-theme="dark"] .dark { background: #282F37; }
+html[data-theme="dark"] .dk { background: var(--paper); color: var(--ink); }
+html[data-theme="dark"] .lt {
+  color-scheme: light;
+  --ink: #14181B; --paper: #F6F4EF; --white: #FFFFFF; --stone: #ECE8E0; --gold-d: #8C7658;
+  --mute: #5E636A; --mute-2: #8A8F95; --line: #DEDAD2; --on-ink: #FFFFFF;
+  background: var(--paper); color: var(--ink);
+}
+html[data-theme="dark"] .theme .sun { display: block; }
+html[data-theme="dark"] .theme .moon { display: none; }
+html[data-theme="dark"] .logo .lg-d { display: none; }
+html[data-theme="dark"] .logo .lg-w { display: block; }
+html[data-theme="dark"] .deal { box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
 footer { border-top: 1px solid var(--line); padding-block: 36px; font-size: 13px; color: var(--mute); }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 20px 32px; justify-content: space-between; align-items: center; }
 footer nav { display: flex; gap: 22px; flex-wrap: wrap; }
@@ -286,16 +364,17 @@ footer .logo img { width: 110px; }
 
 <header class="nav" id="nav">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Westbridge Finance home"><img src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="124" height="39"></a>
+    <a class="logo" href="#top" aria-label="Westbridge Finance home"><img class="lg-d" src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="124" height="39"><img class="lg-w" src="logo/wbf-logo-white-transparent.png" alt="WBF West Bridge Finance" width="124" height="39"></a>
     <ul>
-      <li><a href="#why">Why us</a></li>
+      <li><a href="#about">Who we are</a></li>
+      <li><a href="#terms">Financing</a></li>
       <li><a href="#mandate">Mandate</a></li>
       <li><a href="#deals">Transactions</a></li>
-      <li><a href="#fit">Check your deal</a></li>
-      <li><a href="#process">Process</a></li>
+      <li><a href="#team">Team</a></li>
       <li><a href="#insights">Insights</a></li>
     </ul>
     <div class="nav-r">
+      <button class="theme" type="button" id="theme" aria-label="Switch to light theme"><svg class="sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.5v2.2M10 16.3v2.2M1.5 10h2.2M16.3 10h2.2M4 4l1.6 1.6M14.4 14.4 16 16M4 16l1.6-1.6M14.4 5.6 16 4"/></svg><svg class="moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16.5 12.2A7 7 0 0 1 7.8 3.5a7 7 0 1 0 8.7 8.7z"/></svg></button>
       <div class="lang" role="group" aria-label="Language / Język"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="pl" aria-pressed="false">PL</button></div>
       <a class="btn btn-dark" href="#contact"><span class="lbl">Discuss a transaction</span><span class="arr"><svg viewBox="0 0 12 12" fill="none" stroke="#14181B" stroke-width="1.6"><path d="M2 6h8M7 3l3 3-3 3"/></svg></span></a>
     </div>
@@ -341,12 +420,33 @@ footer .logo img { width: 110px; }
     </div>
   </section>
 
+  <!-- WHO WE ARE -->
+  <section class="pad" id="about">
+    <div class="wrap">
+      <div class="split-h" style="align-items:start">
+        <div>
+          <p class="kicker"><b>01</b> Who we are</p>
+          <h2 class="reveal">A trusted senior secured financing partner <em class="s">for experienced real estate sponsors.</em></h2>
+        </div>
+        <div class="about-copy reveal">
+          <p>Westbridge Finance is a specialist private credit platform providing senior secured financing across a broad range of real estate asset classes and investment stages throughout Poland.</p>
+          <p>We focus on transactions where traditional lenders cannot provide the speed, flexibility or structure a deal requires. Keeping decision-makers directly involved lets us assess opportunities quickly, structure solutions efficiently and give sponsors certainty of execution.</p>
+        </div>
+      </div>
+      <div class="about-cards">
+        <div class="acard reveal"><small>Our background</small><b class="todo-t">[How Westbridge started, the founders' years in real estate lending and the institutions they come from]</b><span class="todo">To be provided by Westbridge</span></div>
+        <div class="acard reveal"><small>Capital backing</small><b class="todo-t">[Who stands behind the fund: investors, committed capital and structure]</b><span class="todo">To be provided by Westbridge</span></div>
+        <div class="acard reveal"><small>Track record</small><b class="big">PLN 150M+</b><p>Already deployed across a diverse range of real estate assets and transaction structures.</p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- WHY: COMPARISON -->
-  <section class="pad" id="why">
+  <section class="pad lt" id="why">
     <div class="wrap">
       <div class="split-h">
         <div>
-          <p class="kicker"><b>01</b> Why Westbridge</p>
+          <p class="kicker"><b>02</b> Why Westbridge</p>
           <h2 class="reveal">Where bank lending stops, <em class="s">we start.</em></h2>
         </div>
         <p class="lede reveal">Banks remain structurally constrained on land, early-stage and transitional assets. We built a lender for exactly those moments, with institutional underwriting and a short decision path.</p>
@@ -371,7 +471,7 @@ footer .logo img { width: 110px; }
     <div class="wrap">
       <div class="split-h">
         <div>
-          <p class="kicker"><b>02</b> Investment mandate</p>
+          <p class="kicker"><b>03</b> Investment mandate</p>
           <h2 class="reveal">Flexible across assets, <em class="s">stages</em> and structures.</h2>
         </div>
         <p class="lede reveal">Pick a lens to see what we finance. Every facility is senior secured and shaped around its own transaction.</p>
@@ -399,12 +499,50 @@ footer .logo img { width: 110px; }
     </div>
   </section>
 
+  <!-- FINANCING AT A GLANCE -->
+  <section class="pad lt terms-sec" id="terms">
+    <div class="wrap">
+      <div class="split-h">
+        <div>
+          <p class="kicker"><b>04</b> Financing at a glance</p>
+          <h2 class="reveal">Our key parameters, <em class="s">in one place.</em></h2>
+        </div>
+        <p class="lede reveal">Senior secured financing calibrated to Poland's real estate market.</p>
+      </div>
+      <div class="terms">
+        <div class="glance reveal">
+          <div><b>PLN 20–120M</b><span>Ticket size</span></div>
+          <div><b>6–48 mo</b><span>Tenor</span></div>
+          <div><b>Up to 65%</b><span>Senior LTV</span></div>
+          <div><b>Up to 85%</b><span>VAT facility LTV</span></div>
+          <div><b>13.0–16.0%</b><span>Pricing p.a.</span></div>
+          <div><b>~30 days</b><span>Approach to funding</span></div>
+        </div>
+        <div class="reveal">
+          <div class="tbl">
+            <table>
+              <tr><th scope="row">Geography</th><td>Poland</td></tr>
+              <tr><th scope="row">Ticket size</th><td>PLN 20–120 million</td></tr>
+              <tr><th scope="row">Tenor</th><td>6–48 months</td></tr>
+              <tr><th scope="row">Senior LTV</th><td>Up to 65%</td></tr>
+              <tr><th scope="row">VAT facilities</th><td>Up to 85%</td></tr>
+              <tr><th scope="row">Pricing</th><td>13.0%–16.0% p.a.</td></tr>
+              <tr><th scope="row">Borrowers</th><td>Experienced sponsors and developers</td></tr>
+              <tr><th scope="row">Execution</th><td>Funding within ~30 days of approach</td></tr>
+            </table>
+          </div>
+          <p class="note">Indicative terms, subject to transaction specifics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- TRANSACTIONS -->
   <section class="pad" id="deals">
     <div class="wrap">
       <div class="split-h">
         <div>
-          <p class="kicker"><b>03</b> Selected transactions</p>
+          <p class="kicker"><b>05</b> Selected transactions</p>
           <h2 class="reveal">Structured to the deal, <em class="s">funded on time.</em></h2>
         </div>
         <p class="lede reveal">A look at how facilities come together across asset types and stages.</p>
@@ -440,11 +578,11 @@ footer .logo img { width: 110px; }
   </section>
 
   <!-- FIT CHECK -->
-  <section class="pad" id="fit" style="padding-top:0">
+  <section class="pad lt" id="fit">
     <div class="wrap">
       <div class="split-h">
         <div>
-          <p class="kicker"><b>04</b> Check your deal</p>
+          <p class="kicker"><b>06</b> Check your deal</p>
           <h2 class="reveal">Does your project <em class="s">fit</em> our mandate?</h2>
         </div>
         <p class="lede reveal">Three inputs, an instant read against our parameters. It is not an offer, but it tells you whether the first call is worth booking.</p>
@@ -485,7 +623,7 @@ footer .logo img { width: 110px; }
     <div class="wrap">
       <div class="split-h">
         <div>
-          <p class="kicker"><b>05</b> Execution</p>
+          <p class="kicker"><b>07</b> Execution</p>
           <h2 class="reveal">Thirty days, <em class="s">mapped out.</em></h2>
         </div>
         <p class="lede reveal">The same timeline whether the ticket is PLN 20M or PLN 120M, with one team carrying the deal from first call to drawdown.</p>
@@ -502,10 +640,10 @@ footer .logo img { width: 110px; }
   </section>
 
   <!-- SECURITY -->
-  <section class="pad">
+  <section class="pad lt" id="security">
     <div class="wrap sec">
       <div>
-        <p class="kicker"><b>06</b> Security package</p>
+        <p class="kicker"><b>08</b> Security package</p>
         <h2 class="reveal">Layered protection, <em class="s">tailored</em> to each facility.</h2>
         <p class="lede reveal" style="margin-top:24px">Instruments are combined to match the asset, the sponsor and the structure, with further protections added where appropriate.</p>
       </div>
@@ -515,12 +653,30 @@ footer .logo img { width: 110px; }
     </div>
   </section>
 
+  <!-- TEAM -->
+  <section class="pad dk" id="team">
+    <div class="wrap">
+      <div class="split-h">
+        <div>
+          <p class="kicker"><b>09</b> Our team</p>
+          <h2 class="reveal">The people <em class="s">behind the fund.</em></h2>
+        </div>
+        <p class="lede reveal">The decision-makers you work with, from the first call to drawdown.</p>
+      </div>
+      <div class="team">
+        <article class="tm reveal"><div class="ph"><svg viewBox="0 0 120 110" fill="currentColor" aria-hidden="true"><circle cx="60" cy="38" r="22"/><path d="M14 110c2-26 22-42 46-42s44 16 46 42z"/></svg></div><div class="bd"><b>Shlomi Weber</b><span class="role todo-t">[Role]</span><p class="todo-t">[Short biography: experience, previous roles and transactions led]</p><span class="todo">Photo and bio to be provided</span></div></article>
+        <article class="tm reveal"><div class="ph"><svg viewBox="0 0 120 110" fill="currentColor" aria-hidden="true"><circle cx="60" cy="38" r="22"/><path d="M14 110c2-26 22-42 46-42s44 16 46 42z"/></svg></div><div class="bd"><b class="todo-t">[Name Surname]</b><span class="role todo-t">[Role]</span><p class="todo-t">[Short biography: experience, previous roles and transactions led]</p><span class="todo">Photo and bio to be provided</span></div></article>
+        <article class="tm reveal"><div class="ph"><svg viewBox="0 0 120 110" fill="currentColor" aria-hidden="true"><circle cx="60" cy="38" r="22"/><path d="M14 110c2-26 22-42 46-42s44 16 46 42z"/></svg></div><div class="bd"><b class="todo-t">[Name Surname]</b><span class="role todo-t">[Role]</span><p class="todo-t">[Short biography: experience, previous roles and transactions led]</p><span class="todo">Photo and bio to be provided</span></div></article>
+      </div>
+    </div>
+  </section>
+
   <!-- PARTNERS -->
   <section class="dark pad">
     <div class="wrap quote">
       <img class="reveal" src="assets/partner-portrait.jpg" alt="Senior partner in a navy suit" width="1400" height="933">
       <div>
-        <p class="kicker"><b>07</b> Who we partner with</p>
+        <p class="kicker"><b>10</b> Who we partner with</p>
         <blockquote class="reveal">We weigh the quality of the sponsor as much as the strength of the opportunity.</blockquote>
         <cite>Westbridge Finance</cite>
         <div class="crit">
@@ -533,11 +689,11 @@ footer .logo img { width: 110px; }
   </section>
 
   <!-- INSIGHTS -->
-  <section class="pad" id="insights">
+  <section class="pad lt" id="insights">
     <div class="wrap">
       <div class="split-h">
         <div>
-          <p class="kicker"><b>08</b> Insights</p>
+          <p class="kicker"><b>11</b> Insights</p>
           <h2 class="reveal">Market notes, transactions <em class="s">and financing explained.</em></h2>
         </div>
         <p class="lede reveal">What we publish on LinkedIn twice a week, collected in one place.</p>
@@ -563,7 +719,7 @@ footer .logo img { width: 110px; }
   <section class="pad" id="contact" style="padding-top:0;padding-bottom:clamp(56px, 6vw, 88px)">
     <div class="wrap contact">
       <div>
-        <p class="kicker"><b>09</b> Contact</p>
+        <p class="kicker"><b>12</b> Contact</p>
         <h2 class="reveal">Let's talk about your <em class="s">next</em> transaction.</h2>
         <p class="lede reveal" style="margin-top:24px">Send the basics. A decision-maker comes back within 1–3 business days with a go / no-go and, where it fits, an indicative term sheet.</p>
         <div class="person">
@@ -594,7 +750,7 @@ footer .logo img { width: 110px; }
 
 <footer>
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Westbridge Finance home"><img src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"></a>
+    <a class="logo" href="#top" aria-label="Westbridge Finance home"><img class="lg-d" src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"><img class="lg-w" src="logo/wbf-logo-white-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"></a>
     <nav><a href="#why">Why us</a><a href="#mandate">Mandate</a><a href="#process">Process</a><a href="polityka-prywatnosci.html">Privacy policy</a><a href="#" data-cc="show-preferencesModal">Privacy settings</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></nav>
     <span>© 2026 Westbridge Finance</span>
   </div>
@@ -604,6 +760,132 @@ footer .logo img { width: 110px; }
 <script>
 (function () {
   var PL = {
+    "About": "O nas",
+    "Terms": "Warunki",
+    "Security": "Zabezpieczenia",
+    "Private credit · Real estate · Poland": "Private credit · Nieruchomości · Polska",
+    "Senior secured capital for real estate opportunities.": "Seniorski, zabezpieczony kapitał dla projektów nieruchomościowych.",
+    "Financing of PLN 20–120M for experienced sponsors, structured around your transaction and funded in about 30 days from first approach. Decision-makers stay involved from the first call to drawdown.": "Finansowanie od 20 do 120 mln zł dla doświadczonych inwestorów, dopasowane do Twojej transakcji i wypłacane w około 30 dni od pierwszego kontaktu. Osoby decyzyjne są zaangażowane od pierwszej rozmowy aż do wypłaty środków.",
+    "See financing terms": "Zobacz warunki finansowania",
+    "Westbridge Finance partner in a grey suit": "Partner Westbridge Finance w szarym garniturze",
+    "PLN 20–120M": "20–120 mln zł",
+    "Up to 65%": "Do 65%",
+    "6–48 mo": "6–48 mies.",
+    "Who we are": "Kim jesteśmy",
+    "A trusted senior secured financing partner for experienced real estate sponsors.": "Zaufany partner w seniorskim, zabezpieczonym finansowaniu dla doświadczonych inwestorów nieruchomościowych.",
+    "Westbridge Finance is a specialist private credit platform providing senior secured financing across a broad range of real estate asset classes and investment stages throughout Poland.": "Westbridge Finance to wyspecjalizowana platforma private credit, która udziela seniorskiego, zabezpieczonego finansowania dla szerokiego spektrum klas aktywów nieruchomościowych i etapów inwestycji w całej Polsce.",
+    "We focus on transactions where traditional lenders cannot provide the speed, flexibility or structure a deal requires. Keeping decision-makers directly involved lets us assess opportunities quickly, structure solutions efficiently and give sponsors certainty of execution.": "Koncentrujemy się na transakcjach, w których tradycyjni kredytodawcy nie zapewniają wymaganej szybkości, elastyczności ani struktury. Bezpośredni udział osób decyzyjnych pozwala nam szybko oceniać projekty, sprawnie strukturyzować rozwiązania i dawać inwestorom pewność realizacji.",
+    "Every facility is built around the specific needs of the transaction, with a streamlined investment process designed to fund in up to 30 days from the initial approach.": "Każde finansowanie budujemy wokół konkretnych potrzeb transakcji, a usprawniony proces inwestycyjny pozwala wypłacić środki w ciągu maksymalnie 30 dni od pierwszego kontaktu.",
+    "Senior secured": "Seniorskie zabezpieczenie",
+    "Institutional underwriting": "Instytucjonalna analiza ryzyka",
+    "Direct access": "Bezpośredni kontakt",
+    "Market opportunity": "Szansa rynkowa",
+    "A persistent funding gap beyond traditional bank lending.": "Trwała luka finansowa poza tradycyjnym kredytem bankowym.",
+    "Banks remain structurally constrained in financing land acquisitions, early-stage developments and transitional assets. That leaves a gap where speed, flexibility and certainty of execution decide whether a transaction happens.": "Banki pozostają strukturalnie ograniczone w finansowaniu zakupu gruntów, projektów na wczesnym etapie i aktywów w fazie przejściowej. Powstaje luka, w której o dojściu transakcji do skutku decydują szybkość, elastyczność i pewność realizacji.",
+    "Westbridge Finance fills it with senior secured financing, institutional underwriting and a short decision path, supporting sponsors at the stages where banks are unable or unwilling to participate.": "Westbridge Finance wypełnia tę lukę seniorskim, zabezpieczonym finansowaniem, instytucjonalną analizą ryzyka i krótką ścieżką decyzyjną, wspierając inwestorów na etapach, na których banki nie mogą lub nie chcą uczestniczyć.",
+    "One of the broadest ticket ranges in Polish private real estate credit.": "Jeden z najszerszych przedziałów finansowania na polskim rynku prywatnego kredytu nieruchomościowego.",
+    "Up to 30 days": "Do 30 dni",
+    "From initial approach to funding, independent of ticket size.": "Od pierwszego kontaktu do wypłaty, niezależnie od wielkości finansowania.",
+    "Why Westbridge Finance": "Dlaczego Westbridge Finance",
+    "A disciplined financing partner for real estate sponsors.": "Zdyscyplinowany partner finansowy dla inwestorów nieruchomościowych.",
+    "Senior secured solutions": "Seniorskie, zabezpieczone rozwiązania",
+    "First-ranking security on every facility, with protection layered to the asset.": "Zabezpieczenie pierwszego rzędu przy każdym finansowaniu, z ochroną dopasowaną do aktywa.",
+    "Fast execution": "Szybka realizacja",
+    "Indicative terms in 1–3 business days and first funding in about 30 days.": "Wstępne warunki w 1–3 dni robocze i pierwsza wypłata w około 30 dni.",
+    "Flexible structuring": "Elastyczna struktura",
+    "Tenor, drawdowns and covenants shaped around the business plan.": "Okres, transze i kowenanty dopasowane do biznesplanu.",
+    "Tailored financing": "Finansowanie szyte na miarę",
+    "No off-the-shelf products. Each facility reflects its own transaction.": "Bez gotowych produktów. Każde finansowanie odzwierciedla swoją transakcję.",
+    "Direct access to decision-makers": "Bezpośredni dostęp do decydentów",
+    "The people who approve your facility are in the room from the first meeting.": "Osoby, które zatwierdzają finansowanie, są obecne od pierwszego spotkania.",
+    "Legal, financial, tax and technical diligence to institutional standards.": "Badanie prawne, finansowe, podatkowe i techniczne zgodne ze standardami instytucjonalnymi.",
+    "Beyond bank financing": "Poza finansowaniem bankowym",
+    "Land, early-stage and transitional assets that banks decline or delay.": "Grunty, projekty na wczesnym etapie i aktywa przejściowe, które banki odrzucają lub odkładają.",
+    "Local market expertise": "Znajomość lokalnego rynku",
+    "A Poland-focused team that knows the cities, the assets and the counterparties.": "Zespół skupiony na Polsce, który zna miasta, aktywa i kontrahentów.",
+    "Relationship-driven": "Oparte na relacjach",
+    "Long-term partnerships with sponsors who come back for the next deal.": "Długoterminowe partnerstwa z inwestorami, którzy wracają przy kolejnej transakcji.",
+    "already deployed across a diverse range of real estate assets and transaction structures, reflecting the flexibility sponsors need at every stage of the development lifecycle.": "już zaangażowane w zróżnicowane aktywa nieruchomościowe i struktury transakcji, co pokazuje elastyczność potrzebną inwestorom na każdym etapie cyklu deweloperskiego.",
+    "Diverse asset types": "Różne typy aktywów",
+    "Land, residential, office and mixed-use.": "Grunty, mieszkania, biura i projekty wielofunkcyjne.",
+    "Flexible structures": "Elastyczne struktury",
+    "Tailored to each sponsor and transaction.": "Dopasowane do każdego inwestora i transakcji.",
+    "Proven discipline": "Sprawdzona dyscyplina",
+    "Institutional underwriting throughout.": "Instytucjonalna analiza ryzyka na każdym etapie.",
+    "Flexible financing across asset types and investment stages.": "Elastyczne finansowanie różnych typów aktywów i etapów inwestycji.",
+    "Land acquisition financing": "Finansowanie zakupu gruntu",
+    "Income-producing assets": "Aktywa generujące dochód",
+    "Commercial assets": "Nieruchomości komercyjne",
+    "Financing parameters": "Parametry finansowania",
+    "Senior secured financing calibrated to Poland's real estate market.": "Seniorskie, zabezpieczone finansowanie skalibrowane do polskiego rynku nieruchomości.",
+    "Up to 85%": "Do 85%",
+    "VAT facility LTV": "LTV finansowania VAT",
+    "Pricing p.a.": "Oprocentowanie rocznie",
+    "Approach to funding": "Od kontaktu do wypłaty",
+    "Geography": "Geografia",
+    "PLN 20–120 million": "20–120 mln zł",
+    "6–48 months": "6–48 miesięcy",
+    "Pricing": "Oprocentowanie",
+    "13.0%–16.0% p.a.": "13,0%–16,0% rocznie",
+    "Borrowers": "Kredytobiorcy",
+    "Experienced sponsors and developers": "Doświadczeni inwestorzy i deweloperzy",
+    "Funding within ~30 days of approach": "Wypłata w ~30 dni od kontaktu",
+    "Indicative terms, subject to transaction specifics.": "Warunki orientacyjne, zależne od specyfiki transakcji.",
+    "Execution process": "Proces realizacji",
+    "Certainty and speed, from first approach to funding.": "Pewność i szybkość, od pierwszego kontaktu do wypłaty.",
+    "Initial screening": "Wstępna weryfikacja",
+    "Materials received, a go/no-go decision and an indicative term sheet issued.": "Otrzymanie materiałów, decyzja tak/nie i wydanie wstępnego term sheetu.",
+    "Legal · Financial · Technical": "Prawne · Finansowe · Techniczne",
+    "In-depth legal, financial, tax and engineering review of the transaction.": "Pogłębiona analiza prawna, finansowa, podatkowa i techniczna transakcji.",
+    "Final approval": "Ostateczna zgoda",
+    "Investment committee": "Komitet inwestycyjny",
+    "Final approval from the investment committee ahead of signing.": "Ostateczna zgoda komitetu inwestycyjnego przed podpisaniem umowy.",
+    "~30 days from approach": "~30 dni od kontaktu",
+    "First funding": "Pierwsza wypłata",
+    "Drawdown of funds, with timelines held consistent regardless of ticket size.": "Wypłata środków w stałym terminie, niezależnie od wielkości finansowania.",
+    "A layered protection framework, tailored to each transaction.": "Wielowarstwowe zabezpieczenie, dopasowane do każdej transakcji.",
+    "Each facility is secured through a transaction-specific combination of instruments, matched to the underlying asset, the sponsor and the financing structure. Additional protections are added where appropriate.": "Każde finansowanie jest zabezpieczone kombinacją instrumentów dobraną do aktywa, inwestora i struktury finansowania. W razie potrzeby dodajemy kolejne zabezpieczenia.",
+    "Security instruments arranged around the facility": "Instrumenty zabezpieczenia wokół finansowania",
+    "Long-term partnerships with ambitious real estate sponsors and developers.": "Długoterminowe partnerstwa z ambitnymi inwestorami i deweloperami.",
+    "We work with sponsors who bring a proven track record, a credible business plan and a clearly defined exit. Relationships rest on transparency, aligned interests and disciplined execution.": "Pracujemy z inwestorami, którzy mają udokumentowane doświadczenie, wiarygodny biznesplan i jasno określoną strategię wyjścia. Relacje opieramy na przejrzystości, zbieżności interesów i zdyscyplinowanej realizacji.",
+    "Our decisions weigh the quality of the sponsor as much as the strength of the opportunity.": "W naszych decyzjach jakość inwestora waży tyle samo, co siła samego projektu.",
+    "Senior partner in conversation over coffee": "Starszy partner podczas rozmowy przy kawie",
+    "Market notes, transactions and financing explained.": "Komentarze rynkowe, transakcje i finansowanie w przystępnej formie.",
+    "Let's discuss your next transaction.": "Porozmawiajmy o Twojej kolejnej transakcji.",
+    "Send the basics of the deal. You will hear back from a decision-maker within one to three business days, with a go/no-go and, where it fits, an indicative term sheet.": "Prześlij podstawowe informacje o transakcji. W ciągu 1–3 dni roboczych odezwie się osoba decyzyjna z decyzją tak/nie, a jeśli projekt pasuje, ze wstępnym term sheetem.",
+    "Transaction enquiry": "Zapytanie o finansowanie",
+    "Amount sought": "Oczekiwana kwota",
+    "PLN 20–40M": "20–40 mln zł",
+    "PLN 40–80M": "40–80 mln zł",
+    "PLN 80–120M": "80–120 mln zł",
+    "Not sure yet": "Jeszcze nie wiem",
+    "Financing type": "Rodzaj finansowania",
+    "Acquisition": "Akwizycja",
+    "Development / late-stage construction": "Budowa / zaawansowany etap",
+    "Value-add / redevelopment": "Value-add / przebudowa",
+    "Asset, location, stage, timeline": "Aktywo, lokalizacja, etap, harmonogram",
+    "Financing": "Finansowanie",
+    "Team": "Zespół",
+    "Our background": "Nasza historia",
+    "Capital backing": "Kapitał",
+    "[How Westbridge started, the founders' years in real estate lending and the institutions they come from]": "[Jak powstał Westbridge, doświadczenie założycieli w finansowaniu nieruchomości i instytucje, z których się wywodzą]",
+    "[Who stands behind the fund: investors, committed capital and structure]": "[Kto stoi za funduszem: inwestorzy, zaangażowany kapitał i struktura]",
+    "To be provided by Westbridge": "Do uzupełnienia przez Westbridge",
+    "Already deployed across a diverse range of real estate assets and transaction structures.": "Już zaangażowane w zróżnicowane aktywa nieruchomościowe i struktury transakcji.",
+    "Financing at a glance": "Finansowanie w skrócie",
+    "Our key parameters,": "Nasze kluczowe parametry",
+    "in one place.": "w jednym miejscu.",
+    "13.0–16.0%": "13,0–16,0%",
+    "Our team": "Nasz zespół",
+    "The people": "Ludzie",
+    "behind the fund.": "stojący za funduszem.",
+    "The decision-makers you work with, from the first call to drawdown.": "Osoby decyzyjne, z którymi pracujesz od pierwszej rozmowy do wypłaty środków.",
+    "[Name Surname]": "[Imię i nazwisko]",
+    "[Role]": "[Stanowisko]",
+    "[Short biography: experience, previous roles and transactions led]": "[Krótkie bio: doświadczenie, wcześniejsze stanowiska i prowadzone transakcje]",
+    "Photo and bio to be provided": "Zdjęcie i bio do uzupełnienia",
+    "A trusted senior secured financing partner": "Zaufany partner w seniorskim, zabezpieczonym finansowaniu",
+    "for experienced real estate sponsors.": "dla doświadczonych inwestorów nieruchomościowych.",
     "Westbridge Finance home": "Westbridge Finance – strona główna", "Privacy policy": "Polityka prywatności", "privacy policy": "polityce prywatności", "Privacy settings": "Ustawienia prywatności", "We use your details only to reply to this enquiry. See our": "Twoje dane wykorzystamy wyłącznie do odpowiedzi na to zapytanie. Szczegóły w",
     "Insights": "Analizy", "Market notes, transactions": "Komentarze rynkowe, transakcje", "and financing explained.": "i finansowanie w przystępnej formie.", "What we publish on LinkedIn twice a week, collected in one place.": "To, co publikujemy na LinkedIn dwa razy w tygodniu, zebrane w jednym miejscu.", "Market intelligence": "Analizy rynku", "Where bank lending stops in Polish real estate": "Gdzie kończy się kredyt bankowy w polskich nieruchomościach", "Market commentary": "Komentarz rynkowy", "Carousel · Why land and early-stage assets sit outside bank appetite in 2026.": "Karuzela · Dlaczego grunty i projekty na wczesnym etapie są w 2026 roku poza apetytem banków.", "Transaction stories": "Historie transakcji", "From term sheet to drawdown in 30 days": "Od term sheetu do wypłaty w 30 dni", "Transaction example": "Przykład transakcji", "Document post · How a residential bridge facility was structured and funded.": "Dokument · Jak ustrukturyzowaliśmy i wypłaciliśmy pomostowe finansowanie mieszkaniowe.", "Education": "Edukacja", "What a VAT facility at 85% LTV actually covers": "Co faktycznie obejmuje finansowanie VAT przy LTV 85%", "Financing education": "Edukacja finansowa", "Expert post · A plain explanation for developers planning a purchase.": "Post ekspercki · Proste wyjaśnienie dla deweloperów planujących zakup.",
     "Why us": "Dlaczego my", "Mandate": "Mandat", "Transactions": "Transakcje", "Check your deal": "Sprawdź projekt", "Process": "Proces",
@@ -692,6 +974,20 @@ footer .logo img { width: 110px; }
   // Sticky nav border
   var nav = document.getElementById("nav");
   addEventListener("scroll", function () { nav.classList.toggle("scrolled", scrollY > 8); }, { passive: true });
+
+  // Light / dark theme switch (dark is the default, closer to the LinkedIn materials)
+  var tb = document.getElementById("theme");
+  function themeLabel() {
+    var dark = document.documentElement.dataset.theme === "dark", pl = WB.lang() === "pl";
+    tb.setAttribute("aria-label", dark ? (pl ? "Przełącz na jasny motyw" : "Switch to light theme") : (pl ? "Przełącz na ciemny motyw" : "Switch to dark theme"));
+  }
+  tb.addEventListener("click", function () {
+    var t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = t;
+    try { localStorage.setItem("wbf-theme", t); } catch (e) {}
+    themeLabel();
+  });
+  WB.onLang(themeLabel);
 
   // Mandate filter
   var cards = document.querySelectorAll("#mgrid .mcard");
