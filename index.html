@@ -356,15 +356,18 @@ html[data-theme="dark"] .offer { box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
 @media (max-width: 1000px) { .whys { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .whys { grid-template-columns: 1fr; } .wcard b { margin-top: 4px; } }
 
-/* TRACK RECORD at portfolio level */
-#track.pad { padding-block: clamp(64px, 8vw, 112px); }
-.trk { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: end; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: clamp(40px, 5vw, 64px); }
-.trk-big { white-space: nowrap; font-size: clamp(52px, 7.4vw, 116px); font-weight: 500; letter-spacing: -.05em; line-height: .9; font-variant-numeric: tabular-nums; color: var(--ink); }
-.trk h2 { font-size: clamp(26px, 3vw, 40px); max-width: 22ch; }
-.trk .lede { margin-top: 18px; }
-.trk-pipe { margin: 28px 0 0; padding-top: 18px; border-top: 1px solid var(--line); color: var(--mute); font-size: 15px; max-width: 60ch; }
-.trk-pipe b { color: var(--ink); font-weight: 500; }
-@media (max-width: 860px) { .trk { grid-template-columns: 1fr; align-items: start; gap: 20px; } }
+/* TRACK RECORD at portfolio level: photo box on a light section */
+#track.pad { padding-top: 0; padding-bottom: clamp(80px, 11vw, 150px); margin-top: -1px; }
+.trk { border-radius: 24px; overflow: hidden; position: relative; color: #fff; padding: clamp(36px, 6vw, 80px); background: url("assets/warsaw.jpg") center 40% / cover; }
+.trk::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,24,27,.95) 35%, rgba(20,24,27,.55)); }
+.trk > * { position: relative; }
+.trk .kicker { color: #AEB3B8; } .trk .kicker b { color: #fff; } .trk .kicker::after { background: rgba(255,255,255,.2); }
+.trk-big { white-space: nowrap; font-size: clamp(52px, 9vw, 140px); font-weight: 500; letter-spacing: -.05em; line-height: .95; margin: 8px 0 22px; font-variant-numeric: tabular-nums; }
+.trk h2 { font-size: clamp(26px, 3vw, 40px); max-width: 24ch; }
+.trk em.s { color: #C9B89E; }
+.trk .lede { color: #C9CCD0; margin-top: 18px; }
+.trk-pipe { margin: 36px 0 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.22); color: #AEB3B8; font-size: 15px; max-width: 60ch; }
+.trk-pipe b { color: #fff; font-weight: 500; }
 
 /* ABOUT with two cards, TEAM with two people */
 .about-cards.two { grid-template-columns: 1fr 1fr; }
@@ -397,6 +400,49 @@ html[data-theme="dark"] .offer { box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
 .pp-wide { display: grid; grid-template-columns: minmax(200px, 300px) 1fr; gap: clamp(28px, 5vw, 80px); padding-top: clamp(32px, 4vw, 48px); }
 .pp-wide p { margin: 0; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.5; letter-spacing: -.01em; color: var(--ink); max-width: 60ch; }
 @media (max-width: 760px) { .pp, .pp-wide { grid-template-columns: 1fr; gap: 20px; } .pp-ph { max-width: 260px; } }
+
+/* TEAM VARIANTS (review) */
+#terms.pad { padding-bottom: clamp(48px, 6vw, 80px); }
+.tm-tabs, .pp-more { display: none; }
+/* B: portrait gallery */
+#team[data-variant="b"] .people { border-top: 0; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3vw, 48px); }
+#team[data-variant="b"] .pp { display: block; border: 0; padding: 0; }
+#team[data-variant="b"] .pp-ph { aspect-ratio: 1; border-radius: 16px; margin-bottom: 26px; max-width: none; }
+#team[data-variant="b"] .pp-wide { grid-template-columns: 1fr; gap: 14px; margin-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }
+/* C: one person at a time, switched with tabs */
+#team[data-variant="c"] .tm-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.tm-tabs button { background: none; border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; text-align: left; cursor: pointer; color: var(--ink); display: grid; gap: 2px; font: 500 16px/1.2 var(--sans); }
+.tm-tabs button small { font-size: 12px; color: var(--mute); font-weight: 400; }
+.tm-tabs button[aria-selected="true"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.tm-tabs button[aria-selected="true"] small { color: var(--on-ink); opacity: .7; }
+#team[data-variant="c"] .people { border-top: 0; }
+#team[data-variant="c"] .pp { display: none; grid-template-columns: minmax(260px, .85fr) 1.15fr; border: 0; padding: 0; align-items: center; }
+#team[data-variant="c"] .pp.on { display: grid; }
+#team[data-variant="c"] .pp-ph { border-radius: 16px; }
+#team[data-variant="c"] .pp h3 { font-size: clamp(38px, 4.4vw, 64px); }
+#team[data-variant="c"] .pp-wide { margin-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }
+/* D: compact, bio expands on demand */
+#team[data-variant="d"] .people { border-top: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(24px, 4vw, 64px); }
+#team[data-variant="d"] .pp { grid-template-columns: 88px 1fr; gap: 22px; border-bottom: 0; border-top: 1px solid var(--line); }
+#team[data-variant="d"] .pp-ph { aspect-ratio: 1; border-radius: 50%; max-width: none; }
+#team[data-variant="d"] .pp-none span { font-size: 26px; }
+#team[data-variant="d"] .pp-none em { display: none; }
+#team[data-variant="d"] .pp h3 { font-size: clamp(24px, 2.2vw, 30px); margin: 8px 0 14px; }
+#team[data-variant="d"] .pp-bio p:not(:first-child) { display: none; }
+#team[data-variant="d"] .pp.open .pp-bio p { display: block; }
+#team[data-variant="d"] .pp-more { display: inline-flex; background: none; border: 0; padding: 0; color: var(--gold-d); font: 500 14px/1 var(--sans); cursor: pointer; }
+.pp-more .rm-c { display: none; } .pp.open .pp-more .rm-o { display: none; } .pp.open .pp-more .rm-c { display: inline; }
+#team[data-variant="d"] .pp-wide { grid-template-columns: 1fr; gap: 14px; border-top: 1px solid var(--line); margin-top: 8px; }
+@media (max-width: 760px) {
+  #team[data-variant="b"] .people, #team[data-variant="d"] .people { grid-template-columns: 1fr; }
+  #team[data-variant="c"] .pp { grid-template-columns: 1fr; }
+  #team[data-variant="c"] .pp-ph { max-width: 320px; }
+}
+.vbar { position: fixed; left: 16px; bottom: 16px; z-index: 60; display: flex; align-items: center; gap: 4px; padding: 5px; border-radius: 999px; background: #14181B; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.3); font: 500 12px/1 var(--sans); }
+.vbar span { padding: 0 8px 0 10px; opacity: .6; }
+.vbar button { background: none; border: 0; color: #fff; font: inherit; padding: 9px 11px; border-radius: 999px; cursor: pointer; }
+.vbar button[aria-pressed="true"] { background: #A99273; color: #14181B; }
+@media (max-width: 560px) { .vbar span { display: none; } .vbar button { padding: 9px 8px; } }
 
 /* THEME: dark direction in the LinkedIn palette, mixed with light sections */
 .theme { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: none; color: var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0; }
@@ -600,18 +646,14 @@ footer .logo img { width: 110px; }
   </section>
 
   <!-- TRACK RECORD -->
-  <section class="pad" id="track">
+  <section class="pad lt terms-sec" id="track">
     <div class="wrap">
       <div class="trk reveal">
-        <div>
-          <p class="kicker"><b>05</b> Track record</p>
-          <div class="trk-big">~PLN 260M</div>
-        </div>
-        <div>
-          <h2>Approximately PLN 260 million <em class="s">invested across Poland.</em></h2>
-          <p class="lede">Westbridge Finance has invested in real estate projects across Poland, financing a range of asset types at different stages of development and investment.</p>
-          <p class="trk-pipe"><b>~PLN 500M</b> additional deployment expected by 31 December 2026, reflecting a robust pipeline of transactions under review and execution.</p>
-        </div>
+        <p class="kicker"><b>05</b> Track record</p>
+        <div class="trk-big">~PLN 260M</div>
+        <h2>Approximately PLN 260 million <em class="s">invested across Poland.</em></h2>
+        <p class="lede">Westbridge Finance has invested in real estate projects across Poland, financing a range of asset types at different stages of development and investment.</p>
+        <p class="trk-pipe"><b>~PLN 500M</b> additional deployment expected by 31 December 2026, reflecting a robust pipeline of transactions under review and execution.</p>
       </div>
     </div>
   </section>
@@ -679,7 +721,7 @@ footer .logo img { width: 110px; }
   </section>
 
   <!-- TEAM -->
-  <section class="pad dk" id="team">
+  <section class="pad dk" id="team" data-variant="a">
     <div class="wrap">
       <div class="split-h">
         <div>
@@ -688,6 +730,7 @@ footer .logo img { width: 110px; }
         </div>
         <p class="lede reveal">The decision-makers you work with, from the first call to drawdown.</p>
       </div>
+      <div class="tm-tabs" id="tm-tabs" role="tablist" aria-label="Team"></div>
       <div class="people">
         <article class="pp reveal">
           <div class="pp-ph"><img src="assets/shlomi-weber.jpg" alt="Shlomi Weber" width="900" height="900"></div>
@@ -699,6 +742,7 @@ footer .logo img { width: 110px; }
               <p>Before joining Westbridge, Shlomi established and led Deloitte Poland's Israeli Desk, supporting international businesses and investors in the Polish market. He also served as a Manager in Deloitte Poland's Audit &amp; Assurance practice.</p>
               <p>Shlomi is a licensed Certified Public Accountant (CPA) with experience in real estate, audit &amp; assurance, corporate finance, financial due diligence and cross-border transactions.</p>
             </div>
+            <button class="pp-more" type="button"><span class="rm-o">Read full bio</span><span class="rm-c">Hide bio</span></button>
             <ul class="pp-tags"><li>CPA</li><li>Deloitte Poland</li><li>Real estate lending</li></ul>
           </div>
         </article>
@@ -712,6 +756,7 @@ footer .logo img { width: 110px; }
               <p>A law graduate of the University of Warsaw, he advises on restructurings and M&amp;A, with a particular focus on family-owned businesses and real estate investments.</p>
               <p>His expertise includes corporate and personal income tax and transaction taxes. At Westbridge Finance, he supports the accounting, tax and legal aspects of the business.</p>
             </div>
+            <button class="pp-more" type="button"><span class="rm-o">Read full bio</span><span class="rm-c">Hide bio</span></button>
             <ul class="pp-tags"><li>Lawyer and tax adviser</li><li>Partner at KNDP</li><li>17+ years of experience</li></ul>
           </div>
         </article>
@@ -800,6 +845,9 @@ footer .logo img { width: 110px; }
   </section>
 </main>
 
+<!-- temporary switcher for reviewing the team layouts, remove after the choice -->
+<div class="vbar" id="vbar" aria-label="Team layout"><span>Zespół</span><button type="button" data-v="a">A Wiersze</button><button type="button" data-v="b">B Galeria</button><button type="button" data-v="c">C Zakładki</button><button type="button" data-v="d">D Kompakt</button></div>
+
 <footer>
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Westbridge Finance home"><img class="lg-d" src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"><img class="lg-w" src="logo/wbf-logo-white-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"></a>
@@ -812,6 +860,9 @@ footer .logo img { width: 110px; }
 <script>
 (function () {
   var PL = {
+    "Read full bio": "Czytaj całe bio",
+    "Hide bio": "Zwiń bio",
+    "Team": "Zespół",
     "CPA": "CPA",
     "Deloitte Poland": "Deloitte Polska",
     "Real estate lending": "Finansowanie nieruchomości",
@@ -1101,6 +1152,30 @@ footer .logo img { width: 110px; }
   // Sticky nav border
   var nav = document.getElementById("nav");
   addEventListener("scroll", function () { nav.classList.toggle("scrolled", scrollY > 8); }, { passive: true });
+
+  // Team layout variants for review (A rows, B gallery, C tabs, D compact)
+  var team = document.getElementById("team"), vbar = document.getElementById("vbar"), people = team.querySelectorAll(".pp");
+  var tabs = document.getElementById("tm-tabs");
+  people.forEach(function (pp, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.setAttribute("role", "tab");
+    b.innerHTML = pp.querySelector("h3").textContent + "<small>" + pp.querySelector(".pp-role").textContent + "</small>";
+    b.addEventListener("click", function () { selectPerson(i); });
+    tabs.appendChild(b);
+    pp.querySelector(".pp-more").addEventListener("click", function () { pp.classList.toggle("open"); });
+  });
+  function selectPerson(i) {
+    people.forEach(function (pp, j) { pp.classList.toggle("on", i === j); });
+    tabs.querySelectorAll("button").forEach(function (b, j) { b.setAttribute("aria-selected", String(i === j)); });
+  }
+  selectPerson(0);
+  function setVariant(v) {
+    team.dataset.variant = v;
+    vbar.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.v === v)); });
+    try { var u = new URL(location.href); u.searchParams.set("team", v); history.replaceState(null, "", u); } catch (e) {}
+  }
+  vbar.querySelectorAll("button").forEach(function (b) { b.addEventListener("click", function () { setVariant(b.dataset.v); }); });
+  setVariant(/^[abcd]$/.test(new URLSearchParams(location.search).get("team") || "") ? new URLSearchParams(location.search).get("team") : "a");
 
   // Light / dark theme switch (dark is the default, closer to the LinkedIn materials)
   var tb = document.getElementById("theme");
