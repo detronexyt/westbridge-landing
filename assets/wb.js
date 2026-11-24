@@ -29,10 +29,10 @@ window.WB = (function () {
     document.documentElement.lang = l;
     document.querySelectorAll("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === l)); });
     hooks.forEach(function (h) { h(l); });
-    try { localStorage.setItem("wbf-lang", l); } catch (e) {}
+    try { localStorage.setItem("wbf-lang-v2", l); } catch (e) {}
   }
 
-  function init(dict) {
+  function init(dict, opts) {
     PL = dict || {};
     collect();
     document.querySelectorAll("[data-lang]").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
@@ -54,10 +54,12 @@ window.WB = (function () {
       document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
     }
 
-    var start = "en";
-    try { start = localStorage.getItem("wbf-lang") || start; } catch (e) {}
+    var start = (opts && opts.lang) || "en";
+    try { start = localStorage.getItem("wbf-lang-v2") || start; } catch (e) {}
     if (location.hash === "#pl") start = "pl";
-    if (start === "pl") setLang("pl"); else hooks.forEach(function (h) { h("en"); });
+    if (location.hash === "#en") start = "en";
+    if (start === "pl") setLang("pl"); else { document.documentElement.lang = "en"; hooks.forEach(function (h) { h("en"); }); }
+    document.documentElement.classList.remove("i18n");
   }
 
   return {

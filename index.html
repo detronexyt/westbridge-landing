@@ -8,7 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
-<script>try{document.documentElement.dataset.theme=localStorage.getItem("wbf-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("wbf-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}
+(function(){var l="pl";try{l=localStorage.getItem("wbf-lang-v2")||"pl"}catch(e){}if(location.hash==="#en")l="en";if(l==="pl"){document.documentElement.classList.add("i18n");setTimeout(function(){document.documentElement.classList.remove("i18n")},1500)}})();</script>
+<style>.i18n body{visibility:hidden}</style>
 <script src="assets/consent.js"></script>
 <style>
 /* Variant B: light editorial. Large grotesque type, serif italics as accent, product-like deal cards */
@@ -331,6 +333,54 @@ html[data-theme="dark"] .terms-sec { background: #FFFFFF; }
 @media (max-width: 900px) { .team { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .team { grid-template-columns: 1fr; } .tm .ph { aspect-ratio: 16 / 10; } .tm .ph svg { width: 40%; } }
 
+/* HERO OFFER CARD */
+.hero h1 { max-width: 18ch; font-size: clamp(40px, 4.8vw, 76px); }
+.offer { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 10px 26px 24px; box-shadow: 0 30px 60px -30px rgba(20,24,27,.22); max-width: 460px; justify-self: end; width: 100%; }
+.of-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.of-row small, .of-what small { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--mute-2); }
+.of-row b { font-size: clamp(22px, 2vw, 28px); font-weight: 500; letter-spacing: -.035em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.of-row small { min-width: 0; }
+.of-what { padding-top: 16px; display: grid; gap: 12px; }
+.of-what ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.of-what li { font-size: 13px; padding: 6px 10px; border-radius: 999px; background: var(--stone); }
+.of-what a { font-size: 14px; font-weight: 500; text-decoration: none; color: var(--gold-d); }
+@media (max-width: 860px) { .offer { justify-self: stretch; max-width: none; } }
+html[data-theme="dark"] .offer { box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
+
+/* WHY: four advantages */
+.whys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.wcard { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 26px 24px 28px; display: grid; gap: 12px; align-content: start; }
+.wcard .wn { font-size: 13px; font-weight: 600; color: var(--gold-d); font-variant-numeric: tabular-nums; }
+.wcard b { font-size: 22px; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; margin-top: 18px; }
+.wcard p { margin: 0; color: var(--mute); font-size: 15px; }
+@media (max-width: 1000px) { .whys { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .whys { grid-template-columns: 1fr; } .wcard b { margin-top: 4px; } }
+
+/* TRACK RECORD at portfolio level */
+.trk { border-radius: 24px; overflow: hidden; position: relative; color: #fff; padding: clamp(36px, 6vw, 80px); background: url("assets/warsaw.jpg") center 40% / cover; }
+.trk::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,24,27,.95) 35%, rgba(20,24,27,.55)); }
+.trk > * { position: relative; }
+.trk .kicker { color: #AEB3B8; } .trk .kicker b { color: #fff; } .trk .kicker::after { background: rgba(255,255,255,.2); }
+.trk-big { font-size: clamp(64px, 11vw, 156px); font-weight: 500; letter-spacing: -.05em; line-height: .95; margin: 8px 0 22px; font-variant-numeric: tabular-nums; }
+.trk h2 { font-size: clamp(26px, 3vw, 40px); max-width: 24ch; }
+.trk em.s { color: #C9B89E; }
+.trk .lede { color: #C9CCD0; margin-top: 18px; }
+.trk-pipe { margin: 36px 0 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.22); color: #AEB3B8; font-size: 15px; max-width: 60ch; }
+.trk-pipe b { color: #fff; font-weight: 500; }
+
+/* ABOUT with two cards, TEAM with two people */
+.about-cards.two { grid-template-columns: 1fr 1fr; }
+@media (max-width: 900px) { .about-cards.two { grid-template-columns: 1fr; } }
+.team.two { grid-template-columns: 1fr 1fr; gap: 18px; }
+.team.two .ph { aspect-ratio: 16 / 10; }
+.ph-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
+.ph-init { position: relative; place-items: center !important; }
+.ph-init span { font-size: clamp(64px, 8vw, 110px); font-weight: 500; letter-spacing: -.04em; color: var(--mute-2); opacity: .6; }
+.ph-init .todo { position: absolute; left: 18px; bottom: 18px; font-style: normal; background: var(--white); }
+.team.two .bd p { margin: 0 0 4px; }
+.team-note { margin: 28px 0 0; max-width: 76ch; color: var(--mute); font-size: 17px; line-height: 1.6; padding-top: 24px; border-top: 1px solid var(--line); }
+@media (max-width: 760px) { .team.two { grid-template-columns: 1fr; } }
+
 /* THEME: dark direction in the LinkedIn palette, mixed with light sections */
 .theme { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: none; color: var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0; }
 .theme svg { width: 17px; height: 17px; }
@@ -371,9 +421,8 @@ footer .logo img { width: 110px; }
     <a class="logo" href="#top" aria-label="Westbridge Finance home"><img class="lg-d" src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="124" height="39"><img class="lg-w" src="logo/wbf-logo-white-transparent.png" alt="WBF West Bridge Finance" width="124" height="39"></a>
     <ul>
       <li><a href="#about">Who we are</a></li>
+      <li><a href="#mandate">What we finance</a></li>
       <li><a href="#terms">Financing</a></li>
-      <li><a href="#mandate">Mandate</a></li>
-      <li><a href="#deals">Transactions</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="#insights">Insights</a></li>
     </ul>
@@ -391,35 +440,33 @@ footer .logo img { width: 110px; }
     <div class="wrap">
       <div class="hero-row">
         <div class="reveal">
-          <p class="kicker">Private credit for real estate in Poland</p>
-          <h1>Capital that moves <em class="s">at the speed</em> of your deal.</h1>
-          <p class="lede" style="margin-top:32px">Senior secured financing of PLN 20-120M for experienced sponsors. Indicative feedback within 48-72 hours, funding in about 30 days, and the people who decide are on every call.</p>
+          <p class="kicker">Private credit · Real estate · Poland</p>
+          <h1>Financing partner for real estate <em class="s">developers and investors</em> in Poland.</h1>
+          <p class="lede" style="margin-top:32px">Senior secured financing of PLN 15-120 million, with a target of around 30 days to first drawdown. You work directly with the people who decide, from the first call to funding.</p>
           <div class="cta">
             <a class="btn btn-dark" href="#contact">Discuss a transaction <span class="arr"><svg viewBox="0 0 12 12" fill="none" stroke="#14181B" stroke-width="1.6"><path d="M2 6h8M7 3l3 3-3 3"/></svg></span></a>
-            <a class="btn btn-line" href="#fit">Check if your deal fits</a>
+            <a class="btn btn-line" href="#fit">Could we finance your project?</a>
           </div>
         </div>
-        <div class="deal reveal" aria-label="Example facility">
-          <div class="deal-top"><span>Bridge facility · Residential</span><span class="pill">Example</span></div>
-          <div class="deal-amt">PLN 48.0M</div>
-          <div class="deal-sub">Senior secured, first-ranking mortgage</div>
-          <dl>
-            <div><dt>LTV</dt><dd>61%</dd></div>
-            <div><dt>Tenor</dt><dd>24 mo</dd></div>
-            <div><dt>Term sheet</dt><dd>Day 2</dd></div>
-          </dl>
-          <div class="track"><i></i></div>
-          <div class="track-l"><span>First call</span><span>Funded on day 28</span></div>
+        <div class="offer reveal" aria-label="Our offer at a glance">
+          <div class="of-row"><small>Financing range</small><b>PLN 15-120M</b></div>
+          <div class="of-row"><small>Term sheet</small><b>48-72 hours</b></div>
+          <div class="of-row"><small>First drawdown</small><b>~30 days</b></div>
+          <div class="of-what">
+            <small>What we finance</small>
+            <ul><li>Land acquisition</li><li>Acquisition</li><li>Bridge financing</li><li>Refinancing</li><li>Residential</li><li>PRS</li><li>Income-producing</li><li>Commercial</li><li>Mixed-use</li><li>Value-add</li><li>Redevelopment</li><li>Late-stage construction</li></ul>
+            <a href="#mandate">See what we finance <span aria-hidden="true">&#8594;</span></a>
+          </div>
         </div>
       </div>
       <div class="hero-img reveal" role="img" aria-label="Aerial view of Warsaw city centre">
         <div class="cap"><span>Land · Residential · PRS · Commercial · Mixed-use</span><span>Across Poland</span></div>
       </div>
       <div class="figs">
-        <div class="fig reveal"><b>PLN 260M+</b><span>Capital deployed</span></div>
-        <div class="fig reveal"><b>20-120M</b><span>Ticket size, PLN</span></div>
+        <div class="fig reveal"><b>~PLN 260M</b><span>Invested across Poland</span></div>
+        <div class="fig reveal"><b>15-120M</b><span>Financing range, PLN</span></div>
         <div class="fig reveal"><b>≤65%</b><span>Senior LTV</span></div>
-        <div class="fig reveal"><b>~30 days</b><span>From approach to funding</span></div>
+        <div class="fig reveal"><b>~30 days</b><span>To first drawdown</span></div>
       </div>
     </div>
   </section>
@@ -438,10 +485,9 @@ footer .logo img { width: 110px; }
           <p>We work alongside sponsors to structure financing that reflects the specific needs of each transaction, with a streamlined investment approach designed to deliver funding in up to 30 days from the initial approach.</p>
         </div>
       </div>
-      <div class="about-cards">
+      <div class="about-cards two">
         <div class="acard reveal"><small>Our background</small><b class="todo-t">[How Westbridge started, the founders' years in real estate lending and the institutions they come from]</b><span class="todo">To be provided by Westbridge</span></div>
         <div class="acard reveal"><small>Capital backing</small><b class="todo-t">[Who stands behind the fund: investors, committed capital and structure]</b><span class="todo">To be provided by Westbridge</span></div>
-        <div class="acard reveal"><small>Track record</small><b class="big">PLN 260M+</b><p>Already deployed across a diverse range of real estate assets and transaction structures.</p><p class="pipe"><b>~PLN 500M</b> additional deployment expected by 31 December 2026, reflecting a robust pipeline of transactions under review and execution.</p></div>
       </div>
     </div>
   </section>
@@ -456,18 +502,12 @@ footer .logo img { width: 110px; }
         </div>
         <p class="lede reveal">Banks remain structurally constrained on land, early-stage and transitional assets. We built a lender for exactly those moments, with institutional underwriting and a short decision path.</p>
       </div>
-      <table class="cmp reveal">
-        <thead><tr><th></th><th>Typical bank</th><th class="wb-h">Westbridge Finance</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Land acquisition</th><td class="bank" data-l="Typical bank">Rarely financed</td><td class="wb" data-l="Westbridge Finance">Core mandate</td></tr>
-          <tr><th scope="row">First answer</th><td class="bank" data-l="Typical bank">Several weeks</td><td class="wb" data-l="Westbridge Finance">48-72 hours</td></tr>
-          <tr><th scope="row">Time to funding</th><td class="bank" data-l="Typical bank">3-6 months</td><td class="wb" data-l="Westbridge Finance">About 30 days</td></tr>
-          <tr><th scope="row">Who decides</th><td class="bank" data-l="Typical bank">Central credit committee</td><td class="wb" data-l="Westbridge Finance">Decision-makers on every call</td></tr>
-          <tr><th scope="row">Structure</th><td class="bank" data-l="Typical bank">Standard products</td><td class="wb" data-l="Westbridge Finance">Built around the business plan</td></tr>
-          <tr><th scope="row">VAT financing</th><td class="bank" data-l="Typical bank">Limited</td><td class="wb" data-l="Westbridge Finance">Up to 85% LTV</td></tr>
-        </tbody>
-      </table>
-      <p class="note">Bank timelines are typical market ranges and vary by institution.</p>
+      <div class="whys">
+        <div class="wcard reveal"><span class="wn">01</span><b>Direct access to decision-makers</b><p>You speak directly with the people who decide and with the team assessing your deal.</p></div>
+        <div class="wcard reveal"><span class="wn">02</span><b>Term sheet within 48-72 hours</b><p>Know quickly whether your deal is workable.</p></div>
+        <div class="wcard reveal"><span class="wn">03</span><b>Structured around your project</b><p>Financing built around the project and its repayment plan.</p></div>
+        <div class="wcard reveal"><span class="wn">04</span><b>First drawdown in max 30 days</b><p>From the initial approach, subject to due diligence and approval.</p></div>
+      </div>
     </div>
   </section>
 
@@ -476,7 +516,7 @@ footer .logo img { width: 110px; }
     <div class="wrap">
       <div class="split-h">
         <div>
-          <p class="kicker"><b>03</b> Investment mandate</p>
+          <p class="kicker"><b>03</b> What we finance</p>
           <h2 class="reveal">Flexible across assets, <em class="s">stages</em> and structures.</h2>
         </div>
         <p class="lede reveal">Pick a lens to see what we finance. Every facility is senior secured and shaped around its own transaction.</p>
@@ -516,24 +556,24 @@ footer .logo img { width: 110px; }
       </div>
       <div class="terms">
         <div class="glance reveal">
-          <div><b>PLN 20-120M</b><span>Ticket size</span></div>
+          <div><b>PLN 15-120M</b><span>Financing range</span></div>
           <div><b>6-48 mo</b><span>Tenor</span></div>
           <div><b>Up to 65%</b><span>Senior LTV</span></div>
           <div><b>Up to 85%</b><span>VAT facility LTV</span></div>
           <div><b>14.55%</b><span>Average rate p.a., all-in</span></div>
-          <div><b>~30 days</b><span>Approach to funding</span></div>
+          <div><b>Max 30 days</b><span>To first drawdown</span></div>
         </div>
         <div class="reveal">
           <div class="tbl">
             <table>
               <tr><th scope="row">Geography</th><td>Poland</td></tr>
-              <tr><th scope="row">Ticket size</th><td>PLN 20-120 million</td></tr>
+              <tr><th scope="row">Financing range</th><td>PLN 15-120 million</td></tr>
               <tr><th scope="row">Tenor</th><td>6-48 months</td></tr>
               <tr><th scope="row">Senior LTV</th><td>Up to 65%</td></tr>
               <tr><th scope="row">VAT facilities</th><td>Up to 85%</td></tr>
               <tr><th scope="row">Pricing</th><td>14.55% average rate p.a., all-in</td></tr>
               <tr><th scope="row">Borrowers</th><td>Experienced sponsors and developers</td></tr>
-              <tr><th scope="row">Execution</th><td>Funding within ~30 days of approach</td></tr>
+              <tr><th scope="row">Execution</th><td>First drawdown in max 30 days, subject to due diligence and approval</td></tr>
             </table>
           </div>
           <p class="note">Indicative terms, subject to transaction specifics.</p>
@@ -542,43 +582,16 @@ footer .logo img { width: 110px; }
     </div>
   </section>
 
-  <!-- TRANSACTIONS -->
-  <section class="pad" id="deals">
+  <!-- TRACK RECORD -->
+  <section class="pad" id="track">
     <div class="wrap">
-      <div class="split-h">
-        <div>
-          <p class="kicker"><b>05</b> Selected transactions</p>
-          <h2 class="reveal">Structured to the deal, <em class="s">funded on time.</em></h2>
-        </div>
-        <p class="lede reveal">A look at how facilities come together across asset types and stages.</p>
+      <div class="trk reveal">
+        <p class="kicker"><b>05</b> Track record</p>
+        <div class="trk-big">~PLN 260M</div>
+        <h2>Approximately PLN 260 million <em class="s">invested across Poland.</em></h2>
+        <p class="lede">Westbridge Finance has invested in real estate projects across Poland, financing a range of asset types at different stages of development and investment.</p>
+        <p class="trk-pipe"><b>~PLN 500M</b> additional deployment expected by 31 December 2026, reflecting a robust pipeline of transactions under review and execution.</p>
       </div>
-      <div class="cases">
-        <article class="case reveal">
-          <div class="ph" style="background-image:url('assets/city.jpg')"><span>Land acquisition</span><span class="ex">Example</span></div>
-          <div class="bd">
-            <div class="amt">PLN 34M</div>
-            <div class="t">Residential land plot with zoning in place, Warsaw. Senior facility to secure the site ahead of the building permit.</div>
-            <dl><div><dt>LTV</dt><dd>55%</dd></div><div><dt>Tenor</dt><dd>18 mo</dd></div><div><dt>Funded</dt><dd>Day 26</dd></div></dl>
-          </div>
-        </article>
-        <article class="case reveal">
-          <div class="ph" style="background-image:url('assets/skyline.jpg')"><span>Bridge</span><span class="ex">Example</span></div>
-          <div class="bd">
-            <div class="amt">PLN 62M</div>
-            <div class="t">Mixed-use scheme in Kraków, bridging the sponsor to long-term bank refinancing after letting.</div>
-            <dl><div><dt>LTV</dt><dd>60%</dd></div><div><dt>Tenor</dt><dd>24 mo</dd></div><div><dt>Funded</dt><dd>Day 31</dd></div></dl>
-          </div>
-        </article>
-        <article class="case reveal">
-          <div class="ph" style="background-image:url('assets/skyline.jpg');background-position:20% 100%;background-size:220%;filter:grayscale(.6)"><span>Refinancing</span><span class="ex">Example</span></div>
-          <div class="bd">
-            <div class="amt">PLN 95M</div>
-            <div class="t">Stabilising PRS portfolio in Wrocław, refinancing a maturing facility and releasing equity for the next phase.</div>
-            <dl><div><dt>LTV</dt><dd>63%</dd></div><div><dt>Tenor</dt><dd>36 mo</dd></div><div><dt>Funded</dt><dd>Day 29</dd></div></dl>
-          </div>
-        </article>
-      </div>
-      <p class="note">Illustrative transactions for the mockup. To be replaced with approved case studies before launch.</p>
     </div>
   </section>
 
@@ -588,7 +601,7 @@ footer .logo img { width: 110px; }
       <div class="split-h">
         <div>
           <p class="kicker"><b>06</b> Check your deal</p>
-          <h2 class="reveal">Does your project <em class="s">fit</em> our mandate?</h2>
+          <h2 class="reveal">Could we finance <em class="s">your project?</em></h2>
         </div>
         <p class="lede reveal">Three inputs, an instant read against our parameters. It is not an offer, but it tells you whether the first call is worth booking.</p>
       </div>
@@ -631,30 +644,16 @@ footer .logo img { width: 110px; }
           <p class="kicker"><b>07</b> Execution</p>
           <h2 class="reveal">Thirty days, <em class="s">mapped out.</em></h2>
         </div>
-        <p class="lede reveal">The same timeline whether the ticket is PLN 20M or PLN 120M, with one team carrying the deal from first call to drawdown.</p>
+        <p class="lede reveal">The same timeline whether the financing is PLN 15M or PLN 120M, with one team carrying the deal from first call to drawdown.</p>
       </div>
       <div class="tl reveal" aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div>
       <div class="tl-l">
         <div class="reveal"><small><i style="background:var(--gold)"></i>Day 0</small><b>First call</b><p>You share the basics. A decision-maker joins the conversation.</p></div>
-        <div class="reveal"><small><i style="background:#BFAE94"></i>48-72 hours</small><b>Indicative feedback</b><p>A clear read on whether the deal is workable.</p></div>
+        <div class="reveal"><small><i style="background:#BFAE94"></i>48-72 hours</small><b>Term sheet</b><p>An indicative term sheet once we have the basics of the project.</p></div>
         <div class="reveal"><small><i style="background:var(--stone);border:1px solid #CFC8BB"></i>Days 4-25</small><b>Due diligence</b><p>Legal, financial, tax and technical review, run in parallel.</p></div>
         <div class="reveal"><small><i style="background:#C9C2B5"></i>Days 25-28</small><b>Committee</b><p>Final approval ahead of signing.</p></div>
-        <div class="reveal"><small><i style="background:var(--ink)"></i>Day ~30</small><b>Funding</b><p>First drawdown of funds.</p></div>
+        <div class="reveal"><small><i style="background:var(--ink)"></i>Max 30 days</small><b>First drawdown</b><p>Subject to due diligence and approval.</p></div>
       </div>
-    </div>
-  </section>
-
-  <!-- SECURITY -->
-  <section class="pad lt" id="security">
-    <div class="wrap sec">
-      <div>
-        <p class="kicker"><b>08</b> Security package</p>
-        <h2 class="reveal">Layered protection, <em class="s">tailored</em> to each facility.</h2>
-        <p class="lede reveal" style="margin-top:24px">Instruments are combined to match the asset, the sponsor and the structure, with further protections added where appropriate.</p>
-      </div>
-      <ol class="slist reveal">
-        <li>First-ranking mortgage</li><li>Share pledge</li><li>Assignment of receivables</li><li>Assignment of bank accounts</li><li>Assignment of insurance proceeds</li><li>Corporate &amp; personal guarantees</li><li>Art. 777 submission to enforcement</li><li>Cash sweep mechanism</li><li>Step-in rights</li>
-      </ol>
     </div>
   </section>
 
@@ -663,16 +662,32 @@ footer .logo img { width: 110px; }
     <div class="wrap">
       <div class="split-h">
         <div>
-          <p class="kicker"><b>09</b> Our team</p>
+          <p class="kicker"><b>08</b> Our team</p>
           <h2 class="reveal">The people <em class="s">behind the fund.</em></h2>
         </div>
         <p class="lede reveal">The decision-makers you work with, from the first call to drawdown.</p>
       </div>
-      <div class="team">
-        <article class="tm reveal"><div class="ph"><svg viewBox="0 0 120 110" fill="currentColor" aria-hidden="true"><circle cx="60" cy="38" r="22"/><path d="M14 110c2-26 22-42 46-42s44 16 46 42z"/></svg></div><div class="bd"><b>Shlomi Weber</b><span class="role">President of the Management Board</span><p class="todo-t">[Short biography: experience, previous roles and transactions led]</p><span class="todo">Photo and bio to be provided</span></div></article>
-        <article class="tm reveal"><div class="ph"><svg viewBox="0 0 120 110" fill="currentColor" aria-hidden="true"><circle cx="60" cy="38" r="22"/><path d="M14 110c2-26 22-42 46-42s44 16 46 42z"/></svg></div><div class="bd"><b class="todo-t">[Name Surname]</b><span class="role todo-t">[Role]</span><p class="todo-t">[Short biography: experience, previous roles and transactions led]</p><span class="todo">Photo and bio to be provided</span></div></article>
-        <article class="tm reveal"><div class="ph"><svg viewBox="0 0 120 110" fill="currentColor" aria-hidden="true"><circle cx="60" cy="38" r="22"/><path d="M14 110c2-26 22-42 46-42s44 16 46 42z"/></svg></div><div class="bd"><b class="todo-t">[Name Surname]</b><span class="role todo-t">[Role]</span><p class="todo-t">[Short biography: experience, previous roles and transactions led]</p><span class="todo">Photo and bio to be provided</span></div></article>
+      <div class="team two">
+        <article class="tm reveal">
+          <div class="ph ph-photo"><img src="assets/shlomi-weber.jpg" alt="Shlomi Weber" width="900" height="900"></div>
+          <div class="bd">
+            <b>Shlomi Weber</b><span class="role">President of the Management Board</span>
+            <p>Shlomi leads Westbridge Finance's real estate lending business in Poland, working directly with developers and investors to assess, structure and execute financing transactions.</p>
+            <p>Before joining Westbridge, Shlomi established and led Deloitte Poland's Israeli Desk, supporting international businesses and investors in the Polish market. He also served as a Manager in Deloitte Poland's Audit &amp; Assurance practice.</p>
+            <p>Shlomi is a licensed Certified Public Accountant (CPA) with experience in real estate, audit &amp; assurance, corporate finance, financial due diligence and cross-border transactions.</p>
+          </div>
+        </article>
+        <article class="tm reveal">
+          <div class="ph ph-init"><span>KT</span><em class="todo">Photo to follow</em></div>
+          <div class="bd">
+            <b>Konrad Turzyński</b><span class="role">Member of the Management Board</span>
+            <p>Konrad is a lawyer and tax adviser with over 17 years of experience and a partner at Warsaw-based KNDP.</p>
+            <p>A law graduate of the University of Warsaw, he advises on restructurings and M&amp;A, with a particular focus on family-owned businesses and real estate investments.</p>
+            <p>His expertise includes corporate and personal income tax and transaction taxes. At Westbridge Finance, he supports the accounting, tax and legal aspects of the business.</p>
+          </div>
+        </article>
       </div>
+      <p class="team-note reveal">Westbridge Finance works with a dedicated team of real estate and credit specialists on every transaction. The team brings expertise in asset assessment, credit underwriting and loan structuring, supporting efficient execution from initial review through to funding.</p>
     </div>
   </section>
 
@@ -681,7 +696,7 @@ footer .logo img { width: 110px; }
     <div class="wrap quote">
       <img class="reveal" src="assets/partner-portrait.jpg" alt="Senior partner in a navy suit" width="1400" height="933">
       <div>
-        <p class="kicker"><b>10</b> Who we partner with</p>
+        <p class="kicker"><b>09</b> Who we partner with</p>
         <blockquote class="reveal">We weigh the quality of the sponsor as much as the strength of the opportunity.</blockquote>
         <cite>Westbridge Finance</cite>
         <div class="crit">
@@ -698,7 +713,7 @@ footer .logo img { width: 110px; }
     <div class="wrap">
       <div class="split-h">
         <div>
-          <p class="kicker"><b>11</b> Insights</p>
+          <p class="kicker"><b>10</b> Insights</p>
           <h2 class="reveal">Market notes, transactions <em class="s">and financing explained.</em></h2>
         </div>
         <p class="lede reveal">What we publish on LinkedIn twice a week, collected in one place.</p>
@@ -724,9 +739,9 @@ footer .logo img { width: 110px; }
   <section class="pad" id="contact" style="padding-bottom:clamp(56px, 6vw, 88px)">
     <div class="wrap contact">
       <div>
-        <p class="kicker"><b>12</b> Contact</p>
+        <p class="kicker"><b>11</b> Contact</p>
         <h2 class="reveal">Let's talk about your <em class="s">next</em> transaction.</h2>
-        <p class="lede reveal" style="margin-top:24px">Send the basics. A decision-maker comes back within 48-72 hours with indicative feedback on whether the deal is workable.</p>
+        <p class="lede reveal" style="margin-top:24px">Send the basics of your project. Where it fits, a decision-maker comes back with a term sheet within 48-72 hours.</p>
         <div class="person">
           <b>Shlomi Weber</b>
           <span style="color:var(--mute);font-size:14px;margin-bottom:8px">President of the Management Board, Westbridge Finance</span>
@@ -756,7 +771,7 @@ footer .logo img { width: 110px; }
 <footer>
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Westbridge Finance home"><img class="lg-d" src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"><img class="lg-w" src="logo/wbf-logo-white-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"></a>
-    <nav><a href="#why">Why us</a><a href="#mandate">Mandate</a><a href="#process">Process</a><a href="polityka-prywatnosci.html">Privacy policy</a><a href="#" data-cc="show-preferencesModal">Privacy settings</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></nav>
+    <nav><a href="#about">Who we are</a><a href="#mandate">What we finance</a><a href="#terms">Financing</a><a href="polityka-prywatnosci.html">Privacy policy</a><a href="#" data-cc="show-preferencesModal">Privacy settings</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></nav>
     <span>© 2026 Westbridge Finance</span>
   </div>
 </footer>
@@ -765,6 +780,59 @@ footer .logo img { width: 110px; }
 <script>
 (function () {
   var PL = {
+    "What we finance": "Co finansujemy",
+    "Financing partner for real estate": "Partner finansowy dla",
+    "developers and investors": "deweloperów i inwestorów",
+    "in Poland.": "nieruchomościowych w Polsce.",
+    "Senior secured financing of PLN 15-120 million, with a target of around 30 days to first drawdown. You work directly with the people who decide, from the first call to funding.": "Seniorskie, zabezpieczone finansowanie od 15 do 120 mln zł, z celem około 30 dni do pierwszej wypłaty. Pracujesz bezpośrednio z osobami decyzyjnymi, od pierwszej rozmowy do wypłaty środków.",
+    "Could we finance your project?": "Czy możemy sfinansować Twój projekt?",
+    "Our offer at a glance": "Nasza oferta w skrócie",
+    "Financing range": "Zakres finansowania",
+    "PLN 15-120M": "15-120 mln zł",
+    "First drawdown": "Pierwsza wypłata",
+    "Acquisition": "Akwizycja",
+    "Residential": "Mieszkaniowe",
+    "PRS": "PRS",
+    "Income-producing": "Dochodowe",
+    "Commercial": "Komercyjne",
+    "Mixed-use": "Wielofunkcyjne",
+    "Value-add": "Value-add",
+    "Redevelopment": "Przebudowa",
+    "See what we finance": "Zobacz, co finansujemy",
+    "~PLN 260M": "~260 mln zł",
+    "Invested across Poland": "Zainwestowane w całej Polsce",
+    "15-120M": "15-120 mln",
+    "Financing range, PLN": "Zakres finansowania, zł",
+    "To first drawdown": "Do pierwszej wypłaty",
+    "You speak directly with the people who decide and with the team assessing your deal.": "Rozmawiasz bezpośrednio z osobami decyzyjnymi i z zespołem, który ocenia Twoją transakcję.",
+    "Term sheet within 48-72 hours": "Term sheet w 48-72 godziny",
+    "Know quickly whether your deal is workable.": "Szybko wiesz, czy transakcja jest możliwa do przeprowadzenia.",
+    "Structured around your project": "Struktura dopasowana do projektu",
+    "Financing built around the project and its repayment plan.": "Finansowanie budowane wokół projektu i jego planu spłaty.",
+    "First drawdown in max 30 days": "Pierwsza wypłata w maks. 30 dni",
+    "From the initial approach, subject to due diligence and approval.": "Od pierwszego kontaktu, po due diligence i akceptacji.",
+    "Max 30 days": "Maks. 30 dni",
+    "PLN 15-120 million": "15-120 mln zł",
+    "First drawdown in max 30 days, subject to due diligence and approval": "Pierwsza wypłata w maks. 30 dni, po due diligence i akceptacji",
+    "Approximately PLN 260 million": "Około 260 mln zł",
+    "invested across Poland.": "zainwestowanych w całej Polsce.",
+    "Westbridge Finance has invested in real estate projects across Poland, financing a range of asset types at different stages of development and investment.": "Westbridge Finance inwestuje w projekty nieruchomościowe w całej Polsce, finansując różne typy aktywów na różnych etapach rozwoju i inwestycji.",
+    "Could we finance": "Czy możemy sfinansować",
+    "your project?": "Twój projekt?",
+    "Within PLN 15-120M": "W przedziale 15-120 mln zł",
+    "The same timeline whether the financing is PLN 15M or PLN 120M, with one team carrying the deal from first call to drawdown.": "Ten sam harmonogram przy 15 i przy 120 mln zł. Jeden zespół prowadzi transakcję od pierwszej rozmowy do wypłaty.",
+    "An indicative term sheet once we have the basics of the project.": "Wstępny term sheet, gdy znamy podstawy projektu.",
+    "Subject to due diligence and approval.": "Po due diligence i akceptacji.",
+    "Shlomi leads Westbridge Finance's real estate lending business in Poland, working directly with developers and investors to assess, structure and execute financing transactions.": "Shlomi kieruje działalnością Westbridge Finance w zakresie finansowania nieruchomości w Polsce. Współpracuje bezpośrednio z deweloperami i inwestorami przy ocenie, strukturyzowaniu i realizacji transakcji finansowania.",
+    "Before joining Westbridge, Shlomi established and led Deloitte Poland's Israeli Desk, supporting international businesses and investors in the Polish market. He also served as a Manager in Deloitte Poland's Audit & Assurance practice.": "Przed dołączeniem do Westbridge Shlomi stworzył i prowadził Israeli Desk w Deloitte Polska, wspierając międzynarodowe firmy i inwestorów na polskim rynku. Pracował też jako Manager w dziale Audit & Assurance Deloitte Polska.",
+    "Shlomi is a licensed Certified Public Accountant (CPA) with experience in real estate, audit & assurance, corporate finance, financial due diligence and cross-border transactions.": "Shlomi jest licencjonowanym Certified Public Accountant (CPA) z doświadczeniem w nieruchomościach, audycie, finansach korporacyjnych, finansowym due diligence oraz transakcjach transgranicznych.",
+    "Member of the Management Board": "Członek Zarządu",
+    "Photo to follow": "Zdjęcie wkrótce",
+    "Konrad is a lawyer and tax adviser with over 17 years of experience and a partner at Warsaw-based KNDP.": "Konrad jest prawnikiem i doradcą podatkowym z ponad 17-letnim doświadczeniem oraz partnerem w warszawskiej kancelarii KNDP.",
+    "A law graduate of the University of Warsaw, he advises on restructurings and M&A, with a particular focus on family-owned businesses and real estate investments.": "Absolwent prawa na Uniwersytecie Warszawskim. Doradza przy restrukturyzacjach i transakcjach M&A, ze szczególnym uwzględnieniem firm rodzinnych i inwestycji w nieruchomości.",
+    "His expertise includes corporate and personal income tax and transaction taxes. At Westbridge Finance, he supports the accounting, tax and legal aspects of the business.": "Specjalizuje się w podatku dochodowym od osób prawnych i fizycznych oraz w podatkach transakcyjnych. W Westbridge Finance wspiera księgowe, podatkowe i prawne aspekty działalności.",
+    "Westbridge Finance works with a dedicated team of real estate and credit specialists on every transaction. The team brings expertise in asset assessment, credit underwriting and loan structuring, supporting efficient execution from initial review through to funding.": "Przy każdej transakcji Westbridge Finance pracuje z dedykowanym zespołem specjalistów od nieruchomości i kredytu. Zespół wnosi doświadczenie w ocenie aktywów, analizie kredytowej i strukturyzowaniu finansowania, co pozwala sprawnie przejść od pierwszej analizy do wypłaty środków.",
+    "Send the basics of your project. Where it fits, a decision-maker comes back with a term sheet within 48-72 hours.": "Prześlij podstawowe informacje o projekcie. Jeśli pasuje do naszych kryteriów, osoba decyzyjna wróci z term sheetem w ciągu 48-72 godzin.",
     "Senior secured financing of PLN 20-120M for experienced sponsors. Indicative feedback within 48-72 hours, funding in about 30 days, and the people who decide are on every call.": "Seniorskie, zabezpieczone finansowanie od 20 do 120 mln zł dla doświadczonych inwestorów. Wstępna odpowiedź w 48-72 godziny, wypłata w około 30 dni, a osoby decyzyjne uczestniczą w każdej rozmowie.",
     "PLN 260M+": "260+ mln zł",
     "We focus on opportunities where traditional lenders are unable to provide the speed, flexibility or structure required to support a transaction. By keeping decision-makers directly involved throughout the process, we are able to assess opportunities quickly, structure solutions efficiently and provide certainty of execution.": "Koncentrujemy się na projektach, w których tradycyjni kredytodawcy nie są w stanie zapewnić szybkości, elastyczności ani struktury potrzebnej do przeprowadzenia transakcji. Dzięki bezpośredniemu udziałowi osób decyzyjnych na każdym etapie szybko oceniamy projekty, sprawnie strukturyzujemy rozwiązania i dajemy pewność realizacji.",
@@ -1037,13 +1105,13 @@ footer .logo img { width: 110px; }
     var maxLtv = purpose === "vat" ? 85 : 65;
     paint(rA); paint(rV);
     oA.textContent = pln(a); oV.textContent = pln(v);
-    var c1 = a >= 20 && a <= 120, c2 = ltv <= maxLtv, c3 = purpose !== "early";
+    var c1 = a >= 15 && a <= 120, c2 = ltv <= maxLtv, c3 = purpose !== "early";
     var score = [c1, c2, c3].filter(Boolean).length;
     verdict.textContent = t(score === 3 ? "Looks like a fit." : (score === 2 && c3 ? "Close, worth a call." : "Outside our mandate."));
     function li(ok, label, val) { return '<li><span class="dot ' + (ok ? "y" : "n") + '">' + (ok ? "✓" : "✕") + '</span><span>' + t(label) + '</span><span>' + val + '</span></li>'; }
     var pBtn = document.querySelector('#purpose [data-p="' + purpose + '"]');
     checks.innerHTML =
-      li(c1, "Ticket size", c1 ? t("Within PLN 20-120M") : pln(a)) +
+      li(c1, "Financing range", c1 ? t("Within PLN 15-120M") : pln(a)) +
       li(c2, "Loan to value", WB.fmt(ltv) + "% · " + t("Max") + " " + maxLtv + "%") +
       li(c3, "Purpose in mandate", pBtn.textContent);
   }
@@ -1071,7 +1139,7 @@ footer .logo img { width: 110px; }
     ok.hidden = false;
   });
 
-  WB.init(PL);
+  WB.init(PL, { lang: "pl" });
 })();
 </script>
 </body>
