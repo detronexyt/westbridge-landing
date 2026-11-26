@@ -11,6 +11,8 @@
   gtag("consent", "default", { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "denied", functionality_storage: "granted", security_storage: "granted", wait_for_update: 500 });
   gtag("set", "ads_data_redaction", true);
   function update(cats) {
+    window.WBF_CONSENT = cats.slice();
+    try { document.dispatchEvent(new CustomEvent("wbf:consent", { detail: cats })); } catch (e) {}
     var a = cats.indexOf("analytics") > -1 ? "granted" : "denied", k = cats.indexOf("marketing") > -1 ? "granted" : "denied";
     gtag("consent", "update", { analytics_storage: a, ad_storage: k, ad_user_data: k, ad_personalization: k });
     return k;
@@ -55,7 +57,7 @@
             { description: 'Choose which categories of cookies you agree to. Details are in our <a href="' + POLICY + '">privacy policy</a>.' },
             { title: "Necessary", description: "Required for the site to work, for example to remember your cookie decision. They cannot be switched off.", linkedCategory: "necessary" },
             { title: "Analytics", description: "Help us understand how the site is used so we can improve it (Google Analytics 4, Microsoft Clarity).", linkedCategory: "analytics", cookieTable: tbl(hEn, [{ name: "_ga, _ga_*", service: "Google Analytics", exp: "2 years" }, { name: "_clck, _clsk, CLID", service: "Microsoft Clarity", exp: "up to 1 year" }]) },
-            { title: "Marketing", description: "Let us measure the effectiveness of campaigns on Google Ads, LinkedIn and Meta.", linkedCategory: "marketing", cookieTable: tbl(hEn, [{ name: "_gcl_au", service: "Google Ads", exp: "90 days" }, { name: "li_*", service: "LinkedIn Insight Tag", exp: "up to 6 months" }, { name: "_fbp, _fbc", service: "Meta Pixel", exp: "90 days" }]) }
+            { title: "Marketing", description: "Let us measure the effectiveness of campaigns on Google Ads, LinkedIn and Meta, and show posts embedded from LinkedIn.", linkedCategory: "marketing", cookieTable: tbl(hEn, [{ name: "_gcl_au", service: "Google Ads", exp: "90 days" }, { name: "li_*", service: "LinkedIn Insight Tag", exp: "up to 6 months" }, { name: "_fbp, _fbc", service: "Meta Pixel", exp: "90 days" }]) }
           ] }
         },
         pl: {
@@ -64,7 +66,7 @@
             { description: 'Wybierz, na które kategorie plików cookies się zgadzasz. Szczegóły znajdziesz w <a href="' + POLICY + '">polityce prywatności</a>.' },
             { title: "Niezbędne", description: "Konieczne do działania strony, np. zapamiętanie Twojej decyzji o cookies. Nie można ich wyłączyć.", linkedCategory: "necessary" },
             { title: "Analityczne", description: "Pomagają zrozumieć, jak korzystasz ze strony, żeby można ją było ulepszać (Google Analytics 4, Microsoft Clarity).", linkedCategory: "analytics", cookieTable: tbl(hPl, [{ name: "_ga, _ga_*", service: "Google Analytics", exp: "2 lata" }, { name: "_clck, _clsk, CLID", service: "Microsoft Clarity", exp: "do 1 roku" }]) },
-            { title: "Marketingowe", description: "Pozwalają mierzyć skuteczność kampanii w Google Ads, LinkedIn i Meta.", linkedCategory: "marketing", cookieTable: tbl(hPl, [{ name: "_gcl_au", service: "Google Ads", exp: "90 dni" }, { name: "li_*", service: "LinkedIn Insight Tag", exp: "do 6 miesięcy" }, { name: "_fbp, _fbc", service: "Meta Pixel", exp: "90 dni" }]) }
+            { title: "Marketingowe", description: "Pozwalają mierzyć skuteczność kampanii w Google Ads, LinkedIn i Meta oraz wyświetlać posty osadzone z LinkedIna.", linkedCategory: "marketing", cookieTable: tbl(hPl, [{ name: "_gcl_au", service: "Google Ads", exp: "90 dni" }, { name: "li_*", service: "LinkedIn Insight Tag", exp: "do 6 miesięcy" }, { name: "_fbp, _fbc", service: "Meta Pixel", exp: "90 dni" }]) }
           ] }
         }
       } }

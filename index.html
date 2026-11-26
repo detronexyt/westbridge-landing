@@ -406,6 +406,15 @@ html[data-theme="dark"] .offer { box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
 @media (max-width: 900px) { .people { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .pp { grid-template-columns: 72px 1fr; gap: 18px; } .pp-wide { grid-template-columns: 1fr; gap: 12px; } }
 
+/* LINKEDIN: follow link and embedded posts */
+.li-follow { margin: -28px 0 28px; }
+.li-embed { background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; min-height: 420px; display: grid; }
+.li-embed iframe { width: 100%; height: 560px; border: 0; display: block; }
+.li-gate { display: grid; align-content: center; justify-items: start; gap: 14px; padding: 28px; }
+.li-gate b { font-size: 20px; font-weight: 500; letter-spacing: -.02em; }
+.li-gate p { margin: 0; color: var(--mute); font-size: 14px; }
+@media (max-width: 860px) { .li-follow { margin: -12px 0 24px; } }
+
 /* THEME: dark direction in the LinkedIn palette, mixed with light sections */
 .theme { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: none; color: var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0; }
 .theme svg { width: 17px; height: 17px; }
@@ -760,16 +769,17 @@ footer .logo img { width: 110px; }
         </div>
         <p class="lede reveal">What we publish on LinkedIn twice a week, collected in one place.</p>
       </div>
-      <div class="posts">
-        <a class="post reveal" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+      <div class="li-follow reveal"><a class="btn btn-line" href="https://www.linkedin.com/company/145195961/" target="_blank" rel="noopener">Follow us on LinkedIn <span aria-hidden="true">&#8599;</span></a></div>
+      <div class="posts" id="li-posts">
+        <a class="post reveal" href="https://www.linkedin.com/company/145195961/" target="_blank" rel="noopener">
           <div class="cv"><small>Market intelligence</small><strong>Where bank lending stops in Polish real estate</strong></div>
           <div class="md"><b>Market commentary</b><span>Carousel · Why land and early-stage assets sit outside bank appetite in 2026.</span></div>
         </a>
-        <a class="post reveal" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+        <a class="post reveal" href="https://www.linkedin.com/company/145195961/" target="_blank" rel="noopener">
           <div class="cv"><small>Transaction stories</small><strong>From term sheet to drawdown in 30 days</strong></div>
           <div class="md"><b>Transaction example</b><span>Document post · How a residential bridge facility was structured and funded.</span></div>
         </a>
-        <a class="post reveal" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+        <a class="post reveal" href="https://www.linkedin.com/company/145195961/" target="_blank" rel="noopener">
           <div class="cv"><small>Education</small><strong>What a VAT facility at 85% LTV actually covers</strong></div>
           <div class="md"><b>Financing education</b><span>Expert post · A plain explanation for developers planning a purchase.</span></div>
         </a>
@@ -815,7 +825,7 @@ footer .logo img { width: 110px; }
 <footer>
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Westbridge Finance home"><img class="lg-d" src="logo/wbf-logo-dark-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"><img class="lg-w" src="logo/wbf-logo-white-transparent.png" alt="WBF West Bridge Finance" width="110" height="34"></a>
-    <nav><a href="#about">Who we are</a><a href="#mandate">What we finance</a><a href="#terms">Financing</a><a href="polityka-prywatnosci.html">Privacy policy</a><a href="#" data-cc="show-preferencesModal">Privacy settings</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></nav>
+    <nav><a href="#about">Who we are</a><a href="#mandate">What we finance</a><a href="#terms">Financing</a><a href="polityka-prywatnosci.html">Privacy policy</a><a href="#" data-cc="show-preferencesModal">Privacy settings</a><a href="https://www.linkedin.com/company/145195961/" target="_blank" rel="noopener">LinkedIn</a></nav>
     <span>© 2026 Westbridge Finance</span>
   </div>
 </footer>
@@ -824,6 +834,7 @@ footer .logo img { width: 110px; }
 <script>
 (function () {
   var PL = {
+    "Follow us on LinkedIn": "Obserwuj nas na LinkedIn",
     "Read full bio": "Czytaj całe bio",
     "Hide bio": "Zwiń bio",
     "Team": "Zespół",
@@ -1116,6 +1127,29 @@ footer .logo img { width: 110px; }
   // Sticky nav border
   var nav = document.getElementById("nav");
   addEventListener("scroll", function () { nav.classList.toggle("scrolled", scrollY > 8); }, { passive: true });
+
+  // LinkedIn: embedded posts. Paste the embed links of chosen posts here
+  // (post menu "Embed this post", e.g. https://www.linkedin.com/embed/feed/update/urn:li:share:123...).
+  // While the list is empty the section shows the cards above, linked to the company page.
+  // Embeds come from LinkedIn and may set cookies, so they load only after marketing consent or a click.
+  var LI_POSTS = [];
+  if (LI_POSTS.length) {
+    var box = document.getElementById("li-posts");
+    box.innerHTML = LI_POSTS.slice(0, 3).map(function () {
+      return '<div class="li-embed reveal in"><div class="li-gate"><b>Post z LinkedIna</b><p>Post ładuje się z serwisu LinkedIn, który może zapisać pliki cookies.</p><button class="btn btn-dark" type="button">Pokaż posty z LinkedIna</button></div></div>';
+    }).join("");
+    var gates = box.querySelectorAll(".li-embed");
+    var loadPosts = function () {
+      gates.forEach(function (g, i) {
+        if (g.querySelector("iframe")) return;
+        g.innerHTML = '<iframe src="' + LI_POSTS[i] + '" title="LinkedIn" loading="lazy" allowfullscreen></iframe>';
+      });
+    };
+    var marketingOk = function () { return (window.WBF_CONSENT || []).indexOf("marketing") > -1; };
+    gates.forEach(function (g) { var b = g.querySelector("button"); if (b) b.addEventListener("click", loadPosts); });
+    if (marketingOk()) loadPosts();
+    document.addEventListener("wbf:consent", function () { if (marketingOk()) loadPosts(); });
+  }
 
   // Team: full bio on demand
   document.querySelectorAll("#team .pp").forEach(function (pp) {
