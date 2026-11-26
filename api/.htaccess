@@ -1,0 +1,4 @@
+Options -Indexes
+<Files "_linkedin.php">
+  Require all denied
+</Files>

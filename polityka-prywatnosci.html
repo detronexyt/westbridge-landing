@@ -140,15 +140,12 @@ em.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-s
 .btn-dark:hover { background: var(--ink); opacity: .88; }
 .btn-line { border-color: var(--ink); color: var(--ink); background: transparent; }
 .btn-line:hover { background: var(--ink); color: var(--on-ink); }
-.ar { width: 26px; height: 12px; flex: none; overflow: visible; fill: none; stroke-width: 1.4; stroke-linecap: square; stroke-linejoin: miter; --ar-tip: var(--gold); transition: transform .35s cubic-bezier(.2,.7,.2,1); }
-a:hover > .ar, button:hover > .ar, .btn:hover .ar { transform: translateX(5px); }
-.ar-ext { transform: rotate(-45deg); }
-a:hover > .ar-ext { transform: rotate(-45deg) translateX(4px); }
-.ar-down { width: 20px; transform: rotate(90deg); }
-button:hover > .ar-down { transform: rotate(90deg) translateX(3px); }
-.pp.open .ar-down { transform: rotate(-90deg); }
-.btn-dark .ar { --ar-tip: var(--gold-d); }
-.fit-out .btn .ar { --ar-tip: #14181B; --ar-tail: #14181B; }
+.ar { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+a:hover .ar, button:hover .ar { transform: translateX(3px); }
+a:hover .ar-x { transform: translate(2px, -2px); }
+button:hover .ar-down { transform: translateY(2px); }
+.pp.open .ar-down { transform: rotate(180deg); }
+.btn { gap: 10px; }
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
 .reveal.in { opacity: 1; transform: none; }
 .nav { position: sticky; top: 0; z-index: 50; background: var(--nav-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: border-color .3s; }
@@ -329,7 +326,7 @@ mark.todo { background: #F7E27A; color: #14181B; padding: 0 4px; border-radius: 
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ar" viewBox="0 0 26 12"><path d="M1 6h22" style="stroke:var(--ar-tail,currentColor)"/><path d="M17.5 1.2 23.6 6l-6.1 4.8" style="stroke:var(--ar-tip,currentColor)"/><circle cx="1.6" cy="6" r="1.6" style="fill:var(--ar-tip,currentColor);stroke:none"/></symbol></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ar" viewBox="0 0 16 16"><path d="M2.5 8h11M9.5 4l4 4-4 4"/></symbol><symbol id="ar-ext" viewBox="0 0 16 16"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></symbol><symbol id="ar-down" viewBox="0 0 16 16"><path d="M8 2.5v11M4 9.5l4 4 4-4"/></symbol></svg>
 
 <header class="nav" id="nav">
   <div class="wrap">
@@ -394,7 +391,7 @@ mark.todo { background: #F7E27A; color: #14181B; padding: 0 4px; border-radius: 
     <h2>Cookies</h2>
     <p>The site uses cookies needed for it to work, including <code>cc_cookie</code>, which remembers your cookie decision for 6 months. Analytics and marketing cookies are used only after you consent.</p>
     <p>The site uses Google Consent Mode v2. Until you consent, the analytics and advertising tools listed above do not store cookies.</p>
-    <p>Posts embedded from LinkedIn are loaded only after you consent to marketing cookies or click to show them. LinkedIn may then store its own cookies.</p>
+    <p>Posts from our LinkedIn page are fetched by our own server and shown on this site. Your browser does not connect to LinkedIn to display them, and LinkedIn does not set cookies through this site.</p>
     <p>You can change your decision at any time: <a href="#" data-cc="show-preferencesModal">Privacy settings</a>.</p>
   </section>
 
@@ -456,7 +453,7 @@ mark.todo { background: #F7E27A; color: #14181B; padding: 0 4px; border-radius: 
     "The site uses cookies needed for it to work, including": "Strona używa cookies niezbędnych do działania, w tym",
     ", which remembers your cookie decision for 6 months. Analytics and marketing cookies are used only after you consent.": ", które przez 6 miesięcy zapamiętuje Twoją decyzję. Cookies analityczne i marketingowe są używane wyłącznie po wyrażeniu zgody.",
     "The site uses Google Consent Mode v2. Until you consent, the analytics and advertising tools listed above do not store cookies.": "Strona korzysta z Google Consent Mode v2. Dopóki nie wyrazisz zgody, wymienione wyżej narzędzia analityczne i reklamowe nie zapisują cookies.",
-    "Posts embedded from LinkedIn are loaded only after you consent to marketing cookies or click to show them. LinkedIn may then store its own cookies.": "Posty osadzone z LinkedIna ładują się dopiero po zgodzie na cookies marketingowe albo po kliknięciu „Pokaż posty”. LinkedIn może wtedy zapisać własne pliki cookies.",
+    "Posts from our LinkedIn page are fetched by our own server and shown on this site. Your browser does not connect to LinkedIn to display them, and LinkedIn does not set cookies through this site.": "Posty z naszego profilu na LinkedIn pobiera nasz serwer i wyświetla je na tej stronie. Twoja przeglądarka nie łączy się przy tym z LinkedIn, a LinkedIn nie zapisuje przez tę stronę plików cookies.",
     "You can change your decision at any time:": "Decyzję zmienisz w każdej chwili:",
     "Privacy settings": "Ustawienia prywatności",
     "Privacy policy": "Polityka prywatności",
