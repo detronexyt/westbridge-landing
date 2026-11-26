@@ -288,19 +288,6 @@ form .btn { justify-self: start; }
 .about-copy p { margin: 0; }
 .about-copy p:first-child { color: var(--ink); font-size: 20px; line-height: 1.5; letter-spacing: -.01em; }
 #about h2 { font-size: clamp(32px, 3.8vw, 54px); }
-.about-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: clamp(40px, 6vw, 72px); }
-.acard { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 26px; display: grid; gap: 12px; align-content: start; }
-.acard small { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--gold-d); font-weight: 600; }
-.acard > b { font-size: 22px; font-weight: 500; letter-spacing: -.02em; line-height: 1.25; }
-.acard p { margin: 0; color: var(--mute); font-size: 15px; }
-.acard-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-.acard-list li { display: grid; gap: 2px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 15px; }
-.acard-list strong { font-weight: 500; color: var(--ink); }
-.acard-list span { color: var(--mute); }
-.acard-link { justify-self: start; display: inline-flex; align-items: center; gap: 10px; margin-top: 6px; font-size: 14px; font-weight: 500; text-decoration: none; color: var(--gold-d); }
-.acard .pipe { padding-top: 12px; border-top: 1px solid var(--line); }
-.acard .pipe b { color: var(--ink); font-weight: 500; }
-@media (max-width: 900px) { .about-cards { grid-template-columns: 1fr; } }
 .todo-t { color: var(--mute) !important; font-style: italic; font-weight: 400 !important; }
 .todo { justify-self: start; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; color: var(--gold-d); border: 1px dashed var(--gold); border-radius: 999px; padding: 5px 11px; }
 .todo::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
@@ -337,8 +324,6 @@ html[data-theme="dark"] .offer { box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
 .trk .lede { color: #C9CCD0; margin-top: 18px; }
 .trk-pipe { margin: 36px 0 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.22); color: #AEB3B8; font-size: 15px; max-width: 60ch; }
 .trk-pipe b { color: #fff; font-weight: 500; }
-.about-cards.two { grid-template-columns: 1fr 1fr; }
-@media (max-width: 900px) { .about-cards.two { grid-template-columns: 1fr; } }
 .team.two { grid-template-columns: 1fr 1fr; gap: 18px; }
 .team.two .ph { aspect-ratio: 16 / 10; }
 .ph-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
@@ -486,14 +471,6 @@ footer .logo img { width: 110px; }
           <p>We focus on opportunities where traditional lenders are unable to provide the speed, flexibility or structure required to support a transaction. By keeping decision-makers directly involved throughout the process, we are able to assess opportunities quickly, structure solutions efficiently and provide certainty of execution.</p>
           <p>We work alongside sponsors to structure financing that reflects the specific needs of each transaction, with a streamlined investment approach designed to deliver funding in up to 30 days from the initial approach.</p>
         </div>
-      </div>
-      <div class="about-cards two">
-        <div class="acard reveal"><small>Management board</small><b>Finance, audit and legal experience at the top</b>
-          <ul class="acard-list"><li><strong>Shlomi Weber</strong><span>President of the Management Board. CPA, previously established and led Deloitte Poland's Israeli Desk.</span></li><li><strong>Konrad Turzyński</strong><span>Member of the Management Board. Lawyer and tax adviser with over 17 years of experience, partner at KNDP.</span></li></ul>
-          <a class="acard-link" href="#team">Meet the team <svg class="ar" aria-hidden="true"><use href="#ar"/></svg></a></div>
-        <div class="acard reveal"><small>Portfolio</small><b>Approximately PLN 260 million invested across Poland</b>
-          <p>Westbridge Finance has invested in real estate projects across Poland, financing a range of asset types at different stages of development and investment.</p>
-          <a class="acard-link" href="#mandate">See what we finance <svg class="ar" aria-hidden="true"><use href="#ar"/></svg></a></div>
       </div>
     </div>
   </section>
