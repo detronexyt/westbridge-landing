@@ -1002,7 +1002,7 @@ footer .logo img { width: 110px; }
     "Close, worth a call.": "Blisko, warto porozmawiać.",
     "Outside our mandate.": "Poza naszym mandatem.",
     "Loan to value": "Wskaźnik LTV",
-    "Purpose in mandate": "Cel w mandacie",
+    "Financing purpose": "Cel finansowania",
     "Max": "Maks."
   };
 
@@ -1060,7 +1060,7 @@ footer .logo img { width: 110px; }
     checks.innerHTML =
       li(c1, "Financing range", c1 ? t("Within PLN 15-120M") : pln(a)) +
       li(c2, "Loan to value", WB.fmt(ltv) + "% · " + t("Max") + " " + maxLtv + "%") +
-      li(c3, "Purpose in mandate", pBtn.textContent);
+      li(c3, "Financing purpose", pBtn.textContent);
   }
   [rA, rV].forEach(function (r) { r.addEventListener("input", run); });
   document.querySelectorAll("#purpose button").forEach(function (b) {
