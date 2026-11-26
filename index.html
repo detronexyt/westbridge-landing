@@ -288,10 +288,10 @@ form .btn { justify-self: start; }
 /* FINANCING AT A GLANCE (blocks from variant A) */
 .terms { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
 .glance { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.glance div { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 8px; }
+.glance div { background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 8px; }
 .glance b { font-size: clamp(26px, 2.6vw, 36px); font-weight: 500; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
 .glance span { font-size: 14px; color: var(--mute); }
-.tbl { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 8px 24px 20px; }
+.tbl { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 8px 24px 20px; }
 .tbl table { width: 100%; border-collapse: collapse; font-size: 15px; }
 .tbl th, .tbl td { text-align: left; padding: 15px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
 .tbl tr:last-child th, .tbl tr:last-child td { border-bottom: 0; }
@@ -299,8 +299,7 @@ form .btn { justify-self: start; }
 .tbl td { font-weight: 500; }
 @media (max-width: 860px) { .terms { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .glance div { padding: 16px; } .glance b { font-size: 22px; white-space: nowrap; } }
-.terms-sec { background: var(--white); }
-html[data-theme="dark"] .terms-sec { background: #FFFFFF; }
+.terms-sec { background: var(--paper); }
 
 /* WHO WE ARE */
 .about-copy { display: grid; gap: 18px; color: var(--mute); }
@@ -357,7 +356,9 @@ html[data-theme="dark"] .offer { box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
 @media (max-width: 560px) { .whys { grid-template-columns: 1fr; } .wcard b { margin-top: 4px; } }
 
 /* TRACK RECORD at portfolio level: photo box on a light section */
-#track.pad { padding-top: 0; padding-bottom: clamp(80px, 11vw, 150px); margin-top: -1px; }
+#track.pad { padding-top: 0; padding-bottom: 0; margin-top: -1px; }
+/* same gap below the box as above it */
+#fit.pad { padding-top: clamp(48px, 6vw, 80px); }
 .trk { border-radius: 24px; overflow: hidden; position: relative; color: #fff; padding: clamp(36px, 6vw, 80px); background: url("assets/warsaw.jpg") center 40% / cover; }
 .trk::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,24,27,.95) 35%, rgba(20,24,27,.55)); }
 .trk > * { position: relative; }
