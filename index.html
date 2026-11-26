@@ -293,6 +293,11 @@ form .btn { justify-self: start; }
 .acard small { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--gold-d); font-weight: 600; }
 .acard > b { font-size: 22px; font-weight: 500; letter-spacing: -.02em; line-height: 1.25; }
 .acard p { margin: 0; color: var(--mute); font-size: 15px; }
+.acard-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.acard-list li { display: grid; gap: 2px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 15px; }
+.acard-list strong { font-weight: 500; color: var(--ink); }
+.acard-list span { color: var(--mute); }
+.acard-link { justify-self: start; display: inline-flex; align-items: center; gap: 10px; margin-top: 6px; font-size: 14px; font-weight: 500; text-decoration: none; color: var(--gold-d); }
 .acard .pipe { padding-top: 12px; border-top: 1px solid var(--line); }
 .acard .pipe b { color: var(--ink); font-weight: 500; }
 @media (max-width: 900px) { .about-cards { grid-template-columns: 1fr; } }
@@ -483,8 +488,12 @@ footer .logo img { width: 110px; }
         </div>
       </div>
       <div class="about-cards two">
-        <div class="acard reveal"><small>Our background</small><b class="todo-t">[How Westbridge started, the founders' years in real estate lending and the institutions they come from]</b><span class="todo">To be provided by Westbridge</span></div>
-        <div class="acard reveal"><small>Capital backing</small><b class="todo-t">[Who stands behind the fund: investors, committed capital and structure]</b><span class="todo">To be provided by Westbridge</span></div>
+        <div class="acard reveal"><small>Management board</small><b>Finance, audit and legal experience at the top</b>
+          <ul class="acard-list"><li><strong>Shlomi Weber</strong><span>President of the Management Board. CPA, previously established and led Deloitte Poland's Israeli Desk.</span></li><li><strong>Konrad Turzyński</strong><span>Member of the Management Board. Lawyer and tax adviser with over 17 years of experience, partner at KNDP.</span></li></ul>
+          <a class="acard-link" href="#team">Meet the team <svg class="ar" aria-hidden="true"><use href="#ar"/></svg></a></div>
+        <div class="acard reveal"><small>Portfolio</small><b>Approximately PLN 260 million invested across Poland</b>
+          <p>Westbridge Finance has invested in real estate projects across Poland, financing a range of asset types at different stages of development and investment.</p>
+          <a class="acard-link" href="#mandate">See what we finance <svg class="ar" aria-hidden="true"><use href="#ar"/></svg></a></div>
       </div>
     </div>
   </section>
@@ -788,6 +797,13 @@ footer .logo img { width: 110px; }
 <script>
 (function () {
   var PL = {
+    "Management board": "Zarząd",
+    "Finance, audit and legal experience at the top": "Doświadczenie w finansach, audycie i prawie na czele firmy",
+    "President of the Management Board. CPA, previously established and led Deloitte Poland's Israeli Desk.": "Prezes Zarządu. CPA, wcześniej stworzył i prowadził Israeli Desk w Deloitte Polska.",
+    "Member of the Management Board. Lawyer and tax adviser with over 17 years of experience, partner at KNDP.": "Członek Zarządu. Prawnik i doradca podatkowy z ponad 17-letnim doświadczeniem, partner w KNDP.",
+    "Meet the team": "Poznaj zespół",
+    "Portfolio": "Portfel",
+    "Approximately PLN 260 million invested across Poland": "Około 260 mln zł zainwestowanych w całej Polsce",
     "Process": "Proces",
     "What we need to issue a term sheet": "Czego potrzebujemy, żeby wystawić term sheet",
     "Financing explained": "Finansowanie w praktyce",
