@@ -164,7 +164,8 @@ button:hover .ar-down { transform: translateY(2px); }
 .lang button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
 .nav ul a, .nav .btn { white-space: nowrap; }
 @media (max-width: 1180px) { .nav ul { display: none; } }
-@media (max-width: 440px) { .nav .btn .lbl { display: none; } .nav .btn { padding: 10px; } .logo img { width: 104px; } }
+.nav-cta .nav-mail { display: none; }
+@media (max-width: 440px) { .nav .btn .lbl { display: none; } .nav .btn { padding: 11px; } .nav-cta .ar:not(.nav-mail) { display: none; } .nav-cta .nav-mail { display: block; width: 18px; height: 18px; } .nav-cta:hover .nav-mail { transform: none; } .logo img { width: 104px; } }
 .hero { padding-top: clamp(48px, 7vw, 96px); overflow: hidden; }
 .hero > .wrap { position: relative; z-index: 1; }
 .hero h1 { max-width: 12ch; font-size: clamp(46px, 6.6vw, 100px); }
@@ -326,7 +327,7 @@ mark.todo { background: #F7E27A; color: #14181B; padding: 0 4px; border-radius: 
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ar" viewBox="0 0 16 16"><path d="M2.5 8h11M9.5 4l4 4-4 4"/></symbol><symbol id="ar-ext" viewBox="0 0 16 16"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></symbol><symbol id="ar-down" viewBox="0 0 16 16"><path d="M8 2.5v11M4 9.5l4 4 4-4"/></symbol></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ar" viewBox="0 0 16 16"><path d="M2.5 8h11M9.5 4l4 4-4 4"/></symbol><symbol id="ar-ext" viewBox="0 0 16 16"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></symbol><symbol id="mail" viewBox="0 0 16 16"><rect x="1.75" y="3.25" width="12.5" height="9.5" rx="1.5"/><path d="M2.5 4.25 8 8.5l5.5-4.25"/></symbol><symbol id="ar-down" viewBox="0 0 16 16"><path d="M8 2.5v11M4 9.5l4 4 4-4"/></symbol></svg>
 
 <header class="nav" id="nav">
   <div class="wrap">
@@ -340,7 +341,7 @@ mark.todo { background: #F7E27A; color: #14181B; padding: 0 4px; border-radius: 
     </ul>
     <div class="nav-r">
       <div class="lang" role="group" aria-label="Language / Język"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="pl" aria-pressed="false">PL</button></div>
-      <a class="btn btn-dark" href="./#contact"><span class="lbl">Discuss a transaction</span><svg class="ar" aria-hidden="true"><use href="#ar"/></svg></a>
+      <a class="btn btn-dark nav-cta" href="./#contact" aria-label="Discuss a transaction"><span class="lbl">Discuss a transaction</span><svg class="ar" aria-hidden="true"><use href="#ar"/></svg><svg class="ar nav-mail" aria-hidden="true"><use href="#mail"/></svg></a>
     </div>
   </div>
 </header>
