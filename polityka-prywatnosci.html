@@ -163,7 +163,18 @@ button:hover .ar-down { transform: translateY(2px); }
 .lang button { background: none; border: 0; color: var(--mute); font: 600 12px/1 var(--sans); letter-spacing: .08em; padding: 8px 10px; border-radius: 999px; cursor: pointer; }
 .lang button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
 .nav ul a, .nav .btn { white-space: nowrap; }
-@media (max-width: 1180px) { .nav ul { display: none; } }
+.menu-btn { display: none; }
+@media (max-width: 1180px) {
+.nav ul { display: none; }
+.menu-btn { display: grid; place-content: center; gap: 6px; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: none; cursor: pointer; padding: 0; }
+.menu-btn span { display: block; width: 16px; height: 1.5px; background: var(--ink); transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+.nav.open .menu-btn span:first-child { transform: translateY(3.75px) rotate(45deg); }
+.nav.open .menu-btn span:last-child { transform: translateY(-3.75px) rotate(-45deg); }
+.nav.open { background: var(--paper); border-bottom-color: var(--line); }
+.nav.open ul { display: flex; flex-direction: column; gap: 0; position: absolute; left: 0; right: 0; top: 100%; margin: 0 !important; padding: 8px var(--gr) 24px var(--g); background: var(--paper); border-bottom: 1px solid var(--line); box-shadow: 0 30px 40px -30px rgba(0,0,0,.6); }
+.nav.open ul a { display: block; padding: 16px 0; font-size: 20px; letter-spacing: -.01em; color: var(--ink); border-bottom: 1px solid var(--line); }
+.nav.open ul li:last-child a { border-bottom: 0; }
+}
 .nav-cta .nav-mail { display: none; }
 @media (max-width: 440px) { .nav .btn .lbl { display: none; } .nav .btn { padding: 11px; } .nav-cta .ar:not(.nav-mail) { display: none; } .nav-cta .nav-mail { display: block; width: 18px; height: 18px; } .nav-cta:hover .nav-mail { transform: none; } .logo img { width: 104px; } }
 .hero { padding-top: clamp(48px, 7vw, 96px); overflow: hidden; }
@@ -332,7 +343,7 @@ mark.todo { background: #F7E27A; color: #14181B; padding: 0 4px; border-radius: 
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="logo" href="./" aria-label="Westbridge Finance home"><img src="logo/wbf-logo-white-transparent.png" alt="WBF West Bridge Finance" width="124" height="39"></a>
-    <ul>
+    <ul id="mnav">
       <li><a href="./#about">Who we are</a></li>
       <li><a href="./#mandate">What we finance</a></li>
       <li><a href="./#terms">Financing</a></li>
@@ -342,6 +353,7 @@ mark.todo { background: #F7E27A; color: #14181B; padding: 0 4px; border-radius: 
     <div class="nav-r">
       <div class="lang" role="group" aria-label="Language / Język"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="pl" aria-pressed="false">PL</button></div>
       <a class="btn btn-dark nav-cta" href="./#contact" aria-label="Discuss a transaction"><span class="lbl">Discuss a transaction</span><svg class="ar" aria-hidden="true"><use href="#ar"/></svg><svg class="ar nav-mail" aria-hidden="true"><use href="#mail"/></svg></a>
+      <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -464,6 +476,14 @@ mark.todo { background: #F7E27A; color: #14181B; padding: 0 4px; border-radius: 
   };
   var nav = document.getElementById("nav");
   addEventListener("scroll", function () { nav.classList.toggle("scrolled", scrollY > 8); }, { passive: true });
+
+  // Mobile menu
+  var mbtn = nav.querySelector(".menu-btn");
+  function menu(open) { nav.classList.toggle("open", open); mbtn.setAttribute("aria-expanded", String(open)); }
+  mbtn.addEventListener("click", function () { menu(!nav.classList.contains("open")); });
+  nav.querySelectorAll("#mnav a").forEach(function (a) { a.addEventListener("click", function () { menu(false); }); });
+  addEventListener("keydown", function (e) { if (e.key === "Escape") menu(false); });
+  addEventListener("resize", function () { if (innerWidth > 1180) menu(false); });
   WB.onLang(function (l) { document.title = l === "pl" ? "Polityka prywatności · Westbridge Finance" : "Privacy policy · Westbridge Finance"; });
   WB.init(PL, { lang: "pl" });
 })();
