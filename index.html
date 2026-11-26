@@ -415,6 +415,45 @@ html[data-theme="dark"] .offer { box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
 .li-gate p { margin: 0; color: var(--mute); font-size: 14px; }
 @media (max-width: 860px) { .li-follow { margin: -12px 0 24px; } }
 
+/* SECTION 03 VARIANTS (review) */
+.wf-b, .wf-c, .wf-not-a { display: none; }
+#mandate[data-wf="b"] .wf-a, #mandate[data-wf="c"] .wf-a, #mandate[data-wf="b"] .wf-only-a, #mandate[data-wf="c"] .wf-only-a { display: none; }
+#mandate[data-wf="b"] .wf-not-a, #mandate[data-wf="c"] .wf-not-a { display: block; }
+#mandate[data-wf="b"] .wf-b { display: grid; }
+#mandate[data-wf="c"] .wf-c { display: block; }
+/* B */
+.wf-b { grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 4vw, 64px); }
+.wcol h3 { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: #C9B89E; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,.22); margin: 0; }
+.wcol h3 i { font-style: normal; color: #9AA0A7; font-variant-numeric: tabular-nums; letter-spacing: 0; }
+.wcol ol { list-style: none; margin: 0; padding: 0; counter-reset: w; }
+.wcol li { counter-increment: w; display: grid; grid-template-columns: 34px 1fr; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.1); font-size: clamp(19px, 1.7vw, 23px); font-weight: 500; letter-spacing: -.02em; line-height: 1.25; transition: padding .3s, color .3s; }
+.wcol li::before { content: counter(w, decimal-leading-zero); font-size: 12px; font-weight: 500; color: #7F868D; padding-top: 6px; font-variant-numeric: tabular-nums; letter-spacing: 0; }
+.wcol li:hover { padding-left: 6px; color: #C9B89E; }
+.wcol li small { grid-column: 2; display: block; font-size: 13px; font-weight: 400; color: #9AA0A7; letter-spacing: 0; margin-top: 6px; }
+@media (max-width: 860px) { .wf-b { grid-template-columns: 1fr; gap: 36px; } }
+/* C */
+.stages { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; position: relative; }
+.stages::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: rgba(255,255,255,.22); }
+.stages > li { position: relative; padding-top: 34px; display: grid; gap: 10px; align-content: start; }
+.stages > li::before { content: ""; position: absolute; left: 0; top: 0; width: 15px; height: 15px; border-radius: 50%; background: #1E2327; border: 2px solid #A99273; }
+html[data-theme="dark"] .stages > li::before { background: #282F37; }
+.stages > li:last-child::before { background: #A99273; }
+.st-n { font-size: 12px; color: #9AA0A7; font-variant-numeric: tabular-nums; }
+.stages b { font-size: clamp(22px, 2vw, 28px); font-weight: 500; letter-spacing: -.025em; }
+.stages ul { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 8px; }
+.stages ul li { font-size: 15px; color: #E4E2DD; padding: 10px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 12px; background: rgba(255,255,255,.03); }
+.stages small { font-size: 13px; color: #9AA0A7; }
+.assets { margin-top: clamp(36px, 5vw, 56px); padding-top: 24px; border-top: 1px solid rgba(255,255,255,.14); display: grid; grid-template-columns: 180px 1fr; gap: 20px; align-items: start; }
+.assets > span { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: #C9B89E; padding-top: 10px; }
+.assets ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.assets li { font-size: 15px; padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); }
+@media (max-width: 960px) {
+  .stages { grid-template-columns: 1fr; gap: 0; }
+  .stages::before { left: 7px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .stages > li { padding: 0 0 28px 36px; }
+  .assets { grid-template-columns: 1fr; }
+}
+
 /* THEME: dark direction in the LinkedIn palette, mixed with light sections */
 .theme { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: none; color: var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0; }
 .theme svg { width: 17px; height: 17px; }
@@ -546,15 +585,17 @@ footer .logo img { width: 110px; }
   </section>
 
   <!-- MANDATE -->
-  <section class="dark pad" id="mandate">
+  <section class="dark pad" id="mandate" data-wf="a">
     <div class="wrap">
       <div class="split-h">
         <div>
           <p class="kicker"><b>03</b> What we finance</p>
           <h2 class="reveal">Flexible across assets, <em class="s">stages</em> and structures.</h2>
         </div>
-        <p class="lede reveal">Pick a lens to see what we finance. Every facility is senior secured and shaped around its own transaction.</p>
+        <p class="lede reveal wf-only-a">Pick a lens to see what we finance. Every facility is senior secured and shaped around its own transaction.</p>
+        <p class="lede reveal wf-not-a">Every facility is senior secured and shaped around its own transaction, from land to stabilised assets.</p>
       </div>
+      <div class="wf-a">
       <div class="tabs" role="tablist" aria-label="Mandate filter">
         <button role="tab" aria-selected="true" data-f="all">All</button>
         <button role="tab" aria-selected="false" data-f="p">Purpose</button>
@@ -574,6 +615,26 @@ footer .logo img { width: 110px; }
         <div class="mcard" data-k="s"><small>Strategy</small><b>Refurbishment / value-add</b></div>
         <div class="mcard" data-k="s"><small>Strategy</small><b>Redevelopment projects</b></div>
         <div class="mcard" data-k="s"><small>Strategy</small><b>Late-stage construction</b><em>Where construction risk has already been materially reduced.</em></div>
+      </div>
+      </div>
+
+      <!-- B: three editorial columns -->
+      <div class="wf-b">
+        <div class="wcol reveal"><h3><span>Purpose</span><i>04</i></h3><ol><li>Land acquisition</li><li>Acquisition financing</li><li>Bridge financing</li><li>Refinancing</li></ol></div>
+        <div class="wcol reveal"><h3><span>Asset</span><i>05</i></h3><ol><li>Residential developments</li><li>PRS (private rented sector)</li><li>Income-producing assets</li><li>Commercial assets</li><li>Mixed-use developments</li></ol></div>
+        <div class="wcol reveal"><h3><span>Strategy</span><i>03</i></h3><ol><li>Refurbishment / value-add</li><li>Redevelopment projects</li><li>Late-stage construction<small>Where construction risk has already been materially reduced.</small></li></ol></div>
+      </div>
+
+      <!-- C: along the life of a project -->
+      <div class="wf-c">
+        <ol class="stages reveal">
+          <li><span class="st-n">01</span><b>Land</b><ul><li>Land acquisition</li></ul></li>
+          <li><span class="st-n">02</span><b>Acquisition</b><ul><li>Acquisition financing</li><li>Bridge financing</li></ul></li>
+          <li><span class="st-n">03</span><b>Construction</b><ul><li>Late-stage construction</li></ul><small>Where construction risk has already been materially reduced.</small></li>
+          <li><span class="st-n">04</span><b>Repositioning</b><ul><li>Refurbishment / value-add</li><li>Redevelopment projects</li></ul></li>
+          <li><span class="st-n">05</span><b>Stabilised</b><ul><li>Refinancing</li><li>Income-producing assets</li></ul></li>
+        </ol>
+        <div class="assets reveal"><span>Asset types</span><ul><li>Residential developments</li><li>PRS (private rented sector)</li><li>Commercial assets</li><li>Mixed-use developments</li><li>Income-producing assets</li></ul></div>
       </div>
     </div>
   </section>
@@ -820,6 +881,9 @@ footer .logo img { width: 110px; }
   </section>
 </main>
 
+<!-- temporary switcher for reviewing section 03, remove after the choice -->
+<div class="vbar" id="vbar-wf" aria-label="Section 03 layout"><span>Sekcja 03</span><button type="button" data-v="a">A Obecna</button><button type="button" data-v="b">B Kolumny</button><button type="button" data-v="c">C Etapy</button></div>
+
 
 
 <footer>
@@ -834,6 +898,13 @@ footer .logo img { width: 110px; }
 <script>
 (function () {
   var PL = {
+    "Every facility is senior secured and shaped around its own transaction, from land to stabilised assets.": "Każde finansowanie jest seniorskie, zabezpieczone i dopasowane do swojej transakcji, od gruntu po ustabilizowane aktywa.",
+    "Land": "Grunt",
+    "Acquisition": "Akwizycja",
+    "Construction": "Budowa",
+    "Repositioning": "Repozycjonowanie",
+    "Stabilised": "Stabilizacja",
+    "Asset types": "Typy aktywów",
     "Follow us on LinkedIn": "Obserwuj nas na LinkedIn",
     "Read full bio": "Czytaj całe bio",
     "Hide bio": "Zwiń bio",
@@ -1150,6 +1221,17 @@ footer .logo img { width: 110px; }
     if (marketingOk()) loadPosts();
     document.addEventListener("wbf:consent", function () { if (marketingOk()) loadPosts(); });
   }
+
+  // Section 03 layout variants for review (A current, B columns, C stages)
+  var wf = document.getElementById("mandate"), vwf = document.getElementById("vbar-wf");
+  function setWf(v) {
+    wf.dataset.wf = v;
+    vwf.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.v === v)); });
+    try { var u = new URL(location.href); u.searchParams.set("wf", v); history.replaceState(null, "", u); } catch (e) {}
+  }
+  vwf.querySelectorAll("button").forEach(function (b) { b.addEventListener("click", function () { setWf(b.dataset.v); }); });
+  var wq = new URLSearchParams(location.search).get("wf");
+  setWf(/^[abc]$/.test(wq || "") ? wq : "a");
 
   // Team: full bio on demand
   document.querySelectorAll("#team .pp").forEach(function (pp) {
