@@ -382,67 +382,30 @@ html[data-theme="dark"] .offer { box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
 .team-note { margin: 28px 0 0; max-width: 76ch; color: var(--mute); font-size: 17px; line-height: 1.6; padding-top: 24px; border-top: 1px solid var(--line); }
 @media (max-width: 760px) { .team.two { grid-template-columns: 1fr; } }
 
-/* TEAM: editorial rows */
-.people { border-top: 1px solid var(--line); }
-.pp { display: grid; grid-template-columns: minmax(200px, 300px) 1fr; gap: clamp(28px, 5vw, 80px); padding-block: clamp(32px, 4vw, 56px); border-bottom: 1px solid var(--line); align-items: start; }
-.pp-ph { aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; background: var(--stone); }
-.pp-ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; display: block; }
-.pp-none { display: grid; place-items: center; position: relative; }
-.pp-none span { font-size: clamp(56px, 6vw, 84px); font-weight: 500; letter-spacing: -.04em; color: var(--mute-2); }
-.pp-none em { position: absolute; left: 0; right: 0; bottom: 16px; text-align: center; font-style: normal; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute-2); }
+/* TEAM: compact profiles, full bio on demand */
+#terms.pad { padding-bottom: clamp(48px, 6vw, 80px); }
+.people { display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(28px, 5vw, 80px); }
+.pp { display: grid; grid-template-columns: 112px 1fr; gap: 26px; align-items: start; padding-block: clamp(28px, 3.4vw, 44px); border-top: 1px solid var(--line); }
+.pp-ph { aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--stone); box-shadow: 0 0 0 1px var(--line); }
+.pp-ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pp-role { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-d); font-weight: 600; }
-.pp h3 { font-size: clamp(32px, 3.6vw, 52px); font-weight: 500; letter-spacing: -.035em; line-height: 1; margin: 12px 0 24px; }
-.pp-bio { max-width: 68ch; color: var(--mute); font-size: 16px; line-height: 1.65; }
-.pp-bio p { margin: 0 0 14px; break-inside: avoid; }
-.pp-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 18px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink); }
+.pp h3 { font-size: clamp(26px, 2.4vw, 34px); font-weight: 500; letter-spacing: -.03em; line-height: 1.05; margin: 10px 0 16px; }
+.pp-bio { color: var(--mute); font-size: 16px; line-height: 1.65; max-width: 60ch; }
+.pp-bio p { margin: 0 0 14px; }
+.pp-rest { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s cubic-bezier(.2,.7,.2,1); }
+.pp-rest > div { overflow: hidden; }
+.pp.open .pp-rest { grid-template-rows: 1fr; }
+.pp-more { display: inline-flex; align-items: center; gap: 8px; background: none; border: 0; padding: 0; color: var(--gold-d); font: 500 14px/1 var(--sans); cursor: pointer; }
+.pp-more i { font-style: normal; display: inline-block; transition: transform .3s; }
+.pp.open .pp-more i { transform: rotate(180deg); }
+.pp-more .rm-c { display: none; } .pp.open .pp-more .rm-o { display: none; } .pp.open .pp-more .rm-c { display: inline; }
+.pp-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 22px 0 0; padding: 16px 0 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink); }
 .pp-tags li { display: inline-flex; align-items: center; gap: 10px; }
 .pp-tags li::before { content: ""; width: 14px; height: 1px; background: var(--gold); }
-.pp-wide { display: grid; grid-template-columns: minmax(200px, 300px) 1fr; gap: clamp(28px, 5vw, 80px); padding-top: clamp(32px, 4vw, 48px); }
-.pp-wide p { margin: 0; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.5; letter-spacing: -.01em; color: var(--ink); max-width: 60ch; }
-@media (max-width: 760px) { .pp, .pp-wide { grid-template-columns: 1fr; gap: 20px; } .pp-ph { max-width: 260px; } }
-
-/* TEAM VARIANTS (review) */
-#terms.pad { padding-bottom: clamp(48px, 6vw, 80px); }
-.tm-tabs, .pp-more { display: none; }
-/* B: portrait gallery */
-#team[data-variant="b"] .people { border-top: 0; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3vw, 48px); }
-#team[data-variant="b"] .pp { display: block; border: 0; padding: 0; }
-#team[data-variant="b"] .pp-ph { aspect-ratio: 1; border-radius: 16px; margin-bottom: 26px; max-width: none; }
-#team[data-variant="b"] .pp-wide { grid-template-columns: 1fr; gap: 14px; margin-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }
-/* C: one person at a time, switched with tabs */
-#team[data-variant="c"] .tm-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
-.tm-tabs button { background: none; border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; text-align: left; cursor: pointer; color: var(--ink); display: grid; gap: 2px; font: 500 16px/1.2 var(--sans); }
-.tm-tabs button small { font-size: 12px; color: var(--mute); font-weight: 400; }
-.tm-tabs button[aria-selected="true"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
-.tm-tabs button[aria-selected="true"] small { color: var(--on-ink); opacity: .7; }
-#team[data-variant="c"] .people { border-top: 0; }
-#team[data-variant="c"] .pp { display: none; grid-template-columns: minmax(260px, .85fr) 1.15fr; border: 0; padding: 0; align-items: center; }
-#team[data-variant="c"] .pp.on { display: grid; }
-#team[data-variant="c"] .pp-ph { border-radius: 16px; }
-#team[data-variant="c"] .pp h3 { font-size: clamp(38px, 4.4vw, 64px); }
-#team[data-variant="c"] .pp-wide { margin-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }
-/* D: compact, bio expands on demand */
-#team[data-variant="d"] .people { border-top: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(24px, 4vw, 64px); }
-#team[data-variant="d"] .pp { grid-template-columns: 88px 1fr; gap: 22px; border-bottom: 0; border-top: 1px solid var(--line); }
-#team[data-variant="d"] .pp-ph { aspect-ratio: 1; border-radius: 50%; max-width: none; }
-#team[data-variant="d"] .pp-none span { font-size: 26px; }
-#team[data-variant="d"] .pp-none em { display: none; }
-#team[data-variant="d"] .pp h3 { font-size: clamp(24px, 2.2vw, 30px); margin: 8px 0 14px; }
-#team[data-variant="d"] .pp-bio p:not(:first-child) { display: none; }
-#team[data-variant="d"] .pp.open .pp-bio p { display: block; }
-#team[data-variant="d"] .pp-more { display: inline-flex; background: none; border: 0; padding: 0; color: var(--gold-d); font: 500 14px/1 var(--sans); cursor: pointer; }
-.pp-more .rm-c { display: none; } .pp.open .pp-more .rm-o { display: none; } .pp.open .pp-more .rm-c { display: inline; }
-#team[data-variant="d"] .pp-wide { grid-template-columns: 1fr; gap: 14px; border-top: 1px solid var(--line); margin-top: 8px; }
-@media (max-width: 760px) {
-  #team[data-variant="b"] .people, #team[data-variant="d"] .people { grid-template-columns: 1fr; }
-  #team[data-variant="c"] .pp { grid-template-columns: 1fr; }
-  #team[data-variant="c"] .pp-ph { max-width: 320px; }
-}
-.vbar { position: fixed; left: 16px; bottom: 16px; z-index: 60; display: flex; align-items: center; gap: 4px; padding: 5px; border-radius: 999px; background: #14181B; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.3); font: 500 12px/1 var(--sans); }
-.vbar span { padding: 0 8px 0 10px; opacity: .6; }
-.vbar button { background: none; border: 0; color: #fff; font: inherit; padding: 9px 11px; border-radius: 999px; cursor: pointer; }
-.vbar button[aria-pressed="true"] { background: #A99273; color: #14181B; }
-@media (max-width: 560px) { .vbar span { display: none; } .vbar button { padding: 9px 8px; } }
+.pp-wide { display: grid; grid-template-columns: minmax(180px, 260px) 1fr; gap: clamp(20px, 4vw, 64px); padding-top: clamp(28px, 3.4vw, 44px); border-top: 1px solid var(--line); }
+.pp-wide p { margin: 0; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.5; letter-spacing: -.01em; color: var(--ink); max-width: 62ch; }
+@media (max-width: 900px) { .people { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .pp { grid-template-columns: 72px 1fr; gap: 18px; } .pp-wide { grid-template-columns: 1fr; gap: 12px; } }
 
 /* THEME: dark direction in the LinkedIn palette, mixed with light sections */
 .theme { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: none; color: var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0; }
@@ -721,7 +684,7 @@ footer .logo img { width: 110px; }
   </section>
 
   <!-- TEAM -->
-  <section class="pad dk" id="team" data-variant="a">
+  <section class="pad dk" id="team">
     <div class="wrap">
       <div class="split-h">
         <div>
@@ -730,33 +693,36 @@ footer .logo img { width: 110px; }
         </div>
         <p class="lede reveal">The decision-makers you work with, from the first call to drawdown.</p>
       </div>
-      <div class="tm-tabs" id="tm-tabs" role="tablist" aria-label="Team"></div>
       <div class="people">
         <article class="pp reveal">
-          <div class="pp-ph"><img src="assets/shlomi-weber.jpg" alt="Shlomi Weber" width="900" height="900"></div>
+          <div class="pp-ph"><img src="assets/shlomi-weber-avatar.jpg" alt="Shlomi Weber" width="600" height="600"></div>
           <div class="pp-bd">
             <span class="pp-role">President of the Management Board</span>
             <h3>Shlomi Weber</h3>
             <div class="pp-bio">
               <p>Shlomi leads Westbridge Finance's real estate lending business in Poland, working directly with developers and investors to assess, structure and execute financing transactions.</p>
-              <p>Before joining Westbridge, Shlomi established and led Deloitte Poland's Israeli Desk, supporting international businesses and investors in the Polish market. He also served as a Manager in Deloitte Poland's Audit &amp; Assurance practice.</p>
-              <p>Shlomi is a licensed Certified Public Accountant (CPA) with experience in real estate, audit &amp; assurance, corporate finance, financial due diligence and cross-border transactions.</p>
+              <div class="pp-rest"><div>
+                <p>Before joining Westbridge, Shlomi established and led Deloitte Poland's Israeli Desk, supporting international businesses and investors in the Polish market. He also served as a Manager in Deloitte Poland's Audit &amp; Assurance practice.</p>
+                <p>Shlomi is a licensed Certified Public Accountant (CPA) with experience in real estate, audit &amp; assurance, corporate finance, financial due diligence and cross-border transactions.</p>
+              </div></div>
             </div>
-            <button class="pp-more" type="button"><span class="rm-o">Read full bio</span><span class="rm-c">Hide bio</span></button>
+            <button class="pp-more" type="button" aria-expanded="false"><span class="rm-o">Read full bio</span><span class="rm-c">Hide bio</span><i aria-hidden="true">&#8595;</i></button>
             <ul class="pp-tags"><li>CPA</li><li>Deloitte Poland</li><li>Real estate lending</li></ul>
           </div>
         </article>
         <article class="pp reveal">
-          <div class="pp-ph"><img src="assets/konrad-turzynski.jpg" alt="Konrad Turzyński" width="900" height="900"></div>
+          <div class="pp-ph"><img src="assets/konrad-turzynski-avatar.jpg" alt="Konrad Turzyński" width="600" height="600"></div>
           <div class="pp-bd">
             <span class="pp-role">Member of the Management Board</span>
             <h3>Konrad Turzyński</h3>
             <div class="pp-bio">
               <p>Konrad is a lawyer and tax adviser with over 17 years of experience and a partner at Warsaw-based KNDP.</p>
-              <p>A law graduate of the University of Warsaw, he advises on restructurings and M&amp;A, with a particular focus on family-owned businesses and real estate investments.</p>
-              <p>His expertise includes corporate and personal income tax and transaction taxes. At Westbridge Finance, he supports the accounting, tax and legal aspects of the business.</p>
+              <div class="pp-rest"><div>
+                <p>A law graduate of the University of Warsaw, he advises on restructurings and M&amp;A, with a particular focus on family-owned businesses and real estate investments.</p>
+                <p>His expertise includes corporate and personal income tax and transaction taxes. At Westbridge Finance, he supports the accounting, tax and legal aspects of the business.</p>
+              </div></div>
             </div>
-            <button class="pp-more" type="button"><span class="rm-o">Read full bio</span><span class="rm-c">Hide bio</span></button>
+            <button class="pp-more" type="button" aria-expanded="false"><span class="rm-o">Read full bio</span><span class="rm-c">Hide bio</span><i aria-hidden="true">&#8595;</i></button>
             <ul class="pp-tags"><li>Lawyer and tax adviser</li><li>Partner at KNDP</li><li>17+ years of experience</li></ul>
           </div>
         </article>
@@ -845,8 +811,7 @@ footer .logo img { width: 110px; }
   </section>
 </main>
 
-<!-- temporary switcher for reviewing the team layouts, remove after the choice -->
-<div class="vbar" id="vbar" aria-label="Team layout"><span>Zespół</span><button type="button" data-v="a">A Wiersze</button><button type="button" data-v="b">B Galeria</button><button type="button" data-v="c">C Zakładki</button><button type="button" data-v="d">D Kompakt</button></div>
+
 
 <footer>
   <div class="wrap">
@@ -1153,29 +1118,11 @@ footer .logo img { width: 110px; }
   var nav = document.getElementById("nav");
   addEventListener("scroll", function () { nav.classList.toggle("scrolled", scrollY > 8); }, { passive: true });
 
-  // Team layout variants for review (A rows, B gallery, C tabs, D compact)
-  var team = document.getElementById("team"), vbar = document.getElementById("vbar"), people = team.querySelectorAll(".pp");
-  var tabs = document.getElementById("tm-tabs");
-  people.forEach(function (pp, i) {
-    var b = document.createElement("button");
-    b.type = "button"; b.setAttribute("role", "tab");
-    b.innerHTML = pp.querySelector("h3").textContent + "<small>" + pp.querySelector(".pp-role").textContent + "</small>";
-    b.addEventListener("click", function () { selectPerson(i); });
-    tabs.appendChild(b);
-    pp.querySelector(".pp-more").addEventListener("click", function () { pp.classList.toggle("open"); });
+  // Team: full bio on demand
+  document.querySelectorAll("#team .pp").forEach(function (pp) {
+    var b = pp.querySelector(".pp-more");
+    b.addEventListener("click", function () { b.setAttribute("aria-expanded", String(pp.classList.toggle("open"))); });
   });
-  function selectPerson(i) {
-    people.forEach(function (pp, j) { pp.classList.toggle("on", i === j); });
-    tabs.querySelectorAll("button").forEach(function (b, j) { b.setAttribute("aria-selected", String(i === j)); });
-  }
-  selectPerson(0);
-  function setVariant(v) {
-    team.dataset.variant = v;
-    vbar.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.v === v)); });
-    try { var u = new URL(location.href); u.searchParams.set("team", v); history.replaceState(null, "", u); } catch (e) {}
-  }
-  vbar.querySelectorAll("button").forEach(function (b) { b.addEventListener("click", function () { setVariant(b.dataset.v); }); });
-  setVariant(/^[abcd]$/.test(new URLSearchParams(location.search).get("team") || "") ? new URLSearchParams(location.search).get("team") : "a");
 
   // Light / dark theme switch (dark is the default, closer to the LinkedIn materials)
   var tb = document.getElementById("theme");
